@@ -19,6 +19,9 @@ public abstract class Empleado {
 
     private String apellidoEmpleado;
 
+    @Enumerated    (EnumType.STRING)
+    private RolEmpleado rolEmpleado;
+
     @OneToOne
     @JoinColumn(name = "id_usuarios")
     private Usuario usuario;

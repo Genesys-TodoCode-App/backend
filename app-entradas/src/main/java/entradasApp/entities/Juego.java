@@ -2,28 +2,22 @@ package entradasApp.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 
-@Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "juegos")
 public class Juego {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_juegos")
     private Long idJuego;
-
+    @Column(name = "nombre_juegos")
     private String nombreJuego;
+    @Column(name = "precio_juegos")
+    private Integer precioJuego;
 
-    private BigDecimal precioJuego;
-
-    @ManyToOne
-    @JoinColumn(name = "id_empleados")
-            private EmpleadoJuego empleadoJuego;
 
 }

@@ -1,13 +1,15 @@
 package entradasApp.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+
 import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDate;
 
-@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Entrada {
 
@@ -17,11 +19,14 @@ public class Entrada {
     private String codigoIdentificacionEntrada;
     private LocalDate fechaHoraUtilizacion;
 
-    @ManyToOne
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_juego")
     private Juego juego;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Comprador comprador;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Empleado empleadoVendedor;
 
 }

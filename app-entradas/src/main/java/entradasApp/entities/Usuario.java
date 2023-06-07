@@ -12,9 +12,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuarios_seq")
-    @SequenceGenerator(name = "usuario_seq", sequenceName = "usuarios_seq", allocationSize = 1)
-    private Long idUsuario;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_usuarios")
+    private int id;
+    @Column(name = "nombre_usuarios")
     private String nombreUsuario;
+    @Column(name = "contrasenia_usuarios")
     private String contraseniaUsuario;
 }

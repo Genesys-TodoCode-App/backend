@@ -11,12 +11,16 @@ import java.time.LocalTime;
 public class HorarioJuego {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idJuego;
+    @Column(name = "id_horario_juegos")
+    private Long idHorarioJuegos;
 
+    @Column(name = "nombre_juegos")
     private String nombreJuego;
 
+    @Column(name = "hora_inicio")
     private LocalTime horaInicio;
 
+    @Column(name = "hora_fin")
     private LocalTime HoraFin;
 
     @ManyToOne
