@@ -20,11 +20,14 @@ public interface ICategoriaRepository extends CrudRepository<Categoria, Integer>
         return CompletableFuture.supplyAsync(() -> save(categoria));
     }
 
+    //Editar la categoria
+    default CompletableFuture<Categoria> updateAsync(Categoria categoria) {
+        return CompletableFuture.supplyAsync(() -> save(categoria));
+    }
+
     default CompletableFuture<Void> deleteByIdAsync(Integer id_categoria) {
         return CompletableFuture.runAsync(() -> deleteById(id_categoria));
     }
-
-
 
 
 }

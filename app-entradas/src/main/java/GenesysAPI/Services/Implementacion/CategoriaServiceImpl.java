@@ -55,6 +55,30 @@ public class CategoriaServiceImpl implements ICategoriaService {
     }
 
     @Override
+    public CompletableFuture<CategoriaDTO> updateAsync(CategoriaDTO categoriaDTO) {
+        return CompletableFuture.supplyAsync(() -> {
+            Integer idCategoria = categoriaDTO.getId_categoria();
+            Optional<Categoria> optionalCategoria = _icategoriaRepository.findById(idCategoria);
+            if (optionalCategoria.isPresent()) {
+                Categoria categoria = optionalCategoria.get();
+
+                // Actualizar los campos de la categoría con los valores del DTO
+                categoria.setNombre(categoriaDTO.getNombre());
+                categoria.setDescripcion(categoriaDTO.getDescripcion());
+                categoria.setEs_activo(categoriaDTO.getEs_activo() == 1);// Convertir el int a boolean
+
+                // Guardar la categoría actualizada en el repositorio
+                Categoria updatedCategoria = _icategoriaRepository.save(categoria);
+
+                // Mapear la categoría actualizada al DTO y devolverla
+                return modelMapper.map(updatedCategoria, CategoriaDTO.class);
+            } else {
+                return null; // En caso de que la categoría no exista
+            }
+        });
+    }
+
+    @Override
     public CompletableFuture<Void> deleteById(Integer id_categoria) {
         return CompletableFuture.runAsync(() -> _icategoriaRepository.deleteById(id_categoria));
     }

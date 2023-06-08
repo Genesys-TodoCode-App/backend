@@ -9,5 +9,9 @@ public class CategoriaDTO {
 
     private String nombre;
 
+    private String descripcion;
+
+   private int es_activo;
+
 
 }

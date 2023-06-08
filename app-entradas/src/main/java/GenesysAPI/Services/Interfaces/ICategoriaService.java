@@ -9,6 +9,7 @@ public interface ICategoriaService {
     CompletableFuture<CategoriaDTO> findById(Integer id_categoria);
     CompletableFuture<Iterable<CategoriaDTO>> findAll();
     CompletableFuture<CategoriaDTO> save(CategoriaDTO categoriaDTO);
+    CompletableFuture<CategoriaDTO> updateAsync(CategoriaDTO categoriaDTO);
     CompletableFuture<Void> deleteById(Integer id_categoria);
 
 }

@@ -18,9 +18,18 @@ public class Categoria {
 
     private String descripcion;
 
-    private boolean esActivo;
+    @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private boolean es_activo;
 
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime fecha_registro;
+
+    @PrePersist
+    public void prePersist() {
+        if(fecha_registro == null ) {
+            fecha_registro = LocalDateTime.now();
+        }
+    }
 
 
 }

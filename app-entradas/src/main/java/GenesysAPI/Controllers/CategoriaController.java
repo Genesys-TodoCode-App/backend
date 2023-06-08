@@ -43,6 +43,19 @@ public class CategoriaController {
                 .thenApply(categoriaDTO1 -> ResponseEntity.status(HttpStatus.CREATED).body(categoriaDTO1));
     }
 
+    @PutMapping("/{id}")
+    public CompletableFuture<ResponseEntity<CategoriaDTO>> updateCategoria(@PathVariable Integer id, @RequestBody CategoriaDTO categoriaDTO) {
+        categoriaDTO.setId_categoria(id); // Establecer el ID de la categoría en el DTO
+        return categoriaService.updateAsync(categoriaDTO)
+                .thenApply(updatedCategoriaDTO -> {
+                    if (updatedCategoriaDTO != null) {
+                        return ResponseEntity.ok(updatedCategoriaDTO);
+                    } else {
+                        return ResponseEntity.notFound().build();
+                    }
+                });
+    }
+
     @DeleteMapping("/{id}")
     public CompletableFuture<ResponseEntity<Void>> deleteCategoria(@PathVariable Integer id) {
         return categoriaService.deleteById(id)
