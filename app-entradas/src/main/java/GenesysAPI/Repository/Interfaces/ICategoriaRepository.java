@@ -25,6 +25,8 @@ public interface ICategoriaRepository extends CrudRepository<Categoria, Integer>
         return CompletableFuture.supplyAsync(() -> save(categoria));
     }
 
+    boolean existsByNombre (String nombre);
+
     default CompletableFuture<Void> deleteByIdAsync(Integer id_categoria) {
         return CompletableFuture.runAsync(() -> deleteById(id_categoria));
     }

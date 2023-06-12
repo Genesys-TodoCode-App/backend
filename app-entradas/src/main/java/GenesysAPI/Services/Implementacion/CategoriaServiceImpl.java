@@ -6,7 +6,9 @@ import GenesysAPI.Models.Categoria;
 import GenesysAPI.Repository.Interfaces.ICategoriaRepository;
 import GenesysAPI.Services.Interfaces.ICategoriaService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +51,24 @@ public class CategoriaServiceImpl implements ICategoriaService {
     public CompletableFuture<CategoriaDTO> save(CategoriaDTO categoriaDTO) {
         Categoria categoria = modelMapper.map(categoriaDTO, Categoria.class);
         return CompletableFuture.supplyAsync(() -> {
-            Categoria savedCategoria = _icategoriaRepository.save(categoria);
-            return modelMapper.map(savedCategoria, CategoriaDTO.class);
+            try {
+                // Verificar si la categoría existe por nombre
+                if (_icategoriaRepository.existsByNombre(categoria.getNombre())) {
+                    throw new ResponseStatusException(HttpStatus.CONFLICT, "La categoría ya existe");
+                }
+
+                // Guardar la categoría
+                Categoria savedCategoria = _icategoriaRepository.save(categoria);
+                return modelMapper.map(savedCategoria, CategoriaDTO.class);
+            } catch (ResponseStatusException ex) {
+                // Relanzar la excepción con el mensaje original
+                throw ex;
+            } catch (Exception ex) {
+                // Devolver la excepción como respuesta de error en formato JSON
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al guardar la categoría", ex);
+            }
         });
+
     }
 
     @Override
