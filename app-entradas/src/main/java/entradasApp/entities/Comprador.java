@@ -10,11 +10,22 @@ public class Comprador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    @Column(name = "id_compradores")
+    @Column(name = "id_compradores",  nullable = false,  unique = true,  updatable = false)
     private Long idComprador;
+
+    @Column(name = "nombre_compradores", length = 20)
     private String nombreComprador;
+
+    @Column(name = "apellido_compradores", length = 20)
     private String apellidoComprador;
+
+    @Column(name = "dni_compradores", length = 11)
+    private String dniComprador;
+
+    @Column(name = "correo_electronico_comprador", length = 50)
     private String correoElectronicoComprador;
+
+    @Column(name = "pase_de_oro", length = 5)
     private boolean paseDeOro;
 
     @ManyToOne

@@ -16,12 +16,17 @@ public class Entrada {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_entradas", nullable = false, unique = true, updatable = false)
     private Long idEntrada;
+
+    @Column(name = "cod_ident_entrada", length = 20)
     private String codigoIdentificacionEntrada;
+
+    @Column(name = "fecha_hora_utilizacion")
     private LocalDate fechaHoraUtilizacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_juego")
+    @JoinColumn(name = "id_juegos")
     private Juego juego;
 
     @ManyToOne(fetch = FetchType.LAZY)

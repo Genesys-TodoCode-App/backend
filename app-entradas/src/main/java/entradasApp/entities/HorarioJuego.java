@@ -11,10 +11,10 @@ import java.time.LocalTime;
 public class HorarioJuego {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_horario_juegos")
+    @Column(name = "id_horario_juegos", unique = true, updatable = false, nullable = false)
     private Long idHorarioJuegos;
 
-    @Column(name = "nombre_juegos")
+    @Column(name = "nombre_juegos", length = 10)
     private String nombreJuego;
 
     @Column(name = "hora_inicio")

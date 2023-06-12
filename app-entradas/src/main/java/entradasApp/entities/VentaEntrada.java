@@ -15,16 +15,16 @@ import java.time.LocalDate;
 public class VentaEntrada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_venta_entrada")
+    @Column(name = "id_venta_entradas", nullable = false, unique = true, updatable = false)
     private Long idVentaEntrada;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_entrada")
+    @JoinColumn(name = "id_entradas")
     private Entrada entrada;
 
-    @Column(name = "monto_venta")
+    @Column(name = "monto_ventas")
     private BigDecimal montoVenta;
 
-    @Column(name = "fecha_venta")
+    @Column(name = "fecha_ventas")
     private LocalDate fechaVenta;
 }
