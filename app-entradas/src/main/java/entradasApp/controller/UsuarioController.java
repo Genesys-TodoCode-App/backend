@@ -29,13 +29,13 @@ public class UsuarioController {
         return usuarioRepository.findAll();
     }
     @GetMapping("/{id}")
-    public Usuario findById(int id) {
+    public Usuario findById(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         usuarioRepository.deleteById(id);
     }
 }

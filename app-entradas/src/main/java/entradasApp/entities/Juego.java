@@ -21,5 +21,9 @@ public class Juego {
     @Column(name = "precio_juegos", length = 10)
     private Integer precioJuego;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_empleados_aut", nullable = false)
+    private Empleado empleadoAutorizado;
+
 
 }

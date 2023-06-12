@@ -1,10 +1,9 @@
 package entradasApp.repositories;
 
-import entradasApp.entities.Usuario;
+import entradasApp.entities.Empleado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-
+public interface EmpleadoRepository extends JpaRepository<Empleado, Long> {
 }
