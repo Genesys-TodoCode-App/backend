@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "empleados")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Empleado {
+public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_empleados")
