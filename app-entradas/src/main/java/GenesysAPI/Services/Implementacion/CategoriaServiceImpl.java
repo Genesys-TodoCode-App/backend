@@ -73,9 +73,11 @@ public class CategoriaServiceImpl implements ICategoriaService {
 
     @Override
     public CompletableFuture<CategoriaDTO> updateAsync(CategoriaDTO categoriaDTO) {
+
         return CompletableFuture.supplyAsync(() -> {
             Integer idCategoria = categoriaDTO.getId_categoria();
             Optional<Categoria> optionalCategoria = _icategoriaRepository.findById(idCategoria);
+
             if (optionalCategoria.isPresent()) {
                 Categoria categoria = optionalCategoria.get();
 
@@ -84,13 +86,18 @@ public class CategoriaServiceImpl implements ICategoriaService {
                 categoria.setDescripcion(categoriaDTO.getDescripcion());
                 categoria.setEs_activo(categoriaDTO.getEs_activo() == 1);// Convertir el int a boolean
 
-                // Guardar la categoría actualizada en el repositorio
-                Categoria updatedCategoria = _icategoriaRepository.save(categoria);
+               try {
+                   // Guardar la categoría actualizada en el repositorio
+                   Categoria updatedCategoria = _icategoriaRepository.save(categoria);
 
-                // Mapear la categoría actualizada al DTO y devolverla
-                return modelMapper.map(updatedCategoria, CategoriaDTO.class);
+                   // Mapear la categoría actualizada al DTO y devolverla
+                   return modelMapper.map(updatedCategoria, CategoriaDTO.class);
+               } catch (Exception ex) {
+                   throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al guardar la categoria ", ex);
+               }
+
             } else {
-                return null; // En caso de que la categoría no exista
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La categoría no existe");
             }
         });
     }
