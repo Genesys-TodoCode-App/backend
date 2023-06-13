@@ -5,8 +5,17 @@ import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Clase principal de la aplicación.
+ * @Author Team Genesys
+ */
+
+
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "App Entradas Parque Diversiones", version = "1.0", description = "Project Genesys"))
+@OpenAPIDefinition(info = @Info(
+  title = "App Entradas Parque Diversiones",
+  version = "1.0",
+  description = "Project Genesys"))
 public class AppEntradasApplication {
 
 	public static void main(String[] args) {

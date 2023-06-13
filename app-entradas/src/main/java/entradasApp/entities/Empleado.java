@@ -15,6 +15,12 @@ public class Empleado {
     @Column(name = "id_empleados", nullable = false,  unique = true, updatable = false)
     private Long idEmpleado;
 
+    @Column(name = "usuario_empleados", length = 20, unique = true)
+    private String usuarioEmpleado;
+
+    @Column(name = "contrasenia_empleados", length = 20)
+    private String contraseniaEmpleado;
+
     @Column(name = "nombre_empleados", length = 20)
     private String nombreEmpleado;
 
@@ -27,12 +33,9 @@ public class Empleado {
     @Column(name = "rutas_a_la_fotos", length = 100)
     private String rutaALaFoto;
 
-    @Column(name = "rol_empleados", length = 20)
+    @Column(name = "rol_empleados", length = 40)
     @Enumerated    (EnumType.STRING)
     private RolEmpleado rolEmpleado;
 
-    @OneToOne
-    @JoinColumn(name = "id_usuarios")
-    private Usuario usuario;
 
 }
