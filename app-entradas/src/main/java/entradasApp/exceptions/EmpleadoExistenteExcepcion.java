@@ -1,11 +1,11 @@
 package entradasApp.exceptions;
 
-public class EmpleadoExistenteExcepcion extends RuntimeException {
+public class EmpleadoExistenteExcepcion extends RuntimeException{
 
     private Long id;
 
     public EmpleadoExistenteExcepcion(Long id) {
-        super("El usuario con id " + id + " ya existe.");
+        super("El empleado con id " + id + " ya existe.");
         this.id = id;
     }
 

@@ -21,6 +21,18 @@ public class EmpleadoController {
         this.empleadoRepository = empleadoRepository;
     }
 
+    private EmpleadoDTO convertToDTO(Empleado empleado) {
+        EmpleadoDTO empleadoDTO = new EmpleadoDTO();
+        empleadoDTO.setUsuarioEmpleado(empleado.getUsuarioEmpleado());
+        empleadoDTO.setContraseniaEmpleado(empleado.getContraseniaEmpleado());
+        empleadoDTO.setNombreEmpleado(empleado.getNombreEmpleado());
+        empleadoDTO.setApellidoEmpleado(empleado.getApellidoEmpleado());
+        empleadoDTO.setDniEmpleado(empleado.getApellidoEmpleado());
+        empleadoDTO.setRutaALaFoto(empleado.getRutaALaFoto());
+        empleadoDTO.setRolEmpleado(empleado.getRolEmpleado());
+        return empleadoDTO;
+    }
+
     @PostMapping
     public void create(@RequestBody Empleado empleado) {
         boolean existeEmpleado = empleadoRepository.existsById(empleado.getIdEmpleado());
@@ -52,6 +64,27 @@ public class EmpleadoController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<EmpleadoDTO> update(@PathVariable Long id, @RequestBody EmpleadoDTO empleadoDTO) {
+        Empleado empleado = empleadoRepository.findById(id).orElse(null);
+        if (empleado != null) {
+            empleado.setUsuarioEmpleado(empleadoDTO.getUsuarioEmpleado());
+            empleado.setContraseniaEmpleado(empleadoDTO.getContraseniaEmpleado());
+            empleado.setNombreEmpleado(empleadoDTO.getNombreEmpleado());
+            empleado.setApellidoEmpleado(empleado.getApellidoEmpleado());
+            empleado.setDniEmpleado(empleado.getApellidoEmpleado());
+            empleado.setRutaALaFoto(empleado.getRutaALaFoto());
+            empleado.setRolEmpleado(empleado.getRolEmpleado());
+
+            empleadoRepository.save(empleado);
+
+            EmpleadoDTO empleadoActualizadoDTO = convertToDTO(empleado);
+            return  ResponseEntity.ok(empleadoActualizadoDTO);
+        } else {
+            throw  new EmpleadoNoEncontradoExcepcion("Empleado con el Id: " + " no encontrado");
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         try {
@@ -62,15 +95,5 @@ public class EmpleadoController {
         }
     }
 
-    private EmpleadoDTO convertToDTO(Empleado empleado) {
-        EmpleadoDTO empleadoDTO = new EmpleadoDTO();
-        empleadoDTO.setUsuarioEmpleado(empleado.getUsuarioEmpleado());
-        empleadoDTO.setContraseniaEmpleado(empleado.getContraseniaEmpleado());
-        empleadoDTO.setNombreEmpleado(empleado.getNombreEmpleado());
-        empleadoDTO.setApellidoEmpleado(empleado.getApellidoEmpleado());
-        empleadoDTO.setDniEmpleado(empleado.getApellidoEmpleado());
-        empleadoDTO.setRutaALaFoto(empleado.getRutaALaFoto());
-        empleadoDTO.setRolEmpleado(empleado.getRolEmpleado());
-        return empleadoDTO;
-    }
+
 }

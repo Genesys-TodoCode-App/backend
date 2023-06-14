@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JuegoRepository extends JpaRepository<Juego, Long> {
+    Long getIdJuegoByIdJuego(Long idJuego);
 }

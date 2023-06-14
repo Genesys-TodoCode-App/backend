@@ -2,6 +2,7 @@ package entradasApp.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 @Entity
 @Data
