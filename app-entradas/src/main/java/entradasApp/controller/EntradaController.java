@@ -26,6 +26,7 @@ public class EntradaController {
             throw new EntradaExistenteExcepcion((entrada.getIdEntrada()));
         }
     }
+    @GetMapping
     public ResponseEntity<List<Entrada>> findAll(){
         List<Entrada> listaDeEntradas = entradaRepository.findAll();
         return ResponseEntity.ok(listaDeEntradas);
