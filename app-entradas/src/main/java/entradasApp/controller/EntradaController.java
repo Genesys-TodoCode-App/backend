@@ -4,6 +4,7 @@ import entradasApp.entities.Entrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EntradaRepository;
+import jakarta.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class EntradaController {
         this.entradaRepository = entradaRepository;
     }
     @PostMapping
-    public void create(@RequestBody Entrada entrada) {
+    public void create(@Valid @RequestBody Entrada entrada) {
         boolean existeEntrada = entradaRepository.existsById(entrada.getIdEntrada());
         if (existeEntrada) {
             throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta entrada en la base de datos");
@@ -45,7 +46,7 @@ public class EntradaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Entrada> update(@PathVariable Long id, @RequestBody Entrada entrada) {
+    public ResponseEntity<Entrada> update(@Valid @PathVariable Long id, @RequestBody Entrada entrada) {
         Entrada entradaExistente = entradaRepository.findById(id).orElse(null);
         if (entradaExistente != null) {
             entradaExistente.setFechaHoraUtilizacion(entrada.getFechaHoraUtilizacion());

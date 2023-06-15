@@ -1,5 +1,6 @@
 package entradasApp.controller;
 
+import entradasApp.dtos.EmpleadoDTO;
 import entradasApp.entities.Empleado;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EmpleadoRepository;

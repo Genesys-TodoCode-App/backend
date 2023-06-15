@@ -4,6 +4,7 @@ import entradasApp.entities.Juego;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.JuegoRepository;
+import jakarta.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class JuegoController {
     }
 
     @PostMapping
-    public void create(@RequestBody Juego juego) {
+    public void create(@Valid @RequestBody Juego juego) {
         boolean existeJuego = juegoRepository.existsById(juego.getIdJuego());
         if (existeJuego) {
             throw new ExisteEnBaseDeDatosExcepcion("Ya existe en base de datos este juego");
@@ -43,7 +44,7 @@ public class JuegoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Juego> update(@PathVariable Long id, @RequestBody Juego juego) {
+    public ResponseEntity<Juego> update(@Valid @PathVariable Long id, @RequestBody Juego juego) {
         Juego juegoExistente = juegoRepository.findById(id).orElse(null);
         if (juegoExistente != null) {
             juegoExistente.setNombreJuego(juego.getNombreJuego());

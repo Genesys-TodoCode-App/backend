@@ -4,6 +4,7 @@ import entradasApp.entities.VentaEntrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.VentaEntradaRepository;
+import jakarta.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class VentaEntradaController {
     }
 
     @PostMapping
-    public void create(@RequestBody VentaEntrada ventaEntrada) {
+    public void create(@Valid @RequestBody VentaEntrada ventaEntrada) {
         boolean existeVentaEntrada = ventaEntradaRepository.existsById(ventaEntrada.getIdVentaEntrada());
         if (existeVentaEntrada) {
             throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta venta de entradas en base de datos");
@@ -45,7 +46,7 @@ public class VentaEntradaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<VentaEntrada> update(@PathVariable Long id, @RequestBody VentaEntrada ventaEntrada) {
+    public ResponseEntity<VentaEntrada> update(@Valid @PathVariable Long id, @RequestBody VentaEntrada ventaEntrada) {
         VentaEntrada ventaEntradaExistente = ventaEntradaRepository.findById(id).orElse(null);
         if (ventaEntradaExistente != null) {
             ventaEntradaExistente.setIdVentaEntrada(ventaEntrada.getIdVentaEntrada());

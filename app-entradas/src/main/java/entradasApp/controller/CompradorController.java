@@ -4,6 +4,7 @@ import entradasApp.entities.Comprador;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.CompradorRepository;
+import jakarta.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class CompradorController {
     }
 
     @PostMapping
-    public void create(@RequestBody Comprador comprador) {
+    public void create(@Valid @RequestBody Comprador comprador) {
         boolean existeComprador = compradorRepository.existsById(comprador.getIdComprador());
         if (existeComprador) {
             throw new ExisteEnBaseDeDatosExcepcion("Este comprador existe en base de datos");
@@ -45,7 +46,7 @@ public class CompradorController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Comprador> update(@PathVariable Long id, @RequestBody Comprador comprador) {
+    public ResponseEntity<Comprador> update(@Valid @PathVariable Long id, @RequestBody Comprador comprador) {
         Comprador compradorexistente = compradorRepository.findById(id).orElse(null);
         if (compradorexistente != null) {
             compradorexistente.setIdComprador(comprador.getIdComprador());

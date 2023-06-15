@@ -5,6 +5,7 @@ import entradasApp.entities.Empleado;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EmpleadoRepository;
+import jakarta.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class EmpleadoController {
     }
 
     @PostMapping
-    public void create(@RequestBody Empleado empleado) {
+    public void create(@Valid @RequestBody Empleado empleado) {
         boolean existeEmpleado = empleadoRepository.existsById(empleado.getIdEmpleado());
         if (existeEmpleado) {
             throw new ExisteEnBaseDeDatosExcepcion("Existe este empleado en base de datos");
@@ -65,7 +66,7 @@ public class EmpleadoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EmpleadoDTO> update(@PathVariable Long id, @RequestBody EmpleadoDTO empleadoDTO) {
+    public ResponseEntity<EmpleadoDTO> update(@Valid @PathVariable Long id, @RequestBody EmpleadoDTO empleadoDTO) {
         Empleado empleado = empleadoRepository.findById(id).orElse(null);
         if (empleado != null) {
             empleado.setUsuarioEmpleado(empleadoDTO.getUsuarioEmpleado());
