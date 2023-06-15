@@ -1,8 +1,8 @@
 package entradasApp.controller;
 
 import entradasApp.entities.Entrada;
-import entradasApp.exceptions.EmpleadoNoEncontradoExcepcion;
-import entradasApp.exceptions.EntradaExistenteExcepcion;
+import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
+import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EntradaRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class EntradaController {
     public void create(@RequestBody Entrada entrada) {
         boolean existeEntrada = entradaRepository.existsById(entrada.getIdEntrada());
         if (existeEntrada) {
-            throw new EntradaExistenteExcepcion((entrada.getIdEntrada()));
+            throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta entrada en la base de datos");
         }
     }
     @GetMapping
@@ -40,7 +40,7 @@ public class EntradaController {
         if (entrada != null) {
             return ResponseEntity.ok(entrada);
         } else {
-            throw new EmpleadoNoEncontradoExcepcion("Entrada con el id: " + "no encontrada");
+            throw new NoEncontradoExcepcion("Entrada con el id: " + "no encontrada");
         }
     }
 
@@ -56,7 +56,7 @@ public class EntradaController {
 
             return ResponseEntity.ok(entradaExistente);
         } else {
-            throw  new EmpleadoNoEncontradoExcepcion("La entrada con el Id: " + id + " no ha sido encontrada");
+            throw  new NoEncontradoExcepcion("La entrada con el Id: " + id + " no ha sido encontrada");
         }
     }
     @DeleteMapping("/{id}")

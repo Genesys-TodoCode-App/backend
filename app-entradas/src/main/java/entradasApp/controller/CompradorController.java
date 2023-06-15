@@ -1,8 +1,8 @@
 package entradasApp.controller;
 
 import entradasApp.entities.Comprador;
-import entradasApp.exceptions.CompradorExistenteExcepcion;
-import entradasApp.exceptions.CompradorNoEncontradoExcepcion;
+import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
+import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.CompradorRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class CompradorController {
     public void create(@RequestBody Comprador comprador) {
         boolean existeComprador = compradorRepository.existsById(comprador.getIdComprador());
         if (existeComprador) {
-            throw new CompradorExistenteExcepcion(comprador.getIdComprador());
+            throw new ExisteEnBaseDeDatosExcepcion("Este comprador existe en base de datos");
         }
         compradorRepository.save(comprador);
     }
@@ -40,7 +40,7 @@ public class CompradorController {
         if (comprador !=null ) {
             return ResponseEntity.ok(comprador);
         } else {
-            throw new CompradorNoEncontradoExcepcion("El comprador con el id: " + id + "no existe");
+            throw new NoEncontradoExcepcion("El comprador con el id: " + id + "no existe");
         }
 
     }
@@ -57,7 +57,7 @@ public class CompradorController {
             compradorRepository.save(compradorexistente);
             return ResponseEntity.ok(compradorexistente);
         } else {
-            throw new CompradorNoEncontradoExcepcion("El comprador con el id " + id + " no ha sido encontrado");
+            throw new NoEncontradoExcepcion("El comprador con el id " + id + " no ha sido encontrado");
         }
     }
     @DeleteMapping("/{id}")

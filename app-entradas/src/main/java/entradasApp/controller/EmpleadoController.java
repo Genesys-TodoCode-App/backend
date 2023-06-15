@@ -2,8 +2,8 @@ package entradasApp.controller;
 
 import entradasApp.dtos.EmpleadoDTO;
 import entradasApp.entities.Empleado;
-import entradasApp.exceptions.EmpleadoExistenteExcepcion;
-import entradasApp.exceptions.EmpleadoNoEncontradoExcepcion;
+import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
+import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EmpleadoRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +37,7 @@ public class EmpleadoController {
     public void create(@RequestBody Empleado empleado) {
         boolean existeEmpleado = empleadoRepository.existsById(empleado.getIdEmpleado());
         if (existeEmpleado) {
-            throw new EmpleadoExistenteExcepcion(empleado.getIdEmpleado());
+            throw new ExisteEnBaseDeDatosExcepcion("Existe este empleado en base de datos");
         }
         empleadoRepository.save(empleado);
     }
@@ -60,7 +60,7 @@ public class EmpleadoController {
             EmpleadoDTO empleadoDTO = convertToDTO(empleado);
             return ResponseEntity.ok(empleadoDTO);
         } else {
-            throw  new EmpleadoNoEncontradoExcepcion("Empleado con el ID " + id + " no encontrado");
+            throw  new NoEncontradoExcepcion("Empleado con el ID " + id + " no encontrado");
         }
     }
 
@@ -81,7 +81,7 @@ public class EmpleadoController {
             EmpleadoDTO empleadoActualizadoDTO = convertToDTO(empleado);
             return  ResponseEntity.ok(empleadoActualizadoDTO);
         } else {
-            throw  new EmpleadoNoEncontradoExcepcion("Empleado con el Id: " + " no encontrado");
+            throw  new NoEncontradoExcepcion("Empleado con el Id: " + " no encontrado");
         }
     }
 

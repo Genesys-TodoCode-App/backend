@@ -2,12 +2,9 @@ package entradasApp.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -25,7 +22,7 @@ public class Entrada {
     private String codigoIdentificacionEntrada;
 
     @Column(name = "fecha_hora_utilizacion")
-    private LocalDate fechaHoraUtilizacion;
+    private LocalDateTime fechaHoraUtilizacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_juegos")

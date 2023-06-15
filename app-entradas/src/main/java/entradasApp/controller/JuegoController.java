@@ -1,8 +1,8 @@
 package entradasApp.controller;
 
 import entradasApp.entities.Juego;
-import entradasApp.exceptions.JuegoExistenteExcepcion;
-import entradasApp.exceptions.JuegoNoEncontradoExcepcion;
+import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
+import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.JuegoRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class JuegoController {
     public void create(@RequestBody Juego juego) {
         boolean existeJuego = juegoRepository.existsById(juego.getIdJuego());
         if (existeJuego) {
-            throw new JuegoExistenteExcepcion(juego.getIdJuego());
+            throw new ExisteEnBaseDeDatosExcepcion("Ya existe en base de datos este juego");
         }
     }
     @GetMapping
@@ -38,7 +38,7 @@ public class JuegoController {
         if (juego != null) {
             return ResponseEntity.ok(juego);
         } else {
-            throw new JuegoNoEncontradoExcepcion("Juego con el id:" + id + "no encontradp.");
+            throw new NoEncontradoExcepcion("Juego con el id:" + id + "no encontradp.");
         }
     }
 
@@ -54,7 +54,7 @@ public class JuegoController {
             juegoRepository.save(juegoExistente);
             return ResponseEntity.ok(juegoExistente);
         } else {
-            throw new JuegoNoEncontradoExcepcion("El juego con el id: " + id + " no ha sido encontrado");
+            throw new NoEncontradoExcepcion("El juego con el id: " + id + " no ha sido encontrado");
         }
 
     }

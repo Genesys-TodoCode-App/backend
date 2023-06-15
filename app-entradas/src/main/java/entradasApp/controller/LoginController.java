@@ -1,7 +1,7 @@
 package entradasApp.controller;
 
 import entradasApp.entities.Empleado;
-import entradasApp.exceptions.EmpleadoNoEncontradoExcepcion;
+import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EmpleadoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +24,7 @@ public class LoginController {
         Empleado empleado = empleadoRepository.findByUsuarioEmpleado(usuario);
 
         if (empleado == null || !empleado.getContraseniaEmpleado().equals(contrasenia)) {
-            throw new EmpleadoNoEncontradoExcepcion("Credenciales de inicio de sesion incorrectas");
+            throw new NoEncontradoExcepcion("Credenciales de inicio de sesion incorrectas");
 
         }
         return ResponseEntity.ok("Inicio de sesion exitoso");

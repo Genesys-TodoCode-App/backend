@@ -1,8 +1,8 @@
 package entradasApp.controller;
 
 import entradasApp.entities.VentaEntrada;
-import entradasApp.exceptions.VentaEntradaExistenteExcepcion;
-import entradasApp.exceptions.VentaEntradaNoEncontradaExcepcion;
+import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
+import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.VentaEntradaRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class VentaEntradaController {
     public void create(@RequestBody VentaEntrada ventaEntrada) {
         boolean existeVentaEntrada = ventaEntradaRepository.existsById(ventaEntrada.getIdVentaEntrada());
         if (existeVentaEntrada) {
-            throw new VentaEntradaExistenteExcepcion(ventaEntrada.getIdVentaEntrada());
+            throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta venta de entradas en base de datos");
         }
     }
 
@@ -40,7 +40,7 @@ public class VentaEntradaController {
         if (ventaEntrada != null) {
             return ResponseEntity.ok(ventaEntrada);
         } else {
-            throw new VentaEntradaNoEncontradaExcepcion(" La venta de entrada con el id: " + id + " no ha sido encontrada");
+            throw new NoEncontradoExcepcion(" La venta de entrada con el id: " + id + " no ha sido encontrada");
         }
     }
 
@@ -55,7 +55,7 @@ public class VentaEntradaController {
             ventaEntradaRepository.save(ventaEntradaExistente);
             return ResponseEntity.ok(ventaEntradaExistente);
         } else {
-            throw new VentaEntradaNoEncontradaExcepcion(" La venta de entradas con el id: " + id + "no ha sido encontrada");
+            throw new NoEncontradoExcepcion(" La venta de entradas con el id: " + id + "no ha sido encontrada");
         }
     }
     @DeleteMapping("/{id}")

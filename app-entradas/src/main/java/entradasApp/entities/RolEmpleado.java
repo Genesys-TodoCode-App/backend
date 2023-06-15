@@ -2,6 +2,6 @@ package entradasApp.entities;
 
 
 public enum RolEmpleado {
-    EMPLEADO_ADMINISTRATIVO,
-    EMPLEADO_JUEGO
+    EMPLEADO_JUEGO,
+    EMPLEADO_ADMINISTRATIVO
 }

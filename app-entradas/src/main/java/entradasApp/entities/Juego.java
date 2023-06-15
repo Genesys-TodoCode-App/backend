@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
-import java.time.LocalTime;
 
 @Data
 @Entity
@@ -25,10 +25,10 @@ public class Juego {
     private Integer precioJuego;
 
     @Column(name = "hora_inicio")
-    private LocalTime horaInicio;
+    private LocalDateTime horaInicio;
 
     @Column(name = "hora_fin")
-    private LocalTime HoraFin;
+    private LocalDateTime HoraFin;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_empleados_aut", nullable = false)
