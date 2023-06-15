@@ -4,8 +4,10 @@ import entradasApp.entities.Entrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EntradaRepository;
+import entradasApp.services.EntradaService;
 import jakarta.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,21 +17,19 @@ import java.util.List;
 @RequestMapping("/entradas")
 public class EntradaController {
 
-    private EntradaRepository entradaRepository;
+    private EntradaService entradaService;
 
-    public EntradaController(EntradaRepository entradaRepository) {
-        this.entradaRepository = entradaRepository;
+    public EntradaController(EntradaService entradaService) {
+        this.entradaService = entradaService;
     }
     @PostMapping
-    public void create(@Valid @RequestBody Entrada entrada) {
-        boolean existeEntrada = entradaRepository.existsById(entrada.getIdEntrada());
-        if (existeEntrada) {
-            throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta entrada en la base de datos");
-        }
+    public ResponseEntity<Void> create(@Valid @RequestBody Entrada entrada) {
+        entradaService.create(entrada);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @GetMapping
     public ResponseEntity<List<Entrada>> findAll(){
-        List<Entrada> listaDeEntradas = entradaRepository.findAll();
+        List<Entrada> listaDeEntradas = entradaService.findAll();
         return ResponseEntity.ok(listaDeEntradas);
     }
 
@@ -37,37 +37,19 @@ public class EntradaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Entrada> findById(@PathVariable Long id) {
-        Entrada entrada = entradaRepository.findById(id).orElse(null);
-        if (entrada != null) {
-            return ResponseEntity.ok(entrada);
-        } else {
-            throw new NoEncontradoExcepcion("Entrada con el id: " + "no encontrada");
-        }
+       Entrada entrada = entradaService.findById(id);
+       return ResponseEntity.ok(entrada);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Entrada> update(@Valid @PathVariable Long id, @RequestBody Entrada entrada) {
-        Entrada entradaExistente = entradaRepository.findById(id).orElse(null);
-        if (entradaExistente != null) {
-            entradaExistente.setFechaHoraUtilizacion(entrada.getFechaHoraUtilizacion());
-            entradaExistente.setJuego(entrada.getJuego());
-            entradaExistente.setComprador(entrada.getComprador());
-            entradaExistente.setEmpleadoVendedor(entrada.getEmpleadoVendedor());
-            entradaRepository.save(entradaExistente);
-
-            return ResponseEntity.ok(entradaExistente);
-        } else {
-            throw  new NoEncontradoExcepcion("La entrada con el Id: " + id + " no ha sido encontrada");
-        }
+        Entrada entradaExistente = entradaService.findById(id);
+        return ResponseEntity.ok(entradaExistente);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        try {
-            entradaRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } catch (EmptyResultDataAccessException e) {
-            throw new RuntimeException("Ocurrió un error al eliminar la entrada con el id: " + id);
-        }
+      entradaService.deleteById(id);
+      return ResponseEntity.noContent().build();
     }
 
 }

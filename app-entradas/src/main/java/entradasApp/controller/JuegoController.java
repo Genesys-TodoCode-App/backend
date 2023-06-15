@@ -1,11 +1,9 @@
 package entradasApp.controller;
 
 import entradasApp.entities.Juego;
-import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
-import entradasApp.exceptions.NoEncontradoExcepcion;
-import entradasApp.repositories.JuegoRepository;
+import entradasApp.services.JuegoService;
 import jakarta.validation.Valid;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -14,59 +12,39 @@ import java.util.List;
 @RequestMapping("/juegos")
 public class JuegoController {
 
-    private JuegoRepository juegoRepository;
+    private JuegoService juegoService;
 
-    public JuegoController(JuegoRepository juegoRepository) {
-        this.juegoRepository = juegoRepository;
+    public JuegoController(JuegoService juegoService) {
+        this.juegoService = juegoService;
     }
 
     @PostMapping
-    public void create(@Valid @RequestBody Juego juego) {
-        boolean existeJuego = juegoRepository.existsById(juego.getIdJuego());
-        if (existeJuego) {
-            throw new ExisteEnBaseDeDatosExcepcion("Ya existe en base de datos este juego");
-        }
+    public ResponseEntity<Void> create(@Valid @RequestBody Juego juego) {
+        juegoService.create(juego);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @GetMapping
     public ResponseEntity<List<Juego>> findAll() {
-        List<Juego> listaDeJuegos = juegoRepository.findAll();
+        List<Juego> listaDeJuegos = juegoService.findAll();
         return ResponseEntity.ok(listaDeJuegos);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Juego> findById(@PathVariable Long id) {
-        Juego juego = juegoRepository.findById(id).orElse(null);
-        if (juego != null) {
-            return ResponseEntity.ok(juego);
-        } else {
-            throw new NoEncontradoExcepcion("Juego con el id:" + id + "no encontradp.");
-        }
+        Juego juego = juegoService.findById(id);
+        return ResponseEntity.ok(juego);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Juego> update(@Valid @PathVariable Long id, @RequestBody Juego juego) {
-        Juego juegoExistente = juegoRepository.findById(id).orElse(null);
-        if (juegoExistente != null) {
-            juegoExistente.setNombreJuego(juego.getNombreJuego());
-            juegoExistente.setPrecioJuego(juego.getPrecioJuego());
-            juegoExistente.setHoraInicio(juego.getHoraInicio());
-            juegoExistente.setHoraFin((juego.getHoraFin()));
-            juegoExistente.setEmpleadoAutorizado(juego.getEmpleadoAutorizado());
-            juegoRepository.save(juegoExistente);
-            return ResponseEntity.ok(juegoExistente);
-        } else {
-            throw new NoEncontradoExcepcion("El juego con el id: " + id + " no ha sido encontrado");
-        }
+      Juego juegoExistente = juegoService.findById(id);
+      return ResponseEntity.ok(juegoExistente);
 
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        try {
-            juegoRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } catch (EmptyResultDataAccessException e) {
-            throw new RuntimeException("Ocurrio un error al eliminar el juego con el id: " + id);
-        }
+        juegoService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -2,98 +2,50 @@ package entradasApp.controller;
 
 import entradasApp.dtos.EmpleadoDTO;
 import entradasApp.entities.Empleado;
-import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
-import entradasApp.exceptions.NoEncontradoExcepcion;
-import entradasApp.repositories.EmpleadoRepository;
+import entradasApp.services.EmpleadoService;
 import jakarta.validation.Valid;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/empleados")
 public class EmpleadoController {
-    private EmpleadoRepository empleadoRepository;
+    private EmpleadoService empleadoService;
 
-    public EmpleadoController(EmpleadoRepository empleadoRepository){
-        this.empleadoRepository = empleadoRepository;
-    }
-
-    private EmpleadoDTO convertToDTO(Empleado empleado) {
-        EmpleadoDTO empleadoDTO = new EmpleadoDTO();
-        empleadoDTO.setUsuarioEmpleado(empleado.getUsuarioEmpleado());
-        empleadoDTO.setContraseniaEmpleado(empleado.getContraseniaEmpleado());
-        empleadoDTO.setNombreEmpleado(empleado.getNombreEmpleado());
-        empleadoDTO.setApellidoEmpleado(empleado.getApellidoEmpleado());
-        empleadoDTO.setDniEmpleado(empleado.getApellidoEmpleado());
-        empleadoDTO.setRutaALaFoto(empleado.getRutaALaFoto());
-        empleadoDTO.setRolEmpleado(empleado.getRolEmpleado());
-        return empleadoDTO;
+    public EmpleadoController(EmpleadoService empleadoService){
+        this.empleadoService = empleadoService;
     }
 
     @PostMapping
-    public void create(@Valid @RequestBody Empleado empleado) {
-        boolean existeEmpleado = empleadoRepository.existsById(empleado.getIdEmpleado());
-        if (existeEmpleado) {
-            throw new ExisteEnBaseDeDatosExcepcion("Existe este empleado en base de datos");
-        }
-        empleadoRepository.save(empleado);
+    public ResponseEntity<Void> create(@Valid @RequestBody Empleado empleado) {
+        empleadoService.create(empleado);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
     public ResponseEntity<List<EmpleadoDTO>> findAll(){
-        List<Empleado> empleados = empleadoRepository.findAll();
-        List<EmpleadoDTO> empleadosDTO = new ArrayList<>();
-        for (Empleado empleado : empleados) {
-            EmpleadoDTO empleadoDTO = convertToDTO(empleado);
-            empleadosDTO.add(empleadoDTO);
-        }
-        return ResponseEntity.ok(empleadosDTO);
+        List<EmpleadoDTO> empleadoDTO = empleadoService.findAll();
+        return ResponseEntity.ok(empleadoDTO);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EmpleadoDTO> findById(@PathVariable Long id){
-        Empleado empleado = empleadoRepository.findById(id).orElse(null);
-        if(empleado != null){
-            EmpleadoDTO empleadoDTO = convertToDTO(empleado);
-            return ResponseEntity.ok(empleadoDTO);
-        } else {
-            throw  new NoEncontradoExcepcion("Empleado con el ID " + id + " no encontrado");
-        }
+       EmpleadoDTO empleadoDTO = empleadoService.findById(id);
+       return ResponseEntity.ok(empleadoDTO);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EmpleadoDTO> update(@Valid @PathVariable Long id, @RequestBody EmpleadoDTO empleadoDTO) {
-        Empleado empleado = empleadoRepository.findById(id).orElse(null);
-        if (empleado != null) {
-            empleado.setUsuarioEmpleado(empleadoDTO.getUsuarioEmpleado());
-            empleado.setContraseniaEmpleado(empleadoDTO.getContraseniaEmpleado());
-            empleado.setNombreEmpleado(empleadoDTO.getNombreEmpleado());
-            empleado.setApellidoEmpleado(empleado.getApellidoEmpleado());
-            empleado.setDniEmpleado(empleado.getApellidoEmpleado());
-            empleado.setRutaALaFoto(empleado.getRutaALaFoto());
-            empleado.setRolEmpleado(empleado.getRolEmpleado());
-
-            empleadoRepository.save(empleado);
-
-            EmpleadoDTO empleadoActualizadoDTO = convertToDTO(empleado);
-            return  ResponseEntity.ok(empleadoActualizadoDTO);
-        } else {
-            throw  new NoEncontradoExcepcion("Empleado con el Id: " + " no encontrado");
-        }
+       empleadoService.update(id, empleadoDTO);
+       return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        try {
-            empleadoRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } catch (EmptyResultDataAccessException e) {
-            throw new RuntimeException("Ocurrió un error al eliminar el empleado con ID: " + id);
-        }
+     empleadoService.deleteById(id);
+     return ResponseEntity.noContent().build();
     }
 
 
