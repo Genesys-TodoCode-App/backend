@@ -14,13 +14,13 @@ public class LoginService {
         this.empleadoRepository = empleadoRepository;
     }
 
-    public void login(String usuario, String contrasenia){
+    public Empleado login(String usuario, String contrasenia){
         Empleado empleado = empleadoRepository.findByUsuarioEmpleado(usuario);
 
         if(empleado == null || !empleado.getContraseniaEmpleado().equals(contrasenia)) {
             throw new NoEncontradoExcepcion("Credenciales de inicio de sesion incorrectas.");
         }
-
+        return empleado;
     }
 
 

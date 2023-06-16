@@ -27,4 +27,6 @@ public class EmpleadoDTO {
     private RolEmpleado rolEmpleado;
 
 
+    public EmpleadoDTO(String usuarioEmpleado, String contraseniaEmpleado, String string) {
+    }
 }

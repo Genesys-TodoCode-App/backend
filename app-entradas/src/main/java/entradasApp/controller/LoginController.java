@@ -1,5 +1,7 @@
 package entradasApp.controller;
 
+import entradasApp.dtos.EmpleadoDTO;
+import entradasApp.dtos.EmpleadoLoginDTO;
 import entradasApp.entities.Empleado;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.services.LoginService;
@@ -22,12 +24,13 @@ public class LoginController {
 
 
     @PostMapping
-    public ResponseEntity<String> login(@RequestParam String usuario, @RequestParam String contrasenia) {
+    public ResponseEntity<EmpleadoLoginDTO> login(@RequestParam String usuario, @RequestParam String contrasenia) {
         try {
-            loginService.login(usuario, contrasenia);
-            return ResponseEntity.ok("Inicio de sesión exitoso");
+            Empleado empleado =loginService.login(usuario, contrasenia);
+            EmpleadoLoginDTO empleadoDTO = new EmpleadoLoginDTO(empleado.getUsuarioEmpleado(),empleado.getContraseniaEmpleado(),empleado.getRolEmpleado().toString());
+            return ResponseEntity.ok(empleadoDTO);
         } catch (NoEncontradoExcepcion e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales de inicio de sesion incorrectas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
 }

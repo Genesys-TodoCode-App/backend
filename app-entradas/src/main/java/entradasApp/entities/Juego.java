@@ -27,11 +27,18 @@ public class Juego {
     @Column(name = "hora_inicio")
     private LocalDateTime horaInicio;
 
+    @Column(name = "cobro_pase_oro")
+    private boolean cobroPaseOro;
+
     @Column(name = "hora_fin")
     private LocalDateTime HoraFin;
 
+    @Column(name = "dias_venta")
+    @Enumerated(EnumType.STRING)
+    private DiasDeVenta diasDeVenta;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_empleados_aut", nullable = false)
+    @JoinColumn(name = "id_empleados_aut")
     private Empleado empleadoAutorizado;
 
 
