@@ -24,7 +24,7 @@ public class LoginController {
     public ResponseEntity<EmpleadoLoginDTO> login(@RequestParam String usuario, @RequestParam String contrasenia) {
         try {
             Empleado empleado =loginService.login(usuario, contrasenia);
-            EmpleadoLoginDTO empleadoDTO = new EmpleadoLoginDTO(empleado.getUsuarioEmpleado(),empleado.getContraseniaEmpleado(),empleado.getRolEmpleado().toString());
+            EmpleadoLoginDTO empleadoDTO = new EmpleadoLoginDTO(empleado.getUsuarioEmpleado(),empleado.getContraseniaEmpleado().toString());
             return ResponseEntity.ok(empleadoDTO);
         } catch (NoEncontradoExcepcion e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);

@@ -15,6 +15,5 @@ public class EmpleadoLoginDTO {
 
     private String contraseniaEmpleado;
 
-    private String rolEmpleado;
 
 }
