@@ -23,8 +23,8 @@ public class VentaEntradaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<VentaEntrada>> findAll() {
-        List<VentaEntrada> listaVentaEntradas = ventaEntradaService.findAll();
+    public ResponseEntity<Iterable<VentaEntrada>> findAll() {
+        Iterable<VentaEntrada> listaVentaEntradas = ventaEntradaService.findAll();
         return ResponseEntity.ok(listaVentaEntradas);
     }
 

@@ -10,4 +10,6 @@ services:
     environment:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: blog
+      POSTGRES_DB: entradas_PU
+      TZ: UTC
+      PGTZ: UTC

@@ -24,8 +24,8 @@ public class JuegoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @GetMapping
-    public ResponseEntity<List<Juego>> findAll() {
-        List<Juego> listaDeJuegos = juegoService.findAll();
+    public ResponseEntity<Iterable<Juego>> findAll() {
+        Iterable<Juego> listaDeJuegos = juegoService.findAll();
         return ResponseEntity.ok(listaDeJuegos);
     }
 

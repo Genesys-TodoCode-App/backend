@@ -37,8 +37,8 @@ public class EmpleadoService {
         }
         empleadoRepository.save(empleado);
     }
-    public List<EmpleadoDTO> findAll(){
-        List<Empleado> empleados = empleadoRepository.findAll();
+    public Iterable<EmpleadoDTO> findAll(){
+        Iterable<Empleado> empleados = empleadoRepository.findAll();
         List<EmpleadoDTO> empleadosDTO = new ArrayList<>();
         for (Empleado empleado : empleados) {
            EmpleadoDTO empleadoDTO = convertToDTO(empleado);

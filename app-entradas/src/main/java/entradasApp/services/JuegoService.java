@@ -23,7 +23,7 @@ public class JuegoService {
             throw new ExisteEnBaseDeDatosExcepcion("Ya existe en base de datos este juego");
         }
     }
-    public List<Juego> findAll() {
+    public Iterable<Juego> findAll() {
         return juegoRepository.findAll();
     }
     public Juego findById(Long id) {

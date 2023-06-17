@@ -25,8 +25,8 @@ public class EmpleadoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EmpleadoDTO>> findAll(){
-        List<EmpleadoDTO> empleadoDTO = empleadoService.findAll();
+    public ResponseEntity<Iterable<EmpleadoDTO>> findAll(){
+        Iterable<EmpleadoDTO> empleadoDTO = empleadoService.findAll();
         return ResponseEntity.ok(empleadoDTO);
     }
 

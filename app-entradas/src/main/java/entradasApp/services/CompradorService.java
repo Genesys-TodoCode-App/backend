@@ -25,7 +25,7 @@ public class CompradorService {
         compradorRepository.save(comprador);
     }
 
-    public List<Comprador> findAll() {
+    public Iterable<Comprador> findAll() {
         return  compradorRepository.findAll();
     }
 

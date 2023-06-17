@@ -26,7 +26,7 @@ public class VentaEntradaService {
         ventaEntradaRepository.save(ventaEntrada);
     }
 
-    public List<VentaEntrada> findAll() {
+    public Iterable<VentaEntrada> findAll() {
         return ventaEntradaRepository.findAll();
     }
 

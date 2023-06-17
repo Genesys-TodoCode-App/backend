@@ -26,8 +26,8 @@ public class CompradorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Comprador>> findAll() {
-        List<Comprador> listaDeCompradores = compradorService.findAll();
+    public ResponseEntity<Iterable<Comprador>> findAll() {
+        Iterable<Comprador> listaDeCompradores = compradorService.findAll();
         return ResponseEntity.ok(listaDeCompradores);
     }
 
