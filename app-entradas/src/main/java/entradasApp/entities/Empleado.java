@@ -13,7 +13,7 @@ import java.util.List;
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_empleados", nullable = false,  unique = true, updatable = false)
+    @Column(name = "id_empleados", unique = true, updatable = false)
     private Long idEmpleado;
 
     @Column(name = "nombre_empleados", length = 20)
