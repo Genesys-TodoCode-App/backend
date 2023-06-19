@@ -1,6 +1,7 @@
 package entradasApp.dtos;
 
 
+import entradasApp.entities.RolEmpleado;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,6 +15,8 @@ public class EmpleadoLoginDTO {
     private String usuarioEmpleado;
 
     private String contraseniaEmpleado;
+
+    private RolEmpleado rolEmpleado;
 
 
 }
