@@ -20,13 +20,10 @@ public class EmpleadoService {
     }
     private EmpleadoDTO convertToDTO(Empleado empleado) {
         EmpleadoDTO empleadoDTO = new EmpleadoDTO();
-        empleadoDTO.setUsuarioEmpleado(empleado.getUsuarioEmpleado());
-        empleadoDTO.setContraseniaEmpleado(empleado.getContraseniaEmpleado());
         empleadoDTO.setNombreEmpleado(empleado.getNombreEmpleado());
         empleadoDTO.setApellidoEmpleado(empleado.getApellidoEmpleado());
         empleadoDTO.setDniEmpleado(empleado.getApellidoEmpleado());
         empleadoDTO.setRutaALaFoto(empleado.getRutaALaFoto());
-        empleadoDTO.setRolEmpleado(empleado.getRolEmpleado());
         return empleadoDTO;
     }
 
@@ -57,13 +54,10 @@ public class EmpleadoService {
     public void update(Long id, EmpleadoDTO empleadoDTO){
         Empleado empleado = empleadoRepository.findById(id).orElse(null);
         if (empleado != null) {
-            empleado.setUsuarioEmpleado(empleadoDTO.getUsuarioEmpleado());
-            empleado.setContraseniaEmpleado(empleadoDTO.getContraseniaEmpleado());
             empleado.setNombreEmpleado(empleadoDTO.getNombreEmpleado());
             empleado.setApellidoEmpleado(empleado.getApellidoEmpleado());
             empleado.setDniEmpleado(empleado.getApellidoEmpleado());
             empleado.setRutaALaFoto(empleado.getRutaALaFoto());
-            empleado.setRolEmpleado(empleado.getRolEmpleado());
             empleadoRepository.save(empleado);
         } else {
             throw  new NoEncontradoExcepcion("Empleado con el Id: " + " no encontrado");

@@ -29,14 +29,6 @@ public class Entrada {
     @JoinColumn(name = "id_juegos")
     private Juego juego;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Comprador comprador;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Empleado empleadoVendedor;
-
-    @OneToMany(mappedBy = "entrada")
-    private List<VentaEntrada> ventasEntradas;
 
 
 }

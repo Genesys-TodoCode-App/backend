@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
-
+import java.util.List;
 
 
 @Data
@@ -25,18 +25,17 @@ public class Juego {
     @Column(name = "precio_juegos", length = 10)
     private Integer precioJuego;
 
-    @Column(name = "hora_inicio")
-    private LocalDateTime horaInicio;
 
     @Column(name = "cobro_pase_oro")
     private boolean cobroPaseOro;
 
-    @Column(name = "hora_fin")
-    private LocalDateTime HoraFin;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_empleados_aut")
-    private Empleado empleadoAutorizado;
+    @ManyToMany
+    @JoinTable(
+        name = "juegos_horarios",
+        joinColumns = @JoinColumn(name = "id_juegos"),
+        inverseJoinColumns = @JoinColumn(name = "id_horarios")
+    )
+    private List<HorarioJuego> horarios;
 
 
 }

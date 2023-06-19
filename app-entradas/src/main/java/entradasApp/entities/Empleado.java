@@ -4,22 +4,17 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name = "empleados")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_empleados", nullable = false,  unique = true, updatable = false)
     private Long idEmpleado;
-
-    @Column(name = "usuario_empleados", length = 20, unique = true)
-    private String usuarioEmpleado;
-
-    @Column(name = "contrasenia_empleados", length = 20)
-    private String contraseniaEmpleado;
 
     @Column(name = "nombre_empleados", length = 20)
     private String nombreEmpleado;
@@ -33,9 +28,16 @@ public class Empleado {
     @Column(name = "rutas_a_la_fotos", length = 100)
     private String rutaALaFoto;
 
-    @Column(name = "rol_empleados", length = 40)
-    @Enumerated    (EnumType.STRING)
-    private RolEmpleado rolEmpleado;
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
+    @ManyToMany
+    @JoinTable(
+        name = "empleados_juegos",
+        joinColumns = @JoinColumn(name = "id_empleados"),
+        inverseJoinColumns = @JoinColumn(name = "id_juegos")
+    )
+    private List<Juego> juegos;
 
 }

@@ -35,8 +35,6 @@ public class EntradaService {
         if (entradaExistente != null) {
             entradaExistente.setFechaHoraUtilizacion(entrada.getFechaHoraUtilizacion());
             entradaExistente.setJuego(entrada.getJuego());
-            entradaExistente.setComprador(entrada.getComprador());
-            entradaExistente.setEmpleadoVendedor(entrada.getEmpleadoVendedor());
             entradaRepository.save(entradaExistente);
         } else {
             throw new NoEncontradoExcepcion("La entrada con el Id: " + id + " no ha sido encontrada");

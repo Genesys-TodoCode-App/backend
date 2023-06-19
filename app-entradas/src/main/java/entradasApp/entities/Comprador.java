@@ -29,7 +29,4 @@ public class Comprador {
     @Column(name = "pase_de_oro", length = 5)
     private boolean paseDeOro;
 
-    @ManyToOne
-    @JoinColumn(name = "id_juegos")
-    private Juego juego;
 }

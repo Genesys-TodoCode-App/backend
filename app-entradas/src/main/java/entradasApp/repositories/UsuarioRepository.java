@@ -1,10 +1,9 @@
 package entradasApp.repositories;
 
-import entradasApp.entities.Empleado;
+import entradasApp.entities.Usuario;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmpleadoRepository extends CrudRepository<Empleado, Long> {
-
+public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 }

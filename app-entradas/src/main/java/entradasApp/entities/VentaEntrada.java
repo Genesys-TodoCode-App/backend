@@ -22,6 +22,14 @@ public class VentaEntrada {
     @JoinColumn(name = "id_entradas")
     private Entrada entrada;
 
+    @ManyToOne
+    @JoinColumn(name = "id_empleados")
+    private Empleado empleadoVendedor;
+
+    @ManyToOne
+    @JoinColumn(name = "id_compradores")
+    private Comprador compradorEntrada;
+
     @Column(name = "monto_ventas")
     private BigDecimal montoVenta;
 
