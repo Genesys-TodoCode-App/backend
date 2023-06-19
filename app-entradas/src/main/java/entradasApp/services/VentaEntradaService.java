@@ -4,6 +4,7 @@ import entradasApp.entities.VentaEntrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.VentaEntradaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 public class VentaEntradaService {
 
+    @Autowired
     private final VentaEntradaRepository ventaEntradaRepository;
 
     public VentaEntradaService(VentaEntradaRepository ventaEntradaRepository) {

@@ -17,7 +17,7 @@ public class HorarioJuego {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_horarios", unique = true, nullable = false, updatable = false)
-    private Long idHorario;
+    private Long idHorarioJuego;
 
     @Column(name = "hora_inicio")
     private LocalDateTime horaInicio;

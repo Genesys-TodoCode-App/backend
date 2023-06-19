@@ -29,7 +29,7 @@ public class Juego {
     @Column(name = "cobro_pase_oro")
     private boolean cobroPaseOro;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
         name = "juegos_horarios",
         joinColumns = @JoinColumn(name = "id_juegos"),

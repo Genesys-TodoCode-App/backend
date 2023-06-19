@@ -4,6 +4,7 @@ import entradasApp.entities.Entrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EntradaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 public class EntradaService {
 
+    @Autowired
     private EntradaRepository entradaRepository;
 
     public EntradaService(EntradaRepository entradaRepository){
@@ -23,6 +25,7 @@ public class EntradaService {
         if (existeEntrada){
             throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta entrada en la base de datos");
         }
+        entradaRepository.save(entrada);
     }
     public List<Entrada> findAll(){
         return entradaRepository.findAll();

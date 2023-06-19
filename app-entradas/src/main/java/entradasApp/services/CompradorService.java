@@ -4,6 +4,7 @@ import entradasApp.entities.Comprador;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.CompradorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ import java.util.List;
 @Service
 public class CompradorService {
 
+
+    @Autowired
     private CompradorRepository compradorRepository;
 
     public CompradorService(CompradorRepository compradorRepository) {

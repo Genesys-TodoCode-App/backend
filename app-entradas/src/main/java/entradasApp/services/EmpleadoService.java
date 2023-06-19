@@ -5,6 +5,7 @@ import entradasApp.entities.Empleado;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EmpleadoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Service
 public class EmpleadoService {
+
+    @Autowired
     private EmpleadoRepository empleadoRepository;
 
     public EmpleadoService(EmpleadoRepository empleadoRepository) {

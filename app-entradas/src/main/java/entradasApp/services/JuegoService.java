@@ -1,8 +1,11 @@
 package entradasApp.services;
 
+import entradasApp.entities.Empleado;
 import entradasApp.entities.Juego;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
+import entradasApp.repositories.EmpleadoRepository;
 import entradasApp.repositories.JuegoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +13,10 @@ import java.util.List;
 
 @Service
 public class JuegoService {
-
+    @Autowired
     private JuegoRepository juegoRepository;
+    @Autowired
+    private EmpleadoRepository empleadoRepository;
 
     private JuegoService(JuegoRepository juegoRepository){
         this.juegoRepository = juegoRepository;
@@ -43,9 +48,18 @@ public class JuegoService {
     }
     public void deleteById(Long id) {
         try {
-            juegoRepository.deleteById(id);
+            Juego juego = juegoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No se encontró el Juego con el ID especificado"));
+
+            // Eliminar las referencias del juego en los empleados
+            for (Empleado empleado : empleadoRepository.findAll()) {
+                empleado.getJuegos().removeIf(j -> j.getIdJuego().equals(juego.getIdJuego()));
+            }
+
+            juegoRepository.deleteById(id); // Eliminar el Juego
         } catch (EmptyResultDataAccessException e) {
             throw new RuntimeException("Ocurrió un error al eliminar el Juego");
         }
     }
+
 }

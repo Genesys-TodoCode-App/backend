@@ -25,7 +25,7 @@ public class Entrada {
     @Column(name = "fecha_hora_utilizacion")
     private LocalDateTime fechaHoraUtilizacion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_juegos")
     private Juego juego;
 

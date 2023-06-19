@@ -18,7 +18,7 @@ public class VentaEntrada {
     @Column(name = "id_venta_entradas", nullable = false, unique = true, updatable = false)
     private Long idVentaEntrada;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_entradas")
     private Entrada entrada;
 
