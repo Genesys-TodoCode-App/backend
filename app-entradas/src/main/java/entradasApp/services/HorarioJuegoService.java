@@ -3,6 +3,7 @@ package entradasApp.services;
 import entradasApp.entities.HorarioJuego;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.HorarioJuegoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Service
 public class HorarioJuegoService {
 
+    @Autowired
     private HorarioJuegoRepository horarioJuegoRepository;
 
     public HorarioJuegoService(HorarioJuegoRepository horarioJuegoRepository) {

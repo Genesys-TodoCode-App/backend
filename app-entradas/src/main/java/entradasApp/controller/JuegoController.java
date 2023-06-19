@@ -3,6 +3,7 @@ package entradasApp.controller;
 import entradasApp.entities.Juego;
 import entradasApp.services.JuegoService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequestMapping("/juegos")
 public class JuegoController {
 
+    @Autowired
     private JuegoService juegoService;
 
     public JuegoController(JuegoService juegoService) {

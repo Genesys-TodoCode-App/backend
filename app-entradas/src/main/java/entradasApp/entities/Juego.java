@@ -16,7 +16,7 @@ import java.util.List;
 public class Juego {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_juegos", unique = true, nullable = false, updatable = false)
+    @Column(name = "id_juegos", unique = true, updatable = false)
     private Long idJuego;
 
     @Column(name = "nombre_juegos", length = 50)

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class VentaEntrada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_venta_entradas", nullable = false, unique = true, updatable = false)
+    @Column(name = "id_venta_entradas", unique = true, updatable = false)
     private Long idVentaEntrada;
 
     @ManyToOne(fetch = FetchType.EAGER)

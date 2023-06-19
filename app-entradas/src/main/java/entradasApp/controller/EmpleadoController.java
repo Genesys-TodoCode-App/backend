@@ -4,6 +4,7 @@ import entradasApp.dtos.EmpleadoDTO;
 import entradasApp.entities.Empleado;
 import entradasApp.services.EmpleadoService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/empleados")
 public class EmpleadoController {
+
+    @Autowired
     private EmpleadoService empleadoService;
 
     public EmpleadoController(EmpleadoService empleadoService){

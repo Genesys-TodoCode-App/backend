@@ -11,7 +11,7 @@ public class Comprador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    @Column(name = "id_compradores",  nullable = false,  unique = true,  updatable = false)
+    @Column(name = "id_compradores",  unique = true,  updatable = false)
     private Long idComprador;
 
     @Column(name = "nombre_compradores", length = 20)

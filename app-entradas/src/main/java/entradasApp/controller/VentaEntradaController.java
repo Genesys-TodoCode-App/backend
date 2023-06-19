@@ -3,6 +3,7 @@ package entradasApp.controller;
 import entradasApp.entities.VentaEntrada;
 import entradasApp.services.VentaEntradaService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @RequestMapping("/ventas-entradas")
 public class VentaEntradaController {
 
+    @Autowired
     private final VentaEntradaService ventaEntradaService;
 
     public VentaEntradaController(VentaEntradaService ventaEntradaService) {

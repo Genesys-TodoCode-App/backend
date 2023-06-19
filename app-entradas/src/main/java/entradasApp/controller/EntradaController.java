@@ -6,6 +6,7 @@ import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EntradaRepository;
 import entradasApp.services.EntradaService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping("/entradas")
 public class EntradaController {
 
+    @Autowired
     private EntradaService entradaService;
 
     public EntradaController(EntradaService entradaService) {
