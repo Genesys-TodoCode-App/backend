@@ -24,7 +24,7 @@ public class VentaEntrada {
 
     @ManyToOne
     @JoinColumn(name = "id_empleados")
-    private Empleado empleadoVendedor;
+    private Empleado empleado;
 
     @ManyToOne
     @JoinColumn(name = "id_compradores")
@@ -36,3 +36,5 @@ public class VentaEntrada {
     @Column(name = "fecha_ventas")
     private LocalDateTime fechaVenta;
 }
+
+

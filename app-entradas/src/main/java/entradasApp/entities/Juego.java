@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,11 +27,13 @@ public class Juego {
     @Column(name = "precio_juegos", length = 10)
     private Integer precioJuego;
 
-
     @Column(name = "cobro_pase_oro")
     private boolean cobroPaseOro;
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @Column(name = "juego_activo")
+    private boolean juegoActivo;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
         name = "juegos_horarios",
         joinColumns = @JoinColumn(name = "id_juegos"),
@@ -37,5 +41,5 @@ public class Juego {
     )
     private List<HorarioJuego> horarios;
 
-
 }
+

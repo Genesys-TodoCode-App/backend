@@ -78,19 +78,20 @@ INSERT INTO empleados (nombre_empleados, apellido_empleados, dni_empleados, ruta
          ('Lucía', 'Romero', '87654321', '/ruta/foto10.jpg', 10),
          ('Miguel', 'Pérez', '12345678', '/ruta/foto11.jpg', 11),
          ('Carolina', 'González', '56789012', '/ruta/foto12.jpg', 12);
-INSERT INTO juegos (nombre_juegos, precio_juegos, cobro_pase_oro)
-VALUES ('Montaña Rusa', 10, true),
-       ('Carrusel', 5, false),
-       ('Tobogán Acuático', 8, true),
-       ('Sillas Voladoras', 6, false),
-       ('Laberinto', 4, true),
-       ('Barco Pirata', 7, false),
-       ('Rueda de la Fortuna', 10, true),
-       ('Autos Chocadores', 6, false),
-       ('Atracción Acuática', 8, true),
-       ('Torre de Caída', 9, false),
-       ('Montaña de Agua', 7, true),
-       ('Tren Fantasma', 5, false);
+INSERT INTO juegos (nombre_juegos, precio_juegos, cobro_pase_oro, juego_activo)
+VALUES ('Montaña Rusa', 10, true, true),
+       ('Carrusel', 5, false, false),
+       ('Tobogán Acuático', 8, true, true),
+       ('Sillas Voladoras', 6, false, false),
+       ('Laberinto', 4, true, true),
+       ('Barco Pirata', 7, false, false),
+       ('Rueda de la Fortuna', 10, true, true),
+       ('Autos Chocadores', 6, false, false),
+       ('Atracción Acuática', 8, true, true),
+       ('Torre de Caída', 9, false, false),
+       ('Montaña de Agua', 7, true, true),
+       ('Tren Fantasma', 5, false, false);
+
 -- Primer horario: 16:00 - 20:00
 INSERT INTO horarios_juego (hora_inicio, hora_fin)
 VALUES

@@ -5,10 +5,8 @@ import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.CompradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class CompradorService {
@@ -49,10 +47,16 @@ public class CompradorService {
     }
 
     public void deleteById(Long id) {
-        try {
-            compradorRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw  new RuntimeException("Ocurrió un error al eliminar el Comprador");
-        }
+        Comprador comprador = compradorRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("No encontrado el Comprador con el id: " + id));
+        comprador.setPaseDeOro(false);
+        comprador.setDniComprador(null);
+        comprador.setNombreComprador(null);
+        comprador.setApellidoComprador(null);
+        comprador.setCorreoElectronicoComprador(null);
+        compradorRepository.save(comprador);
     }
+
+
+
 }
