@@ -30,8 +30,14 @@ public class Juego {
     @Column(name = "cobro_pase_oro")
     private boolean cobroPaseOro;
 
-    @Column(name = "juego_activo")
+    @Column(name = "juegos_activos")
     private boolean juegoActivo;
+
+    @Column(name ="rutas_a_las_fotos")
+    private String rutaALaFoto;
+
+    @Column(name = "descripciones")
+    private String descripciones;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(

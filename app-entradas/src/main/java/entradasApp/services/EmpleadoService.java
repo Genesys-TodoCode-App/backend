@@ -5,7 +5,6 @@ import entradasApp.entities.Empleado;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EmpleadoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +14,11 @@ import java.util.List;
 @Service
 public class EmpleadoService {
 
-    @Autowired
+
     private EmpleadoRepository empleadoRepository;
 
     public EmpleadoService(EmpleadoRepository empleadoRepository) {
         this.empleadoRepository = empleadoRepository;
-    }
-    private EmpleadoDTO convertToDTO(Empleado empleado) {
-        EmpleadoDTO empleadoDTO = new EmpleadoDTO();
-        empleadoDTO.setNombreEmpleado(empleado.getNombreEmpleado());
-        empleadoDTO.setApellidoEmpleado(empleado.getApellidoEmpleado());
-        empleadoDTO.setDniEmpleado(empleado.getApellidoEmpleado());
-        empleadoDTO.setRutaALaFoto(empleado.getRutaALaFoto());
-        return empleadoDTO;
     }
 
     public void create(Empleado empleado){
@@ -41,17 +32,30 @@ public class EmpleadoService {
         Iterable<Empleado> empleados = empleadoRepository.findAll();
         List<EmpleadoDTO> empleadosDTO = new ArrayList<>();
         for (Empleado empleado : empleados) {
-           EmpleadoDTO empleadoDTO = convertToDTO(empleado);
+           EmpleadoDTO empleadoDTO = new EmpleadoDTO();
+           empleadoDTO.setIdEmpleado(empleado.getIdEmpleado());
+           empleadoDTO.setNombreEmpleado(empleado.getNombreEmpleado());
+           empleadoDTO.setApellidoEmpleado(empleado.getApellidoEmpleado());
+           empleadoDTO.setDniEmpleado(empleado.getDniEmpleado());
+           empleadoDTO.setRutaALaFoto(empleado.getRutaALaFoto());
+           empleadoDTO.setRolEmpleado(empleado.getUsuario().getRolEmpleado());
            empleadosDTO.add(empleadoDTO);
         }
         return empleadosDTO;
     }
     public EmpleadoDTO findById(Long id) {
         Empleado empleado = empleadoRepository.findById(id).orElse(null);
-        if(empleado != null) {
-            return convertToDTO(empleado);
+        if (empleado != null) {
+            EmpleadoDTO empleadoDTO = new EmpleadoDTO();
+            empleadoDTO.setIdEmpleado(empleado.getIdEmpleado());
+            empleadoDTO.setNombreEmpleado(empleado.getNombreEmpleado());
+            empleadoDTO.setApellidoEmpleado(empleado.getApellidoEmpleado());
+            empleadoDTO.setDniEmpleado(empleado.getDniEmpleado());
+            empleadoDTO.setRutaALaFoto(empleado.getRutaALaFoto());
+            empleadoDTO.setRolEmpleado(empleado.getUsuario().getRolEmpleado());
+            return empleadoDTO;
         } else {
-            throw  new NoEncontradoExcepcion("El empleado con el id: " + id + " no ha sido encontrado");
+            throw new NoEncontradoExcepcion("El empleado con el id: " + id + " no ha sido encontrado");
         }
     }
     public void update(Long id, EmpleadoDTO empleadoDTO){

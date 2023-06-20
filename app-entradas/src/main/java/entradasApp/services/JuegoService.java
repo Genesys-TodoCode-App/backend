@@ -43,6 +43,8 @@ public class JuegoService {
             juegoExistente.setNombreJuego(juego.getNombreJuego());
             juegoExistente.setPrecioJuego(juego.getPrecioJuego());
             juegoExistente.setCobroPaseOro(juego.isCobroPaseOro());
+            juegoExistente.setDescripciones(juego.getDescripciones());
+            juegoExistente.setRutaALaFoto(juego.getRutaALaFoto());
             juegoExistente.setJuegoActivo(juego.isJuegoActivo());
             juegoExistente.setHorarios(juego.getHorarios());
             juegoRepository.save(juegoExistente);

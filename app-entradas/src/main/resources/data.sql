@@ -78,19 +78,20 @@ INSERT INTO empleados (nombre_empleados, apellido_empleados, dni_empleados, ruta
          ('Lucía', 'Romero', '87654321', '/ruta/foto10.jpg', 10),
          ('Miguel', 'Pérez', '12345678', '/ruta/foto11.jpg', 11),
          ('Carolina', 'González', '56789012', '/ruta/foto12.jpg', 12);
-INSERT INTO juegos (nombre_juegos, precio_juegos, cobro_pase_oro, juego_activo)
-VALUES ('Montaña Rusa', 10, true, true),
-       ('Carrusel', 5, false, false),
-       ('Tobogán Acuático', 8, true, true),
-       ('Sillas Voladoras', 6, false, false),
-       ('Laberinto', 4, true, true),
-       ('Barco Pirata', 7, false, false),
-       ('Rueda de la Fortuna', 10, true, true),
-       ('Autos Chocadores', 6, false, false),
-       ('Atracción Acuática', 8, true, true),
-       ('Torre de Caída', 9, false, false),
-       ('Montaña de Agua', 7, true, true),
-       ('Tren Fantasma', 5, false, false);
+INSERT INTO juegos (nombre_juegos, precio_juegos, cobro_pase_oro, juegos_activos, descripciones, rutas_a_las_fotos)
+VALUES ('Montaña Rusa', 10, true, true, 'Descripción Montaña Rusa', 'ruta_foto1'),
+       ('Carrusel', 5, false, false, 'Descripción Carrusel', 'ruta_foto2'),
+       ('Tobogán Acuático', 8, true, true, 'Descripción Tobogán Acuático', 'ruta_foto3'),
+       ('Sillas Voladoras', 6, false, false, 'Descripción Sillas Voladoras', 'ruta_foto4'),
+       ('Laberinto', 4, true, true, 'Descripción Laberinto', 'ruta_foto5'),
+       ('Barco Pirata', 7, false, false, 'Descripción Barco Pirata', 'ruta_foto6'),
+       ('Rueda de la Fortuna', 10, true, true, 'Descripción Rueda de la Fortuna', 'ruta_foto7'),
+       ('Autos Chocadores', 6, false, false, 'Descripción Autos Chocadores', 'ruta_foto8'),
+       ('Atracción Acuática', 8, true, true, 'Descripción Atracción Acuática', 'ruta_foto9'),
+       ('Torre de Caída', 9, false, false, 'Descripción Torre de Caída', 'ruta_foto10'),
+       ('Montaña de Agua', 7, true, true, 'Descripción Montaña de Agua', 'ruta_foto11'),
+       ('Tren Fantasma', 5, false, false, 'Descripción Tren Fantasma', 'ruta_foto12');
+
 
 -- Primer horario: 16:00 - 20:00
 INSERT INTO horarios_juego (hora_inicio, hora_fin)
