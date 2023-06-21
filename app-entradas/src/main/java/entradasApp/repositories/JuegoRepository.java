@@ -11,12 +11,12 @@ import java.util.List;
 @Repository
 public interface JuegoRepository extends CrudRepository<Juego, Long> {
 
-    @Query("SELECT j.nombreJuego, COUNT(ve) " +
+    @Query(value = "SELECT j.nombreJuego, COUNT(ve) " +
         "FROM Juego j JOIN j.entradas e JOIN e.ventasEntradas ve " +
         "WHERE ve.fechaVenta <= CURRENT_TIMESTAMP " +
         "GROUP BY j.nombreJuego " +
         "ORDER BY COUNT(ve) DESC " +
-        "LIMIT 1")
+        "LIMIT 1", nativeQuery = true)
     Object[] findJuegoMasEntradasVendidasHastaHoy();
 
 
