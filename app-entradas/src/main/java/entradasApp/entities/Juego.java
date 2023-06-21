@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Juego {
     private String nombreJuego;
 
     @Column(name = "precio_juegos", length = 10)
-    private Integer precioJuego;
+    private BigDecimal precioJuego;
 
     @Column(name = "cobro_pase_oro")
     private boolean cobroPaseOro;
