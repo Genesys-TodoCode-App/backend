@@ -1,6 +1,8 @@
 package entradasApp.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,14 +22,19 @@ public class VentaEntrada {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_entradas")
+    @JsonManagedReference
+    // Esta anotación indica que esta entidad controla la relación
     private Entrada entrada;
 
     @ManyToOne
     @JoinColumn(name = "id_empleados")
+    @JsonBackReference
+    // Esta anotación indica que la relación es manejada por otra entidad
     private Empleado empleado;
 
     @ManyToOne
     @JoinColumn(name = "id_compradores")
+    @JsonBackReference // Esta anotación indica que la relación es manejada por otra entidad
     private Comprador compradorEntrada;
 
     @Column(name = "monto_ventas")
@@ -36,5 +43,6 @@ public class VentaEntrada {
     @Column(name = "fecha_ventas")
     private LocalDateTime fechaVenta;
 }
+
 
 
