@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -22,6 +24,9 @@ public class EmpleadoDTO {
     private String rutaALaFoto;
     @JsonProperty("Rol empleado")
     private RolEmpleado rolEmpleado;
+    @JsonProperty("Juegos")
+    private List<JuegoDTO> juegos;
+
 
 
     public EmpleadoDTO(String usuarioEmpleado, String contraseniaEmpleado, String string) {
