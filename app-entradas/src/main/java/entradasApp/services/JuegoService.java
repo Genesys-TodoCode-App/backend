@@ -2,7 +2,6 @@ package entradasApp.services;
 
 import entradasApp.entities.Juego;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
-import entradasApp.repositories.EmpleadoRepository;
 import entradasApp.repositories.JuegoRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +15,12 @@ public class JuegoService {
 
     private final JuegoRepository juegoRepository;
 
-    private EmpleadoRepository empleadoRepository;
 
     /**
      * Constructor de la clase JuegoService
      * @param juegoRepository
      */
-    private JuegoService(JuegoRepository juegoRepository) {
+    public JuegoService(JuegoRepository juegoRepository) {
         this.juegoRepository = juegoRepository;
     }
 

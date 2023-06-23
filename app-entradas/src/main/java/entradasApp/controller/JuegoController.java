@@ -78,6 +78,7 @@ public class JuegoController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Juego> update(@Valid @PathVariable Long id, @RequestBody Juego juego) {
+        juegoService.update(id, juego);
         Juego juegoExistente = juegoService.findById(id);
         return ResponseEntity.ok(juegoExistente);
 
