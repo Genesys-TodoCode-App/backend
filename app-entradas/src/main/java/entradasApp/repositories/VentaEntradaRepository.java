@@ -1,6 +1,5 @@
 package entradasApp.repositories;
 
-import entradasApp.entities.Entrada;
 import entradasApp.entities.VentaEntrada;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -39,14 +38,12 @@ public interface VentaEntradaRepository extends CrudRepository<VentaEntrada, Lon
         "WHERE FUNCTION('DATE', v.fechaVenta) = :fecha")
     BigDecimal getTotalVentasPorFecha(@Param("fecha") LocalDate fecha);
 
-
-
-        @Query("SELECT v.entrada.juego, COUNT(v) AS cantidadEntradasVendidas " +
-            "FROM VentaEntrada v " +
-            "GROUP BY v.entrada.juego " +
-            "ORDER BY cantidadEntradasVendidas DESC")
-        List<Object[]> obtenerJuegoConMasEntradasVendidas();
-    }
+    @Query("SELECT v.entrada.juego, COUNT(v) AS cantidadEntradasVendidas " +
+        "FROM VentaEntrada v " +
+        "GROUP BY v.entrada.juego " +
+        "ORDER BY cantidadEntradasVendidas DESC")
+    List<Object[]> obtenerJuegoConMasEntradasVendidas();
+}
 
 
 

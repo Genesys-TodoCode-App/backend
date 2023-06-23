@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     @Autowired
-  private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
@@ -28,12 +28,13 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Usuario>> findAll(){
+    public ResponseEntity<Iterable<Usuario>> findAll() {
         Iterable<Usuario> listaDeUsuarios = usuarioService.findAll();
         return ResponseEntity.ok(listaDeUsuarios);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> update(@Valid @PathVariable Long id, @RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> update(@Valid @PathVariable Long id, @RequestBody Usuario usuario) {
         Usuario usuarioExistente = usuarioService.findById(id);
         return ResponseEntity.ok(usuarioExistente);
     }

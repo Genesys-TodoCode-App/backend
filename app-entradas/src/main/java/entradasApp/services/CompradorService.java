@@ -13,31 +13,32 @@ public class CompradorService {
 
 
     @Autowired
-    private CompradorRepository compradorRepository;
+    private final CompradorRepository compradorRepository;
 
     public CompradorService(CompradorRepository compradorRepository) {
         this.compradorRepository = compradorRepository;
     }
+
     public void createComprador(Comprador comprador) {
         boolean existeComprador = compradorRepository.existsById(comprador.getIdComprador());
-        if (existeComprador){
+        if (existeComprador) {
             throw new ExisteEnBaseDeDatosExcepcion("Este comprador existe en base de datos");
         }
         compradorRepository.save(comprador);
     }
 
     public Iterable<Comprador> findAll() {
-        return  compradorRepository.findAll();
+        return compradorRepository.findAll();
     }
 
     public Comprador findById(Long id) {
         return compradorRepository.findById(id)
-            .orElseThrow(()-> new NoEncontradoExcepcion("El Comprador con el id: " + id + "no fue encontrado."));
+            .orElseThrow(() -> new NoEncontradoExcepcion("El Comprador con el id: " + id + "no fue encontrado."));
     }
 
-    public void update(Long id, Comprador comprador){
+    public void update(Long id, Comprador comprador) {
         Comprador compradorExistente = compradorRepository.findById(id)
-            .orElseThrow(()-> new NoEncontradoExcepcion("El Comprador con el id: " + id + "no fue encontrado."));
+            .orElseThrow(() -> new NoEncontradoExcepcion("El Comprador con el id: " + id + "no fue encontrado."));
         compradorExistente.setNombreComprador(comprador.getNombreComprador());
         compradorExistente.setApellidoComprador(comprador.getNombreComprador());
         compradorExistente.setDniComprador(comprador.getDniComprador());
@@ -56,7 +57,6 @@ public class CompradorService {
         comprador.setCorreoElectronicoComprador(null);
         compradorRepository.save(comprador);
     }
-
 
 
 }

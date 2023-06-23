@@ -12,8 +12,10 @@ import lombok.Getter;
 public class Comprador {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
-    @Column(name = "id_compradores",  unique = true,  updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_compradores",
+        unique = true,
+        updatable = false)
     @JsonProperty("Id Comprador")
     private Long idComprador;
 

@@ -45,13 +45,13 @@ public class InformeService {
         return ventaEntradaRepository.getTotalVentasPorMesYAnio(mes, anio);
     }
 
-    public BigDecimal getTotalVentasPorFecha(LocalDate fecha){
+    public BigDecimal getTotalVentasPorFecha(LocalDate fecha) {
         return ventaEntradaRepository.getTotalVentasPorFecha(fecha);
     }
+
     public List<Object[]> findEmpleadosConJuegosAsignados() {
         return empleadoRepository.obtenerNombresyApellidosEmpleadosYJuegos();
     }
-
 
 
     public List<Comprador> findCompradorMasEntradas(int mes, int anio) {

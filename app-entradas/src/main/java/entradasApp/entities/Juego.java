@@ -6,10 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -41,7 +38,7 @@ public class Juego {
     @JsonProperty("Juegos Activos")
     private boolean juegoActivo;
 
-    @Column(name ="rutas_a_las_fotos")
+    @Column(name = "rutas_a_las_fotos")
     @JsonProperty("Rutas a las fotos")
     private String rutaALaFoto;
 

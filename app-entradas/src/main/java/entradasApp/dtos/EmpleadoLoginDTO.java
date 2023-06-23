@@ -14,8 +14,10 @@ import lombok.NoArgsConstructor;
 public class EmpleadoLoginDTO {
     @JsonProperty("Usuario empleado")
     private String usuarioEmpleado;
+
     @JsonProperty("Contrasenia empleado")
     private String contraseniaEmpleado;
+
     @JsonProperty("Rol empleado")
     private RolEmpleado rolEmpleado;
 

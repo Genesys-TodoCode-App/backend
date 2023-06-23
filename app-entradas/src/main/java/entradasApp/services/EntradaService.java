@@ -14,25 +14,28 @@ import java.util.List;
 public class EntradaService {
 
     @Autowired
-    private EntradaRepository entradaRepository;
+    private final EntradaRepository entradaRepository;
 
-    public EntradaService(EntradaRepository entradaRepository){
+    public EntradaService(EntradaRepository entradaRepository) {
         this.entradaRepository = entradaRepository;
     }
 
-    public void create(Entrada entrada){
+    public void create(Entrada entrada) {
         boolean existeEntrada = entradaRepository.existsById(entrada.getIdEntrada());
-        if (existeEntrada){
+        if (existeEntrada) {
             throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta entrada en la base de datos");
         }
         entradaRepository.save(entrada);
     }
-    public List<Entrada> findAll(){
+
+    public List<Entrada> findAll() {
         return entradaRepository.findAll();
     }
-    public Entrada findById(Long id){
+
+    public Entrada findById(Long id) {
         return entradaRepository.findById(id).orElse(null);
     }
+
     public void update(Long id, Entrada entrada) {
         Entrada entradaExistente = entradaRepository.findById(id).orElse(null);
         if (entradaExistente != null) {
@@ -43,6 +46,7 @@ public class EntradaService {
             throw new NoEncontradoExcepcion("La entrada con el Id: " + id + " no ha sido encontrada");
         }
     }
+
     public void deleteById(Long id) {
         try {
             entradaRepository.deleteById(id);

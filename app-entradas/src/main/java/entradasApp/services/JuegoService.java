@@ -1,11 +1,9 @@
 package entradasApp.services;
 
-import entradasApp.entities.Empleado;
 import entradasApp.entities.Juego;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.repositories.EmpleadoRepository;
 import entradasApp.repositories.JuegoRepository;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.List;
 @Service
 public class JuegoService {
 
-    private JuegoRepository juegoRepository;
+    private final JuegoRepository juegoRepository;
 
     private EmpleadoRepository empleadoRepository;
 
@@ -54,7 +52,7 @@ public class JuegoService {
 
     public void deleteById(Long id) {
         Juego juego = juegoRepository.findById(id)
-            .orElseThrow(()-> new RuntimeException("No se encontré el juego con el id: " + id));
+            .orElseThrow(() -> new RuntimeException("No se encontré el juego con el id: " + id));
         juego.setJuegoActivo(false);
         juego.setPrecioJuego(null);
         juego.setCobroPaseOro(false);

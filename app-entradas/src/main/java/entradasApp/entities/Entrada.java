@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 
@@ -32,7 +33,6 @@ public class Entrada {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_juegos")
     private Juego juego;
-
 
 
 }

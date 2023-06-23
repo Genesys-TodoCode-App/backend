@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class EmpleadoService {
 
-    private EmpleadoRepository empleadoRepository;
+    private final EmpleadoRepository empleadoRepository;
 
     public EmpleadoService(EmpleadoRepository empleadoRepository) {
         this.empleadoRepository = empleadoRepository;

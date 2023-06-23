@@ -13,32 +13,36 @@ import java.util.List;
 public class HorarioJuegoService {
 
     @Autowired
-    private HorarioJuegoRepository horarioJuegoRepository;
+    private final HorarioJuegoRepository horarioJuegoRepository;
 
     public HorarioJuegoService(HorarioJuegoRepository horarioJuegoRepository) {
         this.horarioJuegoRepository = horarioJuegoRepository;
     }
-    public void create(HorarioJuego horarioJuego){
+
+    public void create(HorarioJuego horarioJuego) {
         boolean existeHorarioJuego = horarioJuegoRepository.existsById(horarioJuego.getIdHorarioJuego());
     }
-    public Iterable<HorarioJuego> findAll(){
+
+    public Iterable<HorarioJuego> findAll() {
         return horarioJuegoRepository.findAll();
     }
+
     public HorarioJuego findById(Long id) {
         return horarioJuegoRepository.findById(id).orElse(null);
     }
 
-    public void update(Long id, HorarioJuego horarioJuego){
+    public void update(Long id, HorarioJuego horarioJuego) {
         HorarioJuego horarioJuegoExistente = horarioJuegoRepository.findById(id).orElse(null);
-        if (horarioJuegoExistente !=null) {
+        if (horarioJuegoExistente != null) {
             horarioJuegoExistente.setHoraInicio(horarioJuego.getHoraInicio());
             horarioJuegoExistente.setHoraFin(horarioJuego.getHoraFin());
             horarioJuegoRepository.save(horarioJuegoExistente);
         } else {
             throw new NoEncontradoExcepcion(" La entrada con el Id: " + id +
-             " no existe");
+                " no existe");
         }
     }
+
     public void deleteById(Long id) {
         try {
             horarioJuegoRepository.deleteById(id);

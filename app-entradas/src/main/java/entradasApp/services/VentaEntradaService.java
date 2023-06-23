@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class VentaEntradaService {
@@ -33,13 +32,11 @@ public class VentaEntradaService {
     }
 
     public VentaEntrada findById(Long id) {
-        return ventaEntradaRepository.findById(id)
-            .orElseThrow(() -> new NoEncontradoExcepcion("La venta de entrada con el id: " + id + " no ha sido encontrada"));
+        return ventaEntradaRepository.findById(id).orElseThrow(() -> new NoEncontradoExcepcion("La venta de entrada con el id: " + id + " no ha sido encontrada"));
     }
 
     public VentaEntrada update(Long id, VentaEntrada ventaEntrada) {
-        VentaEntrada ventaEntradaExistente = ventaEntradaRepository.findById(id)
-            .orElseThrow(() -> new NoEncontradoExcepcion("La venta de entradas con el id: " + id + " no ha sido encontrada"));
+        VentaEntrada ventaEntradaExistente = ventaEntradaRepository.findById(id).orElseThrow(() -> new NoEncontradoExcepcion("La venta de entradas con el id: " + id + " no ha sido encontrada"));
 
         ventaEntradaExistente.setIdVentaEntrada(ventaEntrada.getIdVentaEntrada());
         ventaEntradaExistente.setEntrada(ventaEntrada.getEntrada());

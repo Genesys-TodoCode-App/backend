@@ -21,7 +21,4 @@ public interface CompradorRepository extends CrudRepository<Comprador, Long> {
         "ORDER BY COUNT(*) DESC")
     List<Comprador> obtenerCompradorConMasEntradas(@Param("mes") int mes, @Param("anio") int anio);
 
-
-
-
 }

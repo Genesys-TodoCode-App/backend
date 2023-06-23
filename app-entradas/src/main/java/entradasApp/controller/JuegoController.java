@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/juegos")
 public class JuegoController {
 
     @Autowired
-    private JuegoService juegoService;
+    private final JuegoService juegoService;
 
     public JuegoController(JuegoService juegoService) {
         this.juegoService = juegoService;
@@ -25,6 +25,7 @@ public class JuegoController {
         juegoService.create(juego);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
     @GetMapping
     public ResponseEntity<Iterable<Juego>> findAll() {
         Iterable<Juego> listaDeJuegos = juegoService.findAll();
@@ -39,8 +40,8 @@ public class JuegoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Juego> update(@Valid @PathVariable Long id, @RequestBody Juego juego) {
-      Juego juegoExistente = juegoService.findById(id);
-      return ResponseEntity.ok(juegoExistente);
+        Juego juegoExistente = juegoService.findById(id);
+        return ResponseEntity.ok(juegoExistente);
 
     }
 

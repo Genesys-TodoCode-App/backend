@@ -13,7 +13,7 @@ public class UsuarioService {
 
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -26,12 +26,16 @@ public class UsuarioService {
         }
         usuarioRepository.save(usuario);
     }
-    public Iterable<Usuario> findAll(){ return usuarioRepository.findAll(); }
+
+    public Iterable<Usuario> findAll() {
+        return usuarioRepository.findAll();
+    }
 
     public Usuario findById(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
-    public void update(Long id, Usuario usuario){
+
+    public void update(Long id, Usuario usuario) {
         Usuario usuarioExistente = usuarioRepository.findById(id).orElse(null);
         if (usuarioExistente != null) {
             usuarioExistente.setNombreUsuario(usuario.getNombreUsuario());
@@ -39,14 +43,15 @@ public class UsuarioService {
             usuarioExistente.setRolEmpleado(usuario.getRolEmpleado());
             usuarioRepository.save(usuario);
         } else {
-            throw  new NoEncontradoExcepcion(" Usuario con el id: " + id + "no encontrado");
+            throw new NoEncontradoExcepcion(" Usuario con el id: " + id + "no encontrado");
         }
     }
+
     public void deleteById(Long id) {
         try {
             usuarioRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw  new RuntimeException("Ocurrió un error al eliminar el Usuario");
+            throw new RuntimeException("Ocurrió un error al eliminar el Usuario");
         }
     }
 }
