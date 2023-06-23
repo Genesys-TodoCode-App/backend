@@ -1,6 +1,6 @@
 package entradasApp.services;
 
-import entradasApp.entities.Juego;
+import entradasApp.entities.Comprador;
 import entradasApp.repositories.CompradorRepository;
 import entradasApp.repositories.EmpleadoRepository;
 import entradasApp.repositories.JuegoRepository;
@@ -33,40 +33,34 @@ public class InformeService {
         this.empleadoRepository = empleadoRepository;
     }
 
-    public Long countEntradasVendidasEnFecha(LocalDateTime fecha) {
-        return ventaEntradaRepository.countEntradasVendidasEnFecha(fecha);
+    public Integer countEntradasVendidasEnFecha(LocalDateTime fecha) {
+        return ventaEntradaRepository.findCantidadEntradasVendidasPorFecha(fecha);
     }
 
-    public Long countEntradasVendidasPorJuegoYFecha(Juego juego, LocalDateTime fecha) {
-        return ventaEntradaRepository.countEntradasVendidasPorJuegoYFecha(juego, fecha);
-    }
-
-    public BigDecimal sumMontosVentasEnFecha(LocalDate fecha) {
-        return ventaEntradaRepository.sumMontosVentasEnFecha(fecha);
+    public Integer countEntradasVendidasPorJuegoYFecha(Long idJuego, LocalDateTime fecha) {
+        return ventaEntradaRepository.findCantidadEntradasVendidasPorJuegoYFecha(idJuego, fecha);
     }
 
     public BigDecimal sumMontosVentasEnMesYAnio(int mes, int anio) {
-        return ventaEntradaRepository.sumMontosVentasEnMesYAnio(mes, anio);
+        return ventaEntradaRepository.getTotalVentasPorMesYAnio(mes, anio);
     }
 
-    public List<Object[]> findJuegoMasEntradasVendidas() {
-        return ventaEntradaRepository.findJuegoMasEntradasVendidas();
+    public BigDecimal getTotalVentasPorFecha(LocalDate fecha){
+        return ventaEntradaRepository.getTotalVentasPorFecha(fecha);
     }
-
     public List<Object[]> findEmpleadosConJuegosAsignados() {
-        return empleadoRepository.findEmpleadosConJuegosAsignados();
+        return empleadoRepository.obtenerNombresyApellidosEmpleadosYJuegos();
     }
 
-    public List<Object[]> findCompradorMasEntradas(int mes, int anio) {
-        return compradorRepository.findCompradorMasEntradas(mes, anio);
+
+
+    public List<Comprador> findCompradorMasEntradas(int mes, int anio) {
+        return compradorRepository.obtenerCompradorConMasEntradas(mes, anio);
     }
 
-    public List<Object[]> findCompradorMasEntradasPagadas(int mes, int anio) {
-        return compradorRepository.findCompradorMasEntradasPagadas(mes, anio);
-    }
-
-    public Object[] findJuegoMasEntradasVendidasHastaHoy() {
-        return juegoRepository.findJuegoMasEntradasVendidasHastaHoy();
+    public List<Object[]> findJuegoMasEntradasVendidasHastaHoy() {
+        return ventaEntradaRepository.obtenerJuegoConMasEntradasVendidas();
 
     }
+
 }

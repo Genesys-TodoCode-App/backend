@@ -12,9 +12,10 @@ import java.util.List;
 @RequestMapping("/ventas-entradas")
 public class VentaEntradaController {
 
-    @Autowired
+
     private final VentaEntradaService ventaEntradaService;
 
+    @Autowired
     public VentaEntradaController(VentaEntradaService ventaEntradaService) {
         this.ventaEntradaService = ventaEntradaService;
     }

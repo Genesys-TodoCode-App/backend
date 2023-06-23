@@ -3,6 +3,7 @@ package entradasApp.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,12 +19,12 @@ public class VentaEntrada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_venta_entradas", unique = true, updatable = false)
+    @JsonProperty("Id Venta Entradas")
     private Long idVentaEntrada;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_entradas")
     @JsonManagedReference
-    // Esta anotación indica que esta entidad controla la relación
     private Entrada entrada;
 
     @ManyToOne
@@ -38,9 +39,11 @@ public class VentaEntrada {
     private Comprador compradorEntrada;
 
     @Column(name = "monto_ventas")
+    @JsonProperty("Monto Venta")
     private BigDecimal montoVenta;
 
     @Column(name = "fecha_ventas")
+    @JsonProperty("Fecha Venta")
     private LocalDateTime fechaVenta;
 }
 

@@ -9,7 +9,10 @@ import java.util.List;
 
 @Repository
 public interface EmpleadoRepository extends CrudRepository<Empleado, Long> {
-    @Query(value = "SELECT e.nombreEmpleado, j.nombreJuego FROM Empleado e JOIN e.juegos j", nativeQuery = true)
-    List<Object[]> findEmpleadosConJuegosAsignados();
+
+    @Query("SELECT e.nombreEmpleado, e.apellidoEmpleado, j.nombreJuego " +
+        "FROM Empleado e " +
+        "JOIN e.juegos j")
+    List<Object[]> obtenerNombresyApellidosEmpleadosYJuegos();
 
 }

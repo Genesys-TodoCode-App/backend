@@ -12,17 +12,15 @@ import java.util.List;
 @Repository
 @Transactional
 public interface CompradorRepository extends CrudRepository<Comprador, Long> {
-    @Query(value = "SELECT c.nombreComprador, c.apellidoComprador, COUNT(ve) FROM Comprador c JOIN c.ventasEntradas ve WHERE YEAR(ve.fechaVenta) = :anio AND MONTH(ve.fechaVenta) = :mes GROUP BY c.nombreComprador, c.apellidoComprador ORDER BY COUNT(ve) DESC", nativeQuery = true)
-    List<Object[]> findCompradorMasEntradas(@Param("mes") int mes, @Param("anio") int anio);
 
+    @Query(value = "SELECT c FROM Comprador c " +
+        "JOIN VentaEntrada ve ON c.idComprador = ve.compradorEntrada.idComprador " +
+        "WHERE EXTRACT(MONTH FROM ve.fechaVenta) = :mes " +
+        "AND EXTRACT(YEAR FROM ve.fechaVenta) = :anio " +
+        "GROUP BY c.idComprador, c.nombreComprador, c.apellidoComprador " +
+        "ORDER BY COUNT(*) DESC")
+    List<Comprador> obtenerCompradorConMasEntradas(@Param("mes") int mes, @Param("anio") int anio);
 
-    @Query(value = "SELECT c.nombreComprador, c.apellidoComprador, COUNT(ve) " +
-        "FROM Comprador c JOIN c.ventasEntradas ve " +
-        "WHERE YEAR(ve.fechaVenta) = :anio AND MONTH(ve.fechaVenta) = :mes " +
-        "AND ve.entrada.juego.cobroPaseOro = true AND ve.compradorEntrada.paseDeOro = true " +
-        "GROUP BY c.nombreComprador, c.apellidoComprador " +
-        "ORDER BY COUNT(ve) DESC", nativeQuery = true)
-    List<Object[]> findCompradorMasEntradasPagadas(@Param("mes") int mes, @Param("anio") int anio);
 
 
 

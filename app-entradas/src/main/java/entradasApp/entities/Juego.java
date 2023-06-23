@@ -1,5 +1,7 @@
 package entradasApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,24 +22,31 @@ public class Juego {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_juegos", unique = true, updatable = false)
+    @JsonProperty("Id Juegos")
     private Long idJuego;
 
     @Column(name = "nombre_juegos", length = 50)
+    @JsonProperty("Nombre Juegos")
     private String nombreJuego;
 
     @Column(name = "precio_juegos", length = 10)
+    @JsonProperty("Precio Juegos")
     private BigDecimal precioJuego;
 
     @Column(name = "cobro_pase_oro")
+    @JsonProperty("Cobro Pase Oro")
     private boolean cobroPaseOro;
 
     @Column(name = "juegos_activos")
+    @JsonProperty("Juegos Activos")
     private boolean juegoActivo;
 
     @Column(name ="rutas_a_las_fotos")
+    @JsonProperty("Rutas a las fotos")
     private String rutaALaFoto;
 
     @Column(name = "descripciones")
+    @JsonProperty("Descripciones")
     private String descripciones;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -46,6 +55,7 @@ public class Juego {
         joinColumns = @JoinColumn(name = "id_juegos"),
         inverseJoinColumns = @JoinColumn(name = "id_horarios")
     )
+    @JsonIgnoreProperties("empleados")
     private List<HorarioJuego> horarios;
 
 }

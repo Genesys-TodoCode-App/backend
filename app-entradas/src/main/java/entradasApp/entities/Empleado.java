@@ -1,5 +1,6 @@
 package entradasApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,6 +44,7 @@ public class Empleado {
         uniqueConstraints = @UniqueConstraint(columnNames = {"id_empleados", "id_juegos"})
     )
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonManagedReference
     private List<Juego> juegos;
 
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)

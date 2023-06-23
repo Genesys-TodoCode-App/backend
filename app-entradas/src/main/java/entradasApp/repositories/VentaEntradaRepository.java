@@ -1,6 +1,6 @@
 package entradasApp.repositories;
 
-import entradasApp.entities.Juego;
+import entradasApp.entities.Entrada;
 import entradasApp.entities.VentaEntrada;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -12,23 +12,42 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Repository
 public interface VentaEntradaRepository extends CrudRepository<VentaEntrada, Long> {
 
-    @Query(value = "SELECT COUNT(ve) FROM VentaEntrada ve WHERE ve.fechaVenta = :fecha", nativeQuery = true)
-    Long countEntradasVendidasEnFecha(@Param("fecha") LocalDateTime fecha);
+    @Query("SELECT COUNT(e) AS cantidadEntradasVendidas " +
+        "FROM VentaEntrada e " +
+        "WHERE FUNCTION('DATE', e.fechaVenta) = :fecha")
+    Integer findCantidadEntradasVendidasPorFecha(@Param("fecha") LocalDateTime fecha);
 
-    @Query(value = "SELECT COUNT(ve) FROM VentaEntrada ve WHERE ve.entrada.juego = :juego AND ve.fechaVenta = :fecha", nativeQuery = true)
-    Long countEntradasVendidasPorJuegoYFecha(@Param("juego") Juego juego, @Param("fecha") LocalDateTime fecha);
 
-    @Query(value = "SELECT SUM(CASE WHEN ve.compradorEntrada.paseDeOro = true AND ve.entrada.juego.paseDeOro = true THEN 0 ELSE ve.montoVenta END) FROM VentaEntrada ve WHERE ve.fechaVenta = :fecha", nativeQuery = true)
-    BigDecimal sumMontosVentasEnFecha(@Param("fecha") LocalDate fecha);
+    @Query("SELECT COUNT(v) AS cantidad_entradas_vendidas " +
+        "FROM VentaEntrada v " +
+        "WHERE v.entrada.juego.id = :juegoId " +
+        "AND FUNCTION('DATE', v.fechaVenta) = :fecha")
+    Integer findCantidadEntradasVendidasPorJuegoYFecha(@Param("juegoId") Long juegoId, @Param("fecha") LocalDateTime fecha);
 
-    @Query(value = "SELECT SUM(CASE WHEN ve.compradorEntrada.paseDeOro = true AND ve.entrada.juego.paseDeOro = true THEN 0 ELSE ve.montoVenta END) FROM VentaEntrada ve WHERE YEAR(ve.fechaVenta) = :anio AND MONTH(ve.fechaVenta) = :mes", nativeQuery = true)
-    BigDecimal sumMontosVentasEnMesYAnio(@Param("mes") int mes, @Param("anio") int anio);
+    @Query("SELECT SUM(v.montoVenta) AS totalVentas " +
+        "FROM VentaEntrada v " +
+        "WHERE EXTRACT(MONTH FROM v.fechaVenta) = :mes " +
+        "AND EXTRACT(YEAR FROM v.fechaVenta) = :anio")
+    BigDecimal getTotalVentasPorMesYAnio(@Param("mes") int mes, @Param("anio") int anio);
 
-    @Query(value = "SELECT j.nombreJuego, COUNT(ve) FROM Juego j JOIN j.horarios h JOIN h.entradas ve WHERE ve.fechaHoraUtilizacion <= CURRENT_TIMESTAMP GROUP BY j.nombreJuego ORDER BY COUNT(ve) DESC", nativeQuery = true)
-    List<Object[]> findJuegoMasEntradasVendidas();
+    @Query("SELECT SUM(v.montoVenta) AS totalVentas " +
+        "FROM VentaEntrada v " +
+        "WHERE FUNCTION('DATE', v.fechaVenta) = :fecha")
+    BigDecimal getTotalVentasPorFecha(@Param("fecha") LocalDate fecha);
 
-}
+
+
+        @Query("SELECT v.entrada.juego, COUNT(v) AS cantidadEntradasVendidas " +
+            "FROM VentaEntrada v " +
+            "GROUP BY v.entrada.juego " +
+            "ORDER BY cantidadEntradasVendidas DESC")
+        List<Object[]> obtenerJuegoConMasEntradasVendidas();
+    }
+
+
+
 
