@@ -9,6 +9,13 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
+/**
+ * La clase Empleado representa al empleado que va a usar la aplicación.
+ * Contiene anotaciones de Lombok, Jackson y JPA para la serialización de objetos.
+ * @OneToOne tiene un usuario asociado que sirve para autentificarse en la aplicación.
+ * @ManyToMany asocia a los juegos que el empleado puede interactuar
+ * @OneToMany asocia a las ventas de entradas realizadas por el empleado.
+ */
 @Data
 @Entity
 @NoArgsConstructor
@@ -31,11 +38,17 @@ public class Empleado {
     @Column(name = "rutas_a_la_fotos", length = 100)
     private String rutaALaFoto;
 
+    /** Esta es la relacion con el id del Usuario
+     *
+     */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario usuario;
 
+    /**
+     * Lista de juegos asignados al empleado.
+     */
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "empleados_juegos",
@@ -47,6 +60,9 @@ public class Empleado {
     @JsonManagedReference
     private List<Juego> juegos;
 
+    /**
+     * Lista de ventas de entradas realizadas por el empleado.
+     */
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<VentaEntrada> ventasEntradas;

@@ -8,7 +8,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
+/**
+ * Clase entrada que representa una entrada en la base de datos.
+ * Contiene marcadores de JPA, Lombok y Jackson para la serialización de objetos.
+ * @ManyToOne tiene una relacion con las juegos al que pertenece la entrada.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,6 +34,11 @@ public class Entrada {
     @JsonProperty("Fecha y Hora Utilizacion")
     private LocalDateTime fechaHoraUtilizacion;
 
+    /**
+     * Relación Many-to-One con Juego.
+     * Una entrada pertenece a un juego.
+     *
+     */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_juegos")
     private Juego juego;

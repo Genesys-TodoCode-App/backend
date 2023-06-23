@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * Clase que define los Horarios de los Juegos
+ * Contiene anitaciones de Lombok, Jackson y JPA para la serialización de objetos.
+ */
 @Entity
 @Data
 @AllArgsConstructor

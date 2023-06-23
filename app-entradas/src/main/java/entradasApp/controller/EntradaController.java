@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Controlador para las operaciones relacionadas con las entradas.
+ * Controlador para las operaciones CRUD relacionadas con las entradas.
  *
  * @author Gustavo
  */

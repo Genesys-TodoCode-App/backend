@@ -9,6 +9,13 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * La clase VentaEntrada representa una venta de entrada realizada en la aplicación.
+ * Contiene información que la relaciona con:
+ * @ManyToOne con la entrada
+ * @ManyToOne con el empleado
+ * @ManyToOne con el comprador de la entrada
+ */
 @Data
 @NoArgsConstructor
 @Entity
@@ -20,21 +27,6 @@ public class VentaEntrada {
     @JsonProperty("Id Venta Entradas")
     private Long idVentaEntrada;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_entradas")
-    @JsonManagedReference
-    private Entrada entrada;
-
-    @ManyToOne
-    @JoinColumn(name = "id_empleados")
-    @JsonBackReference
-    private Empleado empleado;
-
-    @ManyToOne
-    @JoinColumn(name = "id_compradores")
-    @JsonBackReference
-    private Comprador compradorEntrada;
-
     @Column(name = "monto_ventas")
     @JsonProperty("Monto Venta")
     private BigDecimal montoVenta;
@@ -42,6 +34,33 @@ public class VentaEntrada {
     @Column(name = "fecha_ventas")
     @JsonProperty("Fecha Venta")
     private LocalDateTime fechaVenta;
+
+    /**
+     * Relación Many-to-One con Entrada.
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_entradas")
+    @JsonManagedReference
+    private Entrada entrada;
+
+    /**
+     * Relación Many-to-One con Empleado.
+     */
+    @ManyToOne
+    @JoinColumn(name = "id_empleados")
+    @JsonBackReference
+    private Empleado empleado;
+
+    /**
+     * Relación Many-to-One con Comprador.
+     */
+    @ManyToOne
+    @JoinColumn(name = "id_compradores")
+    @JsonBackReference
+    private Comprador compradorEntrada;
+
+
+
 }
 
 

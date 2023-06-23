@@ -3,9 +3,12 @@ package entradasApp.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 
-
+/**
+ * Clase Comprador que representa un objeto comprador con sus datos.
+ * Contiene anotaciones de JPA para mapear la clase como una entidad y definir la tabla correspondiente en la base de datos.
+ * Contiene anotaciones de Lombok para generar automáticamente los constructores, getters, setters y otros métodos.
+ */
 @Entity
 @Data
 @Table(name = "compradores")

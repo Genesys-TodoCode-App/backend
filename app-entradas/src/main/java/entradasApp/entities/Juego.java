@@ -9,13 +9,18 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.List;
 
-
+/**
+ * Clase Juego que representa un Juego con sus atributos.
+ * Contiene anotaciones de Lombok, Jackson y JPA para la serialización de objetos.
+ */
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "juegos")
 public class Juego {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_juegos", unique = true, updatable = false)
@@ -46,6 +51,11 @@ public class Juego {
     @JsonProperty("Descripciones")
     private String descripciones;
 
+    /**
+     * Relación One-to-Many con HorarioJuego.
+     * Un juego puede tener varios horarios.
+     * La propiedad horarios representa la lista de horarios asociados al juego.
+     */
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
         name = "juegos_horarios",

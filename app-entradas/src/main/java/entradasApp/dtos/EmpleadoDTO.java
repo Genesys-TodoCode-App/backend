@@ -8,10 +8,16 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Clase EmpleadoDTO que representa un objeto empleado con sus datos.
+ * Contiene anotaciones de Lombok para generar automáticamente los constructores, getters, setters y otros métodos.
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class EmpleadoDTO {
+
+
     @JsonProperty("Id Empleado")
     private Long idEmpleado;
 
@@ -33,6 +39,14 @@ public class EmpleadoDTO {
     @JsonProperty("Juegos")
     private List<JuegoDTO> juegos;
 
+
+    /**
+     * Constructor de EmpleadoDTO con parámetros específicos.
+     *
+     * @param usuarioEmpleado    El usuario del empleado.
+     * @param contraseniaEmpleado La contraseña del empleado.
+     * @param string              Un parámetro adicional de tipo String.
+     */
     public EmpleadoDTO(String usuarioEmpleado, String contraseniaEmpleado, String string) {
     }
 }
