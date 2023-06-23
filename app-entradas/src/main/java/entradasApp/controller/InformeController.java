@@ -39,7 +39,7 @@ public class InformeController {
      * @param fecha La fecha para la cual se desea obtener el número de entradas vendidas.
      * @return El número de entradas vendidas en la fecha especificada.
      */
-    @GetMapping("/entradas-vendidas-en-fecha")
+    @GetMapping("(cantidad-entradas-vendidas-en-fecha")
     public Integer countEntradasVendidasEnFecha(@RequestParam("fecha") LocalDateTime fecha) {
         return informeService.countEntradasVendidasEnFecha(fecha);
     }
@@ -51,7 +51,7 @@ public class InformeController {
      * @param fecha   La fecha para la cual se desea obtener el número de entradas vendidas.
      * @return El número de entradas vendidas para el juego y fecha especificados.
      */
-    @GetMapping("/entradas-vendidas-por-juego-y-fecha")
+    @GetMapping("/cantidad-entradas-vendidas-por-juego-y-fecha")
     public Integer countEntradasVendidasPorJuegoYFecha(@RequestParam("juego") Long idJuego, @RequestParam("fecha") LocalDateTime fecha) {
         return informeService.countEntradasVendidasPorJuegoYFecha(idJuego, fecha);
     }
@@ -63,7 +63,7 @@ public class InformeController {
      * @param anio El año para el cual se desea obtener la suma de los montos de ventas.
      * @return La suma de los montos de ventas para el mes y año especificados.
      */
-    @GetMapping("/sum-montos-ventas-en-mes-anio")
+    @GetMapping("/sumatoria-montos-ventas-por-mes-anio")
     public BigDecimal sumMontosVentasEnMesYAnio(@RequestParam("mes") int mes, @RequestParam("anio") int anio) {
         return informeService.sumMontosVentasEnMesYAnio(mes, anio);
     }
@@ -74,7 +74,7 @@ public class InformeController {
      * @param fecha La fecha para la cual se desea obtener la suma del monto de ventas.
      * @return La suma del monto de ventas para la fecha especificada.
      */
-    @GetMapping("/sum-monto-venta-por-fecha")
+    @GetMapping("/sumatoria-monto-venta-por-dia")
     public BigDecimal sumMontoVentaPorFecha(@RequestParam("fecha") LocalDate fecha) {
         return informeService.getTotalVentasPorFecha(fecha);
     }
@@ -84,7 +84,7 @@ public class InformeController {
      *
      * @return Una lista de objetos que contienen información sobre los empleados y los juegos asignados.
      */
-    @GetMapping("/empleados-con-juegos-asignados")
+    @GetMapping("/lista-empleados-con-juegos-asignados")
     public List<Object[]> findEmpleadosConJuegosAsignados() {
         return informeService.findEmpleadosConJuegosAsignados();
     }
@@ -95,7 +95,7 @@ public class InformeController {
      * @param anio El año para el cual se desea obtener los compradores con más entradas pagadas.
      * @return Una lista de objetos Comprador que representan a los compradores con la mayor cantidad de entradas pagadas.
      */
-    @GetMapping("/comprador-con-mas-entradas-pagadas")
+    @GetMapping("/comprador-con-mas-entradas-compradas")
     public List<Comprador> findCompradorMasEntradasPagadas(int mes, int anio) {
         return informeService.findCompradorMasEntradas(mes, anio);
     }

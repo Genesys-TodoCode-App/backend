@@ -30,7 +30,7 @@ public class CompradorService {
      * Si el comprador ya existe en la base de datos, se lanza una ExisteEnBaseDeDatosExcepcion.
      * @param comprador El comprador a crear.
      */
-    public void createComprador(@org.jetbrains.annotations.NotNull Comprador comprador) {
+    public void createComprador(Comprador comprador) {
         boolean existeComprador = compradorRepository.existsById(comprador.getIdComprador());
         if (existeComprador) {
             throw new ExisteEnBaseDeDatosExcepcion("Este comprador existe en base de datos");

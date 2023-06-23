@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 /**
  * Clase entrada que representa una entrada en la base de datos.
  * Contiene marcadores de JPA, Lombok y Jackson para la serialización de objetos.
- * @ManyToOne tiene una relacion con las juegos al que pertenece la entrada.
+ * ManyToOne tiene una relacion con los juegos al que pertenece la entrada.
  */
 @Data
 @NoArgsConstructor

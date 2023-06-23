@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 /**
  * La clase VentaEntrada representa una venta de entrada realizada en la aplicación.
  * Contiene información que la relaciona con:
- * @ManyToOne con la entrada
- * @ManyToOne con el empleado
- * @ManyToOne con el comprador de la entrada
+ * ManyToOne con la entrada
+ * ManyToOne con el empleado
+ * ManyToOne con el comprador de la entrada
  */
 @Data
 @NoArgsConstructor
