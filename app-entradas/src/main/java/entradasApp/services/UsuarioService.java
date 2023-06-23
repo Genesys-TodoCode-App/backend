@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+
+/**
+ * Clase de servicio que maneja las operaciones relacionadas con los usuarios.
+ */
 @Service
 public class UsuarioService {
 
@@ -15,10 +19,17 @@ public class UsuarioService {
     @Autowired
     private final UsuarioRepository usuarioRepository;
 
+    /**
+     * Constructor de la clase UsuarioService
+     * @param usuarioRepository Repositorio de usuarios.
+     */
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
-
+/**
+     * Crea un nuevo usuario.
+     * @param usuario El usuario a crear.
+     */
     public void create(Usuario usuario) {
         boolean existeUsuario = usuarioRepository.existsById(usuario.getIdUsuario());
         if (existeUsuario) {
@@ -27,19 +38,32 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
+    /**
+     * Obtiene todos los usuarios.
+     * @return Una colección de usuarios.
+     */
     public Iterable<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
-
+    /**
+     * Busca un usuario por su ID.
+     * @param id El ID del usuario a buscar.
+     * @return El usuario encontrado o null si no se encuentra.
+     */
     public Usuario findById(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Actualiza un usuario existente.
+     * @param id El ID del usuario a actualizar.
+     * @param usuario El usuario con los nuevos datos.
+     */
     public void update(Long id, Usuario usuario) {
         Usuario usuarioExistente = usuarioRepository.findById(id).orElse(null);
         if (usuarioExistente != null) {
             usuarioExistente.setNombreUsuario(usuario.getNombreUsuario());
-            usuarioExistente.setContraseniaEmpleado(usuario.getContraseniaEmpleado());
+            usuarioExistente.setContraseniaUsuario(usuario.getContraseniaUsuario());
             usuarioExistente.setRolEmpleado(usuario.getRolEmpleado());
             usuarioRepository.save(usuario);
         } else {
@@ -47,6 +71,10 @@ public class UsuarioService {
         }
     }
 
+    /**
+     * Elimina un usuario por su ID.
+     * @param id El ID del usuario a eliminar.
+     */
     public void deleteById(Long id) {
         try {
             usuarioRepository.deleteById(id);

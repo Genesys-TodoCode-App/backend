@@ -8,6 +8,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import java.time.LocalDateTime;
 
+/**
+ * ApiManejadorDeExcepciones contiene respuestas personalizadas a algunos errores.
+ */
 @ControllerAdvice
 public class AppManejadorDeExcepciones extends ResponseEntityExceptionHandler {
 

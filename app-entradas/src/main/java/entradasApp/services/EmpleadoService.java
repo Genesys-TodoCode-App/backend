@@ -13,15 +13,27 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de servicio que maneja las operaciones relacionadas con los empleados.
+ */
 @Service
 public class EmpleadoService {
 
     private final EmpleadoRepository empleadoRepository;
 
+    /**
+     * Constructor de la clase EmpleadoService.
+     * @param empleadoRepository Repositorio de empleados.
+     */
     public EmpleadoService(EmpleadoRepository empleadoRepository) {
         this.empleadoRepository = empleadoRepository;
     }
 
+    /**
+     * Crea un nuevo empleado.
+     * Si el empleado ya existe en la base de datos, se lanza una ExisteEnBaseDeDatosExcepcion.
+     * @param empleado El empleado a crear.
+     */
     public void create(Empleado empleado) {
         boolean existeEmpleado = empleadoRepository.existsById(empleado.getIdEmpleado());
         if (existeEmpleado) {
@@ -30,6 +42,10 @@ public class EmpleadoService {
         empleadoRepository.save(empleado);
     }
 
+    /**
+     * Obtiene todos los empleados y los devuelve como una lista de EmpleadoDTO.
+     * @return Una lista de EmpleadoDTO que representa a todos los empleados.
+     */
     public Iterable<EmpleadoDTO> findAll() {
         Iterable<Empleado> empleados = empleadoRepository.findAll();
         List<EmpleadoDTO> empleadosDTO = new ArrayList<>();
@@ -40,6 +56,12 @@ public class EmpleadoService {
         return empleadosDTO;
     }
 
+    /**
+     * Busca un empleado por su ID y lo devuelve como un EmpleadoDTO.
+     * Si el empleado no existe, se lanza una NoEncontradoExcepcion.
+     * @param id El ID del empleado a buscar.
+     * @return El EmpleadoDTO correspondiente al empleado encontrado.
+     */
     public EmpleadoDTO findById(Long id) {
         Empleado empleado = empleadoRepository.findById(id).orElse(null);
         if (empleado != null) {
@@ -50,6 +72,12 @@ public class EmpleadoService {
         }
     }
 
+    /**
+     * Actualiza un empleado existente con los datos proporcionados en el EmpleadoDTO.
+     * Si el empleado no existe, se lanza una NoEncontradoExcepcion.
+     * @param id El ID del empleado a actualizar.
+     * @param empleadoDTO El EmpleadoDTO con los nuevos datos del empleado.
+     */
     public void update(Long id, EmpleadoDTO empleadoDTO) {
         Empleado empleado = empleadoRepository.findById(id).orElse(null);
         if (empleado != null) {
@@ -63,6 +91,11 @@ public class EmpleadoService {
         }
     }
 
+    /**
+     * Elimina un empleado por su ID.
+     * Si el empleado no existe, se lanza una EmptyResultDataAccessException.
+     * @param id El ID del empleado a eliminar.
+     */
     public void deleteById(Long id) {
         try {
             empleadoRepository.deleteById(id);
@@ -71,7 +104,11 @@ public class EmpleadoService {
         }
     }
 
-    // Mapeador para convertir Empleado a EmpleadoDTO
+    /**
+     * Mapea un empleado a un EmpleadoDTO.
+     * @param empleado
+     * @return
+     */
     private EmpleadoDTO mapEmpleadoToDTO(Empleado empleado) {
         EmpleadoDTO empleadoDTO = new EmpleadoDTO();
         empleadoDTO.setIdEmpleado(empleado.getIdEmpleado());
@@ -84,7 +121,12 @@ public class EmpleadoService {
         return empleadoDTO;
     }
 
-    // Mapeador para convertir lista de Juego a lista de JuegoDTO
+    /**
+     * Mapea para convertir la lista de juegos a Lista de JuegoDTO.
+     * @param juegos
+     * @return
+     */
+
     private List<JuegoDTO> mapJuegosToDTO(List<Juego> juegos) {
         List<JuegoDTO> juegosDTO = new ArrayList<>();
         if (juegos != null) {
