@@ -28,6 +28,7 @@ public class CompradorController {
         this.compradorService = compradorService;
     }
 
+
     /**
      * Crea un nuevo comprador.
      *
@@ -40,6 +41,7 @@ public class CompradorController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+
     /**
      * Obtiene todos los compradores.
      *
@@ -50,6 +52,7 @@ public class CompradorController {
         Iterable<Comprador> listaDeCompradores = compradorService.findAll();
         return ResponseEntity.ok(listaDeCompradores);
     }
+
 
     /**
      * Obtiene un comprador por su ID.
@@ -63,6 +66,7 @@ public class CompradorController {
         return ResponseEntity.ok(comprador);
     }
 
+
     /**
      * Actualiza un comprador existente.
      *
@@ -75,6 +79,7 @@ public class CompradorController {
         Comprador compradorexistente = compradorService.findById(id);
         return ResponseEntity.ok(compradorexistente);
     }
+
 
     /**
      * Elimina un comprador por su ID.

@@ -25,6 +25,7 @@ public class CompradorService {
         this.compradorRepository = compradorRepository;
     }
 
+
     /**
      * Crea un nuevo comprador.
      * Si el comprador ya existe en la base de datos, se lanza una ExisteEnBaseDeDatosExcepcion.
@@ -38,6 +39,7 @@ public class CompradorService {
         compradorRepository.save(comprador);
     }
 
+
     /**
      * Obtiene todos los compradores.
      * @return Una lista de todos los compradores.
@@ -45,6 +47,7 @@ public class CompradorService {
     public Iterable<Comprador> findAll() {
         return compradorRepository.findAll();
     }
+
 
     /**
      * Busca un comprador por su ID.
@@ -56,6 +59,7 @@ public class CompradorService {
         return compradorRepository.findById(id)
             .orElseThrow(() -> new NoEncontradoExcepcion("El Comprador con el id: " + id + "no fue encontrado."));
     }
+
 
     /**
      * Actualiza un comprador existente.
@@ -73,6 +77,7 @@ public class CompradorService {
         compradorExistente.setPaseDeOro(comprador.isPaseDeOro());
         compradorRepository.save(compradorExistente);
     }
+
 
     /**
      * Elimina un comprador por su ID.

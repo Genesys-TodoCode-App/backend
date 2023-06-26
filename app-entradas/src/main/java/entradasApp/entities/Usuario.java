@@ -22,13 +22,16 @@ public class Usuario {
     @JsonProperty("Id Usuario")
     private Long idUsuario;
 
+
     @Column(name = "nombre_usuario", length = 20, unique = true)
     @JsonProperty("Nombre Usuario")
     private String nombreUsuario;
 
+
     @Column(name = "contrasenia_usuario", length = 20)
     @JsonProperty("Contrasenia Usuario")
     private String contraseniaUsuario;
+
 
     @Column(name = "rol_usuario", length = 40)
     @Enumerated(EnumType.STRING)

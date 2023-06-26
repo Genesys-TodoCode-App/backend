@@ -27,29 +27,40 @@ public class Juego {
     @JsonProperty("Id Juegos")
     private Long idJuego;
 
+
     @Column(name = "nombre_juegos", length = 50)
     @JsonProperty("Nombre Juegos")
     private String nombreJuego;
+
 
     @Column(name = "precio_juegos", length = 10)
     @JsonProperty("Precio Juegos")
     private BigDecimal precioJuego;
 
+
     @Column(name = "cobro_pase_oro")
     @JsonProperty("Cobro Pase Oro")
     private boolean cobroPaseOro;
+
 
     @Column(name = "juegos_activos")
     @JsonProperty("Juegos Activos")
     private boolean juegoActivo;
 
+
+    @Column(name = "juegos_vendidos")
+    @JsonProperty("Juegos Vendidos")
+    private boolean juegoVendido;
+
     @Column(name = "rutas_a_las_fotos")
     @JsonProperty("Rutas a las fotos")
     private String rutaALaFoto;
 
+
     @Column(name = "descripciones")
     @JsonProperty("Descripciones")
     private String descripciones;
+
 
     /**
      * Relación One-to-Many con HorarioJuego.

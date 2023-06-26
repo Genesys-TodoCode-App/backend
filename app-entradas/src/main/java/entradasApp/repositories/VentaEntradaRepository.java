@@ -17,6 +17,8 @@ import java.util.List;
  */
 @Repository
 public interface VentaEntradaRepository extends JpaRepository<VentaEntrada, Long> {
+
+
     /**
      * Método para obtener la cantidad de entradas vendidas por fecha.
      * @param fecha la fecha específica.
@@ -40,6 +42,7 @@ public interface VentaEntradaRepository extends JpaRepository<VentaEntrada, Long
         "AND FUNCTION('DATE', v.fechaVenta) = :fecha")
     Integer findCantidadEntradasVendidasPorJuegoYFecha(@Param("juegoId") Long juegoId, @Param("fecha") LocalDateTime fecha);
 
+
     /**
      * Método para obtener la cantidad de entradas vendidas por mes y año.
      * @param mes el mes específico.
@@ -52,6 +55,7 @@ public interface VentaEntradaRepository extends JpaRepository<VentaEntrada, Long
         "AND EXTRACT(YEAR FROM v.fechaVenta) = :anio")
     BigDecimal getTotalVentasPorMesYAnio(@Param("mes") int mes, @Param("anio") int anio);
 
+
     /**
      * Metodo para obtener la cantidad de entradas vendidas por fecha.
      * @param fecha la fecha específica.
@@ -61,6 +65,7 @@ public interface VentaEntradaRepository extends JpaRepository<VentaEntrada, Long
         "FROM VentaEntrada v " +
         "WHERE FUNCTION('DATE', v.fechaVenta) = :fecha")
     BigDecimal getTotalVentasPorFecha(@Param("fecha") LocalDate fecha);
+
 
     /**
      * Metodo para obtener el juego que más entradas vendió.

@@ -9,6 +9,8 @@ package entradasApp.entities;
  * de asignar los usuarios a cada uno de ellos.
  */
 public enum RolEmpleado {
+
+
     /**
      * Rol del empleado encargado de registrar las ventas de entradas y los datos de los juegos y sus horarios (ABML).
      */

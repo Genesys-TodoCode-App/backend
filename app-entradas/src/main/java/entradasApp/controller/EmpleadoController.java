@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/empleados")
 public class EmpleadoController {
 
+
     @Autowired
     private final EmpleadoService empleadoService;
     /**

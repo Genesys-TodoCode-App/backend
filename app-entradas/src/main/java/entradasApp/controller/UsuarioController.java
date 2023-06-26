@@ -31,6 +31,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+
     /**
      * Método para crear un nuevo usuario.
      * Recibe un objeto Usuario en el cuerpo de la solicitud.
@@ -43,6 +44,8 @@ public class UsuarioController {
         usuarioService.create(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+
     /**
      * Método para obtener todos los usuarios.
      *
@@ -53,6 +56,8 @@ public class UsuarioController {
         Iterable<Usuario> listaDeUsuarios = usuarioService.findAll();
         return ResponseEntity.ok(listaDeUsuarios);
     }
+
+
     /**
      * Método para actualizar un usuario existente.
      * Recibe el ID del usuario a actualizar y un objeto Usuario en el cuerpo de la solicitud.
@@ -66,6 +71,8 @@ public class UsuarioController {
         Usuario usuarioExistente = usuarioService.findById(id);
         return ResponseEntity.ok(usuarioExistente);
     }
+
+
     /**
      * Método para buscar un usuario por su ID.
      *
@@ -77,6 +84,7 @@ public class UsuarioController {
         Usuario usuario = usuarioService.findById(id);
         return ResponseEntity.ok(usuario);
     }
+
 
     /**
      * Método para eliminar un usuario por su ID.

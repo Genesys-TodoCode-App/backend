@@ -14,6 +14,7 @@ import lombok.Data;
 @Table(name = "compradores")
 public class Comprador {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compradores",
@@ -22,21 +23,26 @@ public class Comprador {
     @JsonProperty("Id Comprador")
     private Long idComprador;
 
+
     @Column(name = "nombre_compradores", length = 20)
     @JsonProperty("Nombre Comprador")
     private String nombreComprador;
+
 
     @Column(name = "apellido_compradores", length = 20)
     @JsonProperty("Apellido Comprador")
     private String apellidoComprador;
 
+
     @Column(name = "dni_compradores", length = 11)
     @JsonProperty("DNI Comprador")
     private String dniComprador;
 
+
     @Column(name = "correo_electronico_comprador", length = 50)
     @JsonProperty("Correo Electronico Comprador")
     private String correoElectronicoComprador;
+
 
     @Column(name = "pase_de_oro", length = 5)
     @JsonProperty("Pase de Oro")

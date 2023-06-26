@@ -27,6 +27,7 @@ public class VentaEntradaService {
         this.ventaEntradaRepository = ventaEntradaRepository;
     }
 
+
     /**
      * Crea una nueva venta de entrada.
      * @param ventaEntrada La venta de entrada a crear.
@@ -39,6 +40,7 @@ public class VentaEntradaService {
         ventaEntradaRepository.save(ventaEntrada);
     }
 
+
     /**
      * Obtiene todas las ventas de entradas y las devuelve en una lista.
      * @param pageable Parámetro de paginación.
@@ -47,6 +49,7 @@ public class VentaEntradaService {
     public Page<VentaEntrada> findAll(Pageable pageable) {
         return ventaEntradaRepository.findAll(pageable);
     }
+
 
     /**
      * Busca una venta de entrada por su ID.
@@ -57,6 +60,7 @@ public class VentaEntradaService {
     public VentaEntrada findById(Long id) {
         return ventaEntradaRepository.findById(id).orElseThrow(() -> new NoEncontradoExcepcion("La venta de entrada con el id: " + id + " no ha sido encontrada"));
     }
+
 
     /**
      * Actualiza una venta de entrada existente.
@@ -76,6 +80,7 @@ public class VentaEntradaService {
 
         return ventaEntradaRepository.save(ventaEntradaExistente);
     }
+
 
     /**
      * Elimina una venta de entrada por su ID.

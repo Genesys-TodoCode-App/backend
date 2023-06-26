@@ -15,6 +15,8 @@ import java.util.List;
 @Repository
 @Transactional
 public interface CompradorRepository extends CrudRepository<Comprador, Long> {
+
+
     /**
      * Obtiene una lista de compradores que tienen más entradas vendidas en el mes y año especificados
      * @param mes el mes específico.

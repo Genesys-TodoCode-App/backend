@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 /**
  * Clase de servicio que maneja las operaciones relacionadas con las entradas.
@@ -20,6 +20,7 @@ public class EntradaService {
 
     @Autowired
     private final EntradaRepository entradaRepository;
+
 
     /**
      * Constructor de la clase EntradaService.
@@ -42,6 +43,7 @@ public class EntradaService {
         entradaRepository.save(entrada);
     }
 
+
     /**
      * Obtiene todas las entradas.
      * @param pageable Paginación de la consulta.
@@ -62,6 +64,7 @@ public class EntradaService {
         return entradaRepository.findById(id).orElse(null);
     }
 
+
     /**
      * Actualiza una entrada existente con los datos proporcionados en la entrada.
      * Si la entrada no existe, se lanza una NoEncontradoExcepcion.
@@ -78,6 +81,7 @@ public class EntradaService {
             throw new NoEncontradoExcepcion("La entrada con el Id: " + id + " no ha sido encontrada");
         }
     }
+
 
     /**
      * Elimina una entrada por su ID.

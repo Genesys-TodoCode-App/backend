@@ -22,8 +22,10 @@ import java.util.List;
 @RequestMapping("/entradas")
 public class EntradaController {
 
+
     @Autowired
     private final EntradaService entradaService;
+
 
     /**
      * Constructor de la clase EntradaController.
@@ -33,6 +35,7 @@ public class EntradaController {
     public EntradaController(EntradaService entradaService) {
         this.entradaService = entradaService;
     }
+
 
     /**
      * Crea una nueva entrada.
@@ -45,6 +48,7 @@ public class EntradaController {
         entradaService.create(entrada);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 
     /**
      * Obtiene todas las entradas.
@@ -63,6 +67,7 @@ public class EntradaController {
         return ResponseEntity.ok(entradas);
     }
 
+
     /**
      * Obtiene una entrada por su ID.
      *
@@ -74,6 +79,7 @@ public class EntradaController {
         Entrada entrada = entradaService.findById(id);
         return ResponseEntity.ok(entrada);
     }
+
 
     /**
      * Actualiza una entrada existente.
@@ -87,6 +93,7 @@ public class EntradaController {
         Entrada entradaExistente = entradaService.findById(id);
         return ResponseEntity.ok(entradaExistente);
     }
+
 
     /**
      * Elimina una entrada por su ID.

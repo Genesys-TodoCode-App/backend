@@ -10,7 +10,6 @@ public class ExisteEnBaseDeDatosExcepcion extends RuntimeException {
      * Constructor de ExisteEnBaseDeDatosExcepcion
      * @param mensaje Mensaje de error
      */
-
     public ExisteEnBaseDeDatosExcepcion(String mensaje) {
         super();
     }

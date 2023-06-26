@@ -18,6 +18,7 @@ public class HorarioJuegoService {
     @Autowired
     private final HorarioJuegoRepository horarioJuegoRepository;
 
+
     /**
      * Constructor de la clase HorarioJuegoService.
      * @param horarioJuegoRepository Repositorio de horarios de juego.
@@ -25,6 +26,7 @@ public class HorarioJuegoService {
     public HorarioJuegoService(HorarioJuegoRepository horarioJuegoRepository) {
         this.horarioJuegoRepository = horarioJuegoRepository;
     }
+
 
     /**
      * Crea un nuevo horario de juego.
@@ -40,6 +42,7 @@ public class HorarioJuegoService {
         }
     }
 
+
     /**
      * Obtiene todos los horarios de juego y los devuelve como una colección Iterable.
      * @return Una colección Iterable de HorarioJuego que representa a todos los horarios de juego.
@@ -47,6 +50,7 @@ public class HorarioJuegoService {
     public Iterable<HorarioJuego> findAll() {
         return horarioJuegoRepository.findAll();
     }
+
 
     /**
      * Busca un horario de juego por su ID y lo devuelve.
@@ -57,6 +61,7 @@ public class HorarioJuegoService {
     public HorarioJuego findById(Long id) {
         return horarioJuegoRepository.findById(id).orElse(null);
     }
+
 
     /**
      * Actualiza un horario de juego existente con los datos proporcionados en el horario de juego.
@@ -75,6 +80,7 @@ public class HorarioJuegoService {
                 " no existe");
         }
     }
+
 
     /**
      * Elimina un horario de juego por su ID.

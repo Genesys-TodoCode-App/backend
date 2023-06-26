@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/juegos")
 public class JuegoController {
 
+
     @Autowired
     private final JuegoService juegoService;
 
@@ -30,6 +31,7 @@ public class JuegoController {
     public JuegoController(JuegoService juegoService) {
         this.juegoService = juegoService;
     }
+
 
     /**
      * Método para crear un nuevo juego.
@@ -44,6 +46,7 @@ public class JuegoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+
     /**
      * Método para obtener todos los juegos.
      *
@@ -54,6 +57,7 @@ public class JuegoController {
         Iterable<Juego> listaDeJuegos = juegoService.findAll();
         return ResponseEntity.ok(listaDeJuegos);
     }
+
 
     /**
      * Método para buscar un juego por su ID.
@@ -81,8 +85,8 @@ public class JuegoController {
         Juego juegoExistente = juegoService.findById(id);
         juegoService.update(id, juego);
         return ResponseEntity.ok(juegoExistente);
-
     }
+
 
     /**
      * Método para eliminar un juego por su ID.

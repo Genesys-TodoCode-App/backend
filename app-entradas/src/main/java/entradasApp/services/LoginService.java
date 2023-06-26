@@ -20,6 +20,7 @@ public class LoginService {
 
     private UsuarioRepository usuarioRepository;
 
+
     /**
      * Constructor de la clase LoginService.
      * @param usuarioRepository Repositorio de usuarios.
@@ -28,6 +29,7 @@ public class LoginService {
     public LoginService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
+
 
     /**
      * Este método se encarga de registrarse y devolver un token de sesion y un nombre de usuario.
@@ -59,6 +61,12 @@ public class LoginService {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new EmpleadoLoginDTO(nombreUsuario, null, null, "Credeciales incorrectas, verifica los datos."));
     }
+
+    /**
+     * Método que genera un token de sesion aleatorio.
+     * @param usuario el usuario a generar el token de sesion.
+     * @return un token de sesion.
+     */
     private String generarTokenSesion(Usuario usuario) {
         String token = UUID.randomUUID().toString();
         return token;

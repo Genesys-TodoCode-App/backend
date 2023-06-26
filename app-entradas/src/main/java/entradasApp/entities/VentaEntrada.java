@@ -22,20 +22,25 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "ventas_entradas")
 public class VentaEntrada {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_venta_entradas", unique = true, updatable = false)
     @JsonProperty("Id Venta Entradas")
     private Long idVentaEntrada;
 
+
     @Column(name = "monto_ventas")
     @JsonProperty("Monto Venta")
     private BigDecimal montoVenta;
+
 
     @Column(name = "fecha_ventas")
     @JsonProperty("Fecha Venta")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDateTime fechaVenta;
+
 
     /**
      * Relación Many-to-One con Entrada.
@@ -45,6 +50,7 @@ public class VentaEntrada {
     @JsonManagedReference
     private Entrada entrada;
 
+
     /**
      * Relación Many-to-One con Empleado.
      */
@@ -53,6 +59,7 @@ public class VentaEntrada {
     @JsonBackReference
     private Empleado empleado;
 
+
     /**
      * Relación Many-to-One con Comprador.
      */
@@ -60,9 +67,6 @@ public class VentaEntrada {
     @JoinColumn(name = "id_compradores")
     @JsonBackReference
     private Comprador compradorEntrada;
-
-
-
 }
 
 

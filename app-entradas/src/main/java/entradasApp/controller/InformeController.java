@@ -22,6 +22,7 @@ import java.util.List;
 @RequestMapping("/informes")
 public class InformeController {
 
+
     private final InformeService informeService;
 
     /**
@@ -33,6 +34,7 @@ public class InformeController {
         this.informeService = informeService;
     }
 
+
     /**
      * Método para obtener el número de entradas vendidas en una fecha específica.
      *
@@ -43,6 +45,7 @@ public class InformeController {
     public Integer countEntradasVendidasEnFecha(@RequestParam("fecha") LocalDateTime fecha) {
         return informeService.countEntradasVendidasEnFecha(fecha);
     }
+
 
     /**
      * Método para obtener el número de entradas vendidas para un juego en particular en una fecha específica.
@@ -56,6 +59,7 @@ public class InformeController {
         return informeService.countEntradasVendidasPorJuegoYFecha(idJuego, fecha);
     }
 
+
     /**
      * Método para obtener la suma de los montos de ventas en un mes y año específicos.
      *
@@ -68,6 +72,7 @@ public class InformeController {
         return informeService.sumMontosVentasEnMesYAnio(mes, anio);
     }
 
+
     /**
      * Método para obtener la suma del monto total de ventas para una fecha específica.
      *
@@ -79,6 +84,7 @@ public class InformeController {
         return informeService.getTotalVentasPorFecha(fecha);
     }
 
+
     /**
      * Método para obtener una lista de empleados con los juegos asignados.
      *
@@ -88,6 +94,8 @@ public class InformeController {
     public List<Object[]> findEmpleadosConJuegosAsignados() {
         return informeService.findEmpleadosConJuegosAsignados();
     }
+
+
     /**
      * Método para obtener una lista de compradores con la mayor cantidad de entradas pagadas en un mes y año específicos.     *
      * @param mes  El número del mes para el cual se desea obtener los compradores con más entradas pagadas.
@@ -98,6 +106,7 @@ public class InformeController {
     public List<Comprador> findCompradorMasEntradasPagadas(int mes, int anio) {
         return informeService.findCompradorMasEntradas(mes, anio);
     }
+
 
     /**
      * Método para obtener una lista de juegos con la mayor cantidad de entradas vendidas hasta la fecha actual.     *

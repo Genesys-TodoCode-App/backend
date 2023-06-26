@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class LoginController {
 
+
     private LoginService loginService;
 
     /**
@@ -26,6 +27,7 @@ public class LoginController {
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
     }
+
 
     /**
      * Controlador para el login de usuarios

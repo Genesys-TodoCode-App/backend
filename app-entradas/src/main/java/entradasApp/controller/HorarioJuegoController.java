@@ -33,6 +33,7 @@ public class HorarioJuegoController {
         this.horarioJuegoService = horarioJuegoService;
     }
 
+
     /**
      * Método para crear un nuevo horario de juego.
      * Recibe un objeto HorarioJuego en el cuerpo de la solicitud.
@@ -46,6 +47,7 @@ public class HorarioJuegoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+
     /**
      * Método para obtener todos los horarios de juego.
      *
@@ -55,8 +57,9 @@ public class HorarioJuegoController {
     public ResponseEntity<Iterable<HorarioJuego>> findAll() {
         Iterable<HorarioJuego> listaHorarioJuegos = horarioJuegoService.findAll();
         return ResponseEntity.ok(listaHorarioJuegos);
-
     }
+
+
     /**
      * Método para buscar un horario de juego por su ID.
      *
@@ -67,8 +70,9 @@ public class HorarioJuegoController {
     public ResponseEntity<HorarioJuego> findById(@PathVariable Long id) {
         HorarioJuego horarioJuego = horarioJuegoService.findById(id);
         return ResponseEntity.ok(horarioJuego);
-
     }
+
+
     /**
      * Método para eliminar un horario de juego por su ID.
      *

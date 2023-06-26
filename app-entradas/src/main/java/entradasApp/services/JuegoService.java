@@ -24,6 +24,7 @@ public class JuegoService {
         this.juegoRepository = juegoRepository;
     }
 
+
     /**
      * Crea un nuevo juego.
      * Se hace una comprobación de que el juego no exista en la base de datos y si existe se arroja una ExisteEnBaseDeDatosExcepcion.
@@ -36,6 +37,7 @@ public class JuegoService {
         }
     }
 
+
     /**
      * Devuelve todos los juegos de la base de datos.
      * @return un iterable con todos los juegos
@@ -43,6 +45,7 @@ public class JuegoService {
     public Iterable<Juego> findAll() {
         return juegoRepository.findAll();
     }
+
 
     /**
      * Busca un juego por su ID.
@@ -53,6 +56,7 @@ public class JuegoService {
         return juegoRepository.findById(id)
             .orElse(null);
     }
+
 
     /**
      * Actualiza un juego existente.
@@ -71,8 +75,8 @@ public class JuegoService {
             juegoExistente.setHorarios(juego.getHorarios());
             juegoRepository.save(juegoExistente);
         }
-
     }
+
 
     /**
      * Elimina un juego por su ID.

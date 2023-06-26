@@ -18,6 +18,7 @@ public class JuegoDTO {
     @JsonProperty("Id Juego")
     private Long idJuego;
 
+
     @JsonProperty("Nombre juego")
     private String nombreJuego;
 

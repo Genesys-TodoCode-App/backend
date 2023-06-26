@@ -27,6 +27,7 @@ public class InformeService {
     private final CompradorRepository compradorRepository;
     private final EmpleadoRepository empleadoRepository;
 
+
     /**
      * Constructor de la clase InformeService
      * @param ventaEntradaRepository Repositorio de ventas de entradas.
@@ -42,6 +43,7 @@ public class InformeService {
         this.empleadoRepository = empleadoRepository;
     }
 
+
     /**
      * Devuelve la cantidad de entradas vendidas en una fecha específica.
      * @param fecha La fecha para la cual se desea contar las entradas vendidas.
@@ -50,6 +52,7 @@ public class InformeService {
     public Integer countEntradasVendidasEnFecha(LocalDateTime fecha) {
         return ventaEntradaRepository.findCantidadEntradasVendidasPorFecha(fecha);
     }
+
 
     /**
      * Devuelve la cantidad de entradas vendidas para un juego específico en una fecha específica.
@@ -61,6 +64,7 @@ public class InformeService {
         return ventaEntradaRepository.findCantidadEntradasVendidasPorJuegoYFecha(idJuego, fecha);
     }
 
+
     /**
      * Devuelve la suma de los montos de todas las ventas realizadas en un mes y año específicos.
      * @param mes El número del mes para el cual se desea obtener la suma de los montos de ventas.
@@ -71,6 +75,7 @@ public class InformeService {
         return ventaEntradaRepository.getTotalVentasPorMesYAnio(mes, anio);
     }
 
+
     /**
      * Devuelve el monto total de ventas realizadas en una fecha específica.
      * @param fecha La fecha para la cual se desea obtener el monto total de ventas.
@@ -79,6 +84,7 @@ public class InformeService {
     public BigDecimal getTotalVentasPorFecha(LocalDate fecha) {
         return ventaEntradaRepository.getTotalVentasPorFecha(fecha);
     }
+
 
     /**
      * Devuelve una lista de objetos que contienen los nombres y apellidos de los empleados
@@ -90,6 +96,7 @@ public class InformeService {
         return empleadoRepository.obtenerNombresyApellidosEmpleadosYJuegos();
     }
 
+
     /**
      * Devuelve una lista de compradores que han realizado la mayor cantidad de entradas
      * en un mes y año específicos.
@@ -100,6 +107,7 @@ public class InformeService {
     public List<Comprador> findCompradorMasEntradas(int mes, int anio) {
         return compradorRepository.obtenerCompradorConMasEntradas(mes, anio);
     }
+
 
     /**
      * Devuelve una lista de objetos que contienen el juego con la mayor cantidad de entradas vendidas hasta la fecha actual.

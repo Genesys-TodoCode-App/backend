@@ -27,7 +27,8 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-/**
+
+    /**
      * Crea un nuevo usuario.
      * @param usuario El usuario a crear.
      */
@@ -39,6 +40,7 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
+
     /**
      * Obtiene todos los usuarios.
      * @return Una colección de usuarios.
@@ -46,6 +48,8 @@ public class UsuarioService {
     public Iterable<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
+
+
     /**
      * Busca un usuario por su ID.
      * @param id El ID del usuario a buscar.
@@ -54,6 +58,7 @@ public class UsuarioService {
     public Usuario findById(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
+
 
     /**
      * Actualiza un usuario existente.
@@ -71,6 +76,7 @@ public class UsuarioService {
             throw new NoEncontradoExcepcion(" Usuario con el id: " + id + "no encontrado");
         }
     }
+
 
     /**
      * Elimina un usuario por su ID.

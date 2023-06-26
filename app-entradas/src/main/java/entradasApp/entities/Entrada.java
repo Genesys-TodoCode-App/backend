@@ -21,20 +21,24 @@ import java.time.LocalDateTime;
 @Table(name = "entradas")
 public class Entrada {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_entradas", unique = true, updatable = false)
     @JsonProperty("Id Entrada")
     private Long idEntrada;
 
+
     @Column(name = "cod_ident_entrada", length = 20)
     @JsonProperty("Codigo Identificacion Entrada")
     private String codigoIdentificacionEntrada;
+
 
     @Column(name = "fecha_hora_utilizacion")
     @JsonProperty("Fecha y Hora Utilizacion")
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime fechaHoraUtilizacion;
+
 
     /**
      * Relación Many-to-One con Juego.

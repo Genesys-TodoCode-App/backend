@@ -21,22 +21,29 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "empleados")
 public class Empleado {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_empleados", unique = true, updatable = false)
     private Long idEmpleado;
 
+
     @Column(name = "nombre_empleados", length = 20)
     private String nombreEmpleado;
+
 
     @Column(name = "apellido_empleados", length = 20)
     private String apellidoEmpleado;
 
+
     @Column(name = "dni_empleados", length = 20)
     private String dniEmpleado;
 
+
     @Column(name = "rutas_a_la_fotos", length = 100)
     private String rutaALaFoto;
+
 
     /** Esta es la relacion con el id del Usuario
      *
@@ -45,6 +52,7 @@ public class Empleado {
     @JoinColumn(name = "id_usuario")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario usuario;
+
 
     /**
      * Lista de juegos asignados al empleado.
@@ -59,6 +67,7 @@ public class Empleado {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<Juego> juegos;
+
 
     /**
      * Lista de ventas de entradas realizadas por el empleado.

@@ -29,6 +29,7 @@ public class EmpleadoService {
         this.empleadoRepository = empleadoRepository;
     }
 
+
     /**
      * Crea un nuevo empleado.
      * Si el empleado ya existe en la base de datos, se lanza una ExisteEnBaseDeDatosExcepcion.
@@ -41,6 +42,7 @@ public class EmpleadoService {
         }
         empleadoRepository.save(empleado);
     }
+
 
     /**
      * Obtiene todos los empleados y los devuelve como una lista de EmpleadoDTO.
@@ -55,6 +57,7 @@ public class EmpleadoService {
         }
         return empleadosDTO;
     }
+
 
     /**
      * Busca un empleado por su ID y lo devuelve como un EmpleadoDTO.
@@ -71,6 +74,7 @@ public class EmpleadoService {
             throw new NoEncontradoExcepcion("El empleado con el id: " + id + " no ha sido encontrado");
         }
     }
+
 
     /**
      * Actualiza un empleado existente con los datos proporcionados en el EmpleadoDTO.
@@ -91,6 +95,7 @@ public class EmpleadoService {
         }
     }
 
+
     /**
      * Elimina un empleado por su ID.
      * Si el empleado no existe, se lanza una EmptyResultDataAccessException.
@@ -103,6 +108,7 @@ public class EmpleadoService {
             throw new RuntimeException("Ocurrió un error al eliminar el Empleado");
         }
     }
+
 
     /**
      * Mapea un empleado a un EmpleadoDTO.
@@ -121,12 +127,12 @@ public class EmpleadoService {
         return empleadoDTO;
     }
 
+
     /**
      * Mapea para convertir la lista de juegos a Lista de JuegoDTO.
      * @param juegos
      * @return
      */
-
     private List<JuegoDTO> mapJuegosToDTO(List<Juego> juegos) {
         List<JuegoDTO> juegosDTO = new ArrayList<>();
         if (juegos != null) {
