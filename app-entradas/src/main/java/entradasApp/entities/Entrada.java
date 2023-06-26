@@ -1,5 +1,6 @@
 package entradasApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class Entrada {
 
     @Column(name = "fecha_hora_utilizacion")
     @JsonProperty("Fecha y Hora Utilizacion")
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime fechaHoraUtilizacion;
 
     /**

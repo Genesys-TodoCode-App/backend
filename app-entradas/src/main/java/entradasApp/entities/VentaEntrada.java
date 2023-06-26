@@ -1,6 +1,7 @@
 package entradasApp.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -33,6 +34,7 @@ public class VentaEntrada {
 
     @Column(name = "fecha_ventas")
     @JsonProperty("Fecha Venta")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDateTime fechaVenta;
 
     /**

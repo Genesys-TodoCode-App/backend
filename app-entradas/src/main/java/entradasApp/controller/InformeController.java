@@ -39,7 +39,7 @@ public class InformeController {
      * @param fecha La fecha para la cual se desea obtener el número de entradas vendidas.
      * @return El número de entradas vendidas en la fecha especificada.
      */
-    @GetMapping("(cantidad-entradas-vendidas-en-fecha")
+    @GetMapping("/cantidad-entradas-vendidas-en-fecha")
     public Integer countEntradasVendidasEnFecha(@RequestParam("fecha") LocalDateTime fecha) {
         return informeService.countEntradasVendidasEnFecha(fecha);
     }
@@ -89,8 +89,7 @@ public class InformeController {
         return informeService.findEmpleadosConJuegosAsignados();
     }
     /**
-     * Método para obtener una lista de compradores con la mayor cantidad de entradas pagadas en un mes y año específicos.
-     *
+     * Método para obtener una lista de compradores con la mayor cantidad de entradas pagadas en un mes y año específicos.     *
      * @param mes  El número del mes para el cual se desea obtener los compradores con más entradas pagadas.
      * @param anio El año para el cual se desea obtener los compradores con más entradas pagadas.
      * @return Una lista de objetos Comprador que representan a los compradores con la mayor cantidad de entradas pagadas.
@@ -101,8 +100,7 @@ public class InformeController {
     }
 
     /**
-     * Método para obtener una lista de juegos con la mayor cantidad de entradas vendidas hasta la fecha actual.
-     *
+     * Método para obtener una lista de juegos con la mayor cantidad de entradas vendidas hasta la fecha actual.     *
      * @return Una lista de objetos que contienen información sobre los juegos y la cantidad de entradas vendidas.
      */
     @GetMapping("/juego-con-mas-entradas-vendidas-hasta-hoy")

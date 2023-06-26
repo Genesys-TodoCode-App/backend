@@ -18,12 +18,14 @@ public class EmpleadoLoginDTO {
     private String usuarioEmpleado;
 
 
-    @JsonProperty("Contrasenia empleado")
-    private String contraseniaEmpleado;
-
-
     @JsonProperty("Rol empleado")
     private RolEmpleado rolEmpleado;
+
+    @JsonProperty("Token de sesión")
+    private String tokenDeSesion;
+
+    @JsonProperty("Mensaje")
+    private String mensaje;
 
 
 }

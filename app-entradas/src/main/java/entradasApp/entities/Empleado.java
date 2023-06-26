@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * La clase Empleado representa al empleado que va a usar la aplicación.
  * Contiene anotaciones de Lombok, Jackson y JPA para la serialización de objetos.
- * @OneToOne tiene un usuario asociado que sirve para autentificarse en la aplicación.
- * @ManyToMany asocia a los juegos que el empleado puede interactuar
- * @OneToMany asocia a las ventas de entradas realizadas por el empleado.
+ * OneToOne tiene un usuario asociado que sirve para autentificarse en la aplicación.
+ * ManyToMany asocia a los juegos que el empleado puede interactuar
+ * OneToMany asocia a las ventas de entradas realizadas por el empleado.
  */
 @Data
 @Entity

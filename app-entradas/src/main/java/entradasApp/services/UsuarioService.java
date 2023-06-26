@@ -26,6 +26,7 @@ public class UsuarioService {
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
+
 /**
      * Crea un nuevo usuario.
      * @param usuario El usuario a crear.
