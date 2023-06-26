@@ -20,6 +20,10 @@ public class LoginService {
 
     private UsuarioRepository usuarioRepository;
 
+    /**
+     * Constructor de la clase LoginService.
+     * @param usuarioRepository Repositorio de usuarios.
+     */
     @Autowired
     public LoginService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;

@@ -15,6 +15,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
   description = "Project Genesys"))
 public class AppEntradasApplication {
 
+    /**
+     * Método principal de la aplicación entradasApp.
+     * Este método inicia la aplicación y ejecuta las operaciones principales.
+     *
+     * @param args Los argumentos de línea de comandos pasados al programa.
+     */
 	public static void main(String[] args) {
 		SpringApplication.run(AppEntradasApplication.class, args);
 	}

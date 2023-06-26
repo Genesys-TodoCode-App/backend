@@ -22,7 +22,7 @@ public class CompradorController {
 
     /**
      * Constructor de la clase
-     * @param compradorService
+     * @param compradorService Servicio de compradores
      */
     public CompradorController(CompradorService compradorService) {
         this.compradorService = compradorService;

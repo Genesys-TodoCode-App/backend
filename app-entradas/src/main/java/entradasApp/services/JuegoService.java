@@ -18,7 +18,7 @@ public class JuegoService {
 
     /**
      * Constructor de la clase JuegoService
-     * @param juegoRepository
+     * @param juegoRepository El repositorio de juegos.
      */
     public JuegoService(JuegoRepository juegoRepository) {
         this.juegoRepository = juegoRepository;
@@ -27,7 +27,7 @@ public class JuegoService {
     /**
      * Crea un nuevo juego.
      * Se hace una comprobación de que el juego no exista en la base de datos y si existe se arroja una ExisteEnBaseDeDatosExcepcion.
-     * @param juego
+     * @param juego El juego a crear.
      */
     public void create(Juego juego) {
         boolean existeJuego = juegoRepository.existsById(juego.getIdJuego());

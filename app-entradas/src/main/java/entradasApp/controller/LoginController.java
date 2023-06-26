@@ -19,9 +19,20 @@ public class LoginController {
 
     private LoginService loginService;
 
+    /**
+     * Constructor de la clase
+     * @param loginService El servicio de LoginService que se utilizará en el controlador.
+     */
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
     }
+
+    /**
+     * Controlador para el login de usuarios
+     * @param nombreUsuario se ingresa el nombre de usuario
+     * @param contraseniaUsuario se ingresa la contraseña del usuario
+     * @return un token de sesion y un nombre de usuario a través de un ResponseEntity con un Empleado DTO que protege la contraseña.
+     */
     @PostMapping
     public ResponseEntity<EmpleadoLoginDTO> login(@RequestParam String nombreUsuario,
                                                   @RequestParam String contraseniaUsuario) {

@@ -4,6 +4,9 @@ import entradasApp.entities.VentaEntrada;
 import entradasApp.services.VentaEntradaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
  * Las ventas de entradas son objetos de la clase VentaEntrada.
  * Este controlador está mapeado a la ruta "/ventas-entradas".
  */
-
 @RestController
 @RequestMapping("/ventas-entradas")
 public class VentaEntradaController {
@@ -24,12 +26,13 @@ public class VentaEntradaController {
 
     /**
      * Constructor de la clase VentaEntradaController.
-     * @param ventaEntradaService
+     * @param ventaEntradaService El servicio de ventas de entradas.
      */
     @Autowired
     public VentaEntradaController(VentaEntradaService ventaEntradaService) {
         this.ventaEntradaService = ventaEntradaService;
     }
+
 
     /**
      * Método para crear una nueva venta de entrada.
@@ -41,16 +44,25 @@ public class VentaEntradaController {
     public void create(@Valid @RequestBody VentaEntrada ventaEntrada) {
         ventaEntradaService.create(ventaEntrada);
     }
+
+
     /**
-     * Método para obtener todas las ventas de entradas.
-     *
-     * @return ResponseEntity con una lista Iterable de VentaEntrada en el cuerpo de la respuesta.
+     * Método para obtener todas las ventas de entradas existentes.
+     * @param page número de paginas a mostrar.
+     * @param size número de elementos por página.
+     * @return ResponseEntity con la lista de ventas de entradas.
      */
     @GetMapping
-    public ResponseEntity<Iterable<VentaEntrada>> findAll() {
-        Iterable<VentaEntrada> listaVentaEntradas = ventaEntradaService.findAll();
-        return ResponseEntity.ok(listaVentaEntradas);
+    public ResponseEntity<Page<VentaEntrada>> getAllVentasEntradas(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<VentaEntrada> ventasEntradasPage = ventaEntradaService.findAll(pageable);
+        return ResponseEntity.ok(ventasEntradasPage);
     }
+
+
     /**
      * Método para buscar una venta de entrada por su ID.
      *
@@ -62,6 +74,7 @@ public class VentaEntradaController {
         VentaEntrada ventaEntrada = ventaEntradaService.findById(id);
         return ResponseEntity.ok(ventaEntrada);
     }
+
 
     /**
      * Método para actualizar una venta de entrada existente.
@@ -76,6 +89,7 @@ public class VentaEntradaController {
         VentaEntrada ventaEntradaActualizada = ventaEntradaService.update(id, ventaEntrada);
         return ResponseEntity.ok(ventaEntradaActualizada);
     }
+
 
     /**
      * Método para eliminar una venta de entrada por su ID.

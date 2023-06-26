@@ -9,10 +9,18 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repositorio para la entidad Comprador
+ */
 @Repository
 @Transactional
 public interface CompradorRepository extends CrudRepository<Comprador, Long> {
-
+    /**
+     * Obtiene una lista de compradores que tienen más entradas vendidas en el mes y año especificados
+     * @param mes el mes específico.
+     * @param anio el año específico.
+     * @return Una lista de compradores con la maxima cantidad de entradas vendidas.
+     */
     @Query(value = "SELECT c FROM Comprador c " +
         "JOIN VentaEntrada ve ON c.idComprador = ve.compradorEntrada.idComprador " +
         "WHERE EXTRACT(MONTH FROM ve.fechaVenta) = :mes " +

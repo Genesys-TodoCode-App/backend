@@ -6,6 +6,8 @@ import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.VentaEntradaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,11 +40,12 @@ public class VentaEntradaService {
     }
 
     /**
-     * Obtiene todas las ventas de entradas.
-     * @return Una colección de ventas de entradas.
+     * Obtiene todas las ventas de entradas y las devuelve en una lista.
+     * @param pageable Parámetro de paginación.
+     * @return Una lista de ventas de entradas.
      */
-    public Iterable<VentaEntrada> findAll() {
-        return ventaEntradaRepository.findAll();
+    public Page<VentaEntrada> findAll(Pageable pageable) {
+        return ventaEntradaRepository.findAll(pageable);
     }
 
     /**

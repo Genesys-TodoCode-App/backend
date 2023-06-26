@@ -29,10 +29,10 @@ public class InformeService {
 
     /**
      * Constructor de la clase InformeService
-     * @param ventaEntradaRepository
-     * @param juegoRepository
-     * @param compradorRepository
-     * @param empleadoRepository
+     * @param ventaEntradaRepository Repositorio de ventas de entradas.
+     * @param juegoRepository Repositorio de juegos.
+     * @param compradorRepository Repositorio de compradores.
+     * @param empleadoRepository Repositorio de empleados.
      */
     @Autowired
     public InformeService(VentaEntradaRepository ventaEntradaRepository, JuegoRepository juegoRepository, CompradorRepository compradorRepository, EmpleadoRepository empleadoRepository) {

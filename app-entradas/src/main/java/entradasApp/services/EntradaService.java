@@ -6,6 +6,8 @@ import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EntradaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,11 +43,12 @@ public class EntradaService {
     }
 
     /**
-     * Obtiene todas las ebtradas y las devuelve en una lista
-     * @return una lista de entradas
+     * Obtiene todas las entradas.
+     * @param pageable Paginación de la consulta.
+     * @return Una lista de entradas.
      */
-    public List<Entrada> findAll() {
-        return entradaRepository.findAll();
+    public Page<Entrada> findAll(Pageable pageable) {
+        return entradaRepository.findAll(pageable);
     }
 
 

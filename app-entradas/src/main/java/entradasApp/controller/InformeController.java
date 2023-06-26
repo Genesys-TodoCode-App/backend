@@ -26,7 +26,7 @@ public class InformeController {
 
     /**
      * Constructor del controlador.
-     * @param informeService
+     * @param informeService Servicio de informes.
      */
     @Autowired
     public InformeController(InformeService informeService) {
