@@ -1,5 +1,6 @@
 package entradasApp.controller;
 
+import entradasApp.dtos.JuegoDTO;
 import entradasApp.entities.Juego;
 import entradasApp.services.JuegoService;
 import jakarta.validation.Valid;
@@ -53,8 +54,8 @@ public class JuegoController {
      * @return ResponseEntity con una lista Iterable de Juego en el cuerpo de la respuesta.
      */
     @GetMapping
-    public ResponseEntity<Iterable<Juego>> findAll() {
-        Iterable<Juego> listaDeJuegos = juegoService.findAll();
+    public ResponseEntity<Iterable<JuegoDTO>> findAll() {
+        Iterable<JuegoDTO> listaDeJuegos = juegoService.findAll();
         return ResponseEntity.ok(listaDeJuegos);
     }
 

@@ -1,9 +1,15 @@
 package entradasApp.services;
 
+import entradasApp.dtos.JuegoDTO;
 import entradasApp.entities.Juego;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.repositories.JuegoRepository;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Clase de servicio que maneja las operaciones relacionadas con los juegos.
@@ -15,13 +21,18 @@ public class JuegoService {
 
     private final JuegoRepository juegoRepository;
 
+    private final ModelMapper modelMapper;
+
 
     /**
      * Constructor de la clase JuegoService
+     *
      * @param juegoRepository El repositorio de juegos.
+     * @param modelMapper
      */
-    public JuegoService(JuegoRepository juegoRepository) {
+    public JuegoService(JuegoRepository juegoRepository, ModelMapper modelMapper) {
         this.juegoRepository = juegoRepository;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -40,11 +51,21 @@ public class JuegoService {
 
     /**
      * Devuelve todos los juegos de la base de datos.
+     *
      * @return un iterable con todos los juegos
      */
-    public Iterable<Juego> findAll() {
-        return juegoRepository.findAll();
+    public Iterable<JuegoDTO> findAll() {
+        Iterable<Juego> juegos = juegoRepository.findAll();
+        List<JuegoDTO> juegoDTOs = new ArrayList<>();
+
+        for (Juego juego : juegos) {
+            JuegoDTO juegoDTO = modelMapper.map(juego, JuegoDTO.class);
+            juegoDTOs.add(juegoDTO);
+        }
+
+        return juegoDTOs;
     }
+
 
 
     /**
