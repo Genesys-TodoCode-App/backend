@@ -71,11 +71,20 @@ public class EntradaService {
     /**
      * Busca una entrada por su ID y la devuelve.
      * Si la entrada no existe, se devuelve null.
+     *
      * @param id El ID de la entrada a buscar.
      * @return La Entrada correspondiente a la entrada encontrada, o null si no se encontró ninguna entrada.
      */
-    public Entrada findById(Long id) {
-        return entradaRepository.findById(id).orElse(null);
+    public EntradaDTO findById(Long id) {
+        Entrada entrada = entradaRepository.findById(id).orElse(null);
+        if (entrada != null) {
+            EntradaDTO entradaDTO = modelMapper.map(entrada, EntradaDTO.class);
+            entradaDTO.setIdJuegos(entrada.getJuego() != null ? entrada.getJuego().getIdJuego() : null);
+            entradaDTO.setNombreJuegos(entrada.getJuego() != null ? entrada.getJuego().getNombreJuego() : null);
+            return entradaDTO;
+        } else {
+            throw new NoEncontradoExcepcion("La entrada con el Id: " + id + " no ha sido encontrada");
+        }
     }
 
 

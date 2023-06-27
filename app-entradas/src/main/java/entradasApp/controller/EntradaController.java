@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * Controlador para las operaciones CRUD relacionadas con las entradas.
  *
@@ -76,8 +74,8 @@ public class EntradaController {
      * @return ResponseEntity con la entrada encontrada
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Entrada> findById(@PathVariable Long id) {
-        Entrada entrada = entradaService.findById(id);
+    public ResponseEntity<EntradaDTO> findById(@PathVariable Long id) {
+        EntradaDTO entrada = entradaService.findById(id);
         return ResponseEntity.ok(entrada);
     }
 
@@ -85,13 +83,13 @@ public class EntradaController {
     /**
      * Actualiza una entrada existente.
      *
-     * @param id ID de la entrada a actualizar
+     * @param id      ID de la entrada a actualizar
      * @param entrada objeto Entrada con los datos actualizados
      * @return ResponseEntity con la entrada actualizada
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Entrada> update(@Valid @PathVariable Long id, @RequestBody Entrada entrada) {
-        Entrada entradaExistente = entradaService.findById(id);
+    public ResponseEntity<EntradaDTO> update(@Valid @PathVariable Long id, @RequestBody Entrada entrada) {
+        EntradaDTO entradaExistente = entradaService.findById(id);
         return ResponseEntity.ok(entradaExistente);
     }
 
