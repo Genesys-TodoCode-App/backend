@@ -21,7 +21,6 @@ public class EntradaDTO {
     private String codigoIdentificacionEntrada;
 
     @JsonProperty("Fecha y Hora Utilizacion")
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime fechaHoraUtilizacion;
 
     @JsonProperty("Id juego")

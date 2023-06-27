@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VentaEntradaDTO {
+
     @JsonProperty("Id Venta Entradas")
     private Long idVentaEntradas;
 
