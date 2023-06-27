@@ -6,13 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Clase EmpleadoLoginDTO que representa un objeto empleado para el inicio de sesión.
+ * Clase UsuarioLoginDTO que representa un objeto empleado para el inicio de sesión.
  * Contiene anotaciones de Lombok para generar automáticamente los constructores, getters, setters y otros métodos.
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class EmpleadoLoginDTO {
+public class UsuarioLoginDTO {
+
+    @JsonProperty("Id Usuario")
+    private Long idUsuario;
 
     @JsonProperty("Usuario empleado")
     private String usuarioEmpleado;
@@ -28,4 +31,6 @@ public class EmpleadoLoginDTO {
     private String mensaje;
 
 
+    public UsuarioLoginDTO(String nombreUsuario, Object o, Object o1, String s) {
+    }
 }

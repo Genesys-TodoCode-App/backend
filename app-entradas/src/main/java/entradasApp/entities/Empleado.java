@@ -1,5 +1,7 @@
 package entradasApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -48,6 +50,7 @@ public class Empleado {
     /** Esta es la relacion con el id del Usuario
      *
      */
+    @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -65,13 +68,14 @@ public class Empleado {
         uniqueConstraints = @UniqueConstraint(columnNames = {"id_empleados", "id_juegos"})
     )
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference
+    @JsonManagedReference("empleado-juegos")
     private List<Juego> juegos;
 
 
     /**
      * Lista de ventas de entradas realizadas por el empleado.
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<VentaEntrada> ventasEntradas;

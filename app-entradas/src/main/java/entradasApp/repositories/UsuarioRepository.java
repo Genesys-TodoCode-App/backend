@@ -16,6 +16,8 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
      * @return el usuario encontrado
      */
     Usuario findByNombreUsuario(String nombreUsuario);
+
+    boolean existsByNombreUsuario(String nombreUsuario);
 }
 
 

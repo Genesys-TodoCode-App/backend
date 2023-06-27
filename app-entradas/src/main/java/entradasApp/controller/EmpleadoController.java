@@ -4,6 +4,7 @@ import entradasApp.dtos.EmpleadoDTO;
 import entradasApp.entities.Empleado;
 import entradasApp.services.EmpleadoService;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,27 +22,31 @@ public class EmpleadoController {
 
     @Autowired
     private final EmpleadoService empleadoService;
+    private final ModelMapper modelMapper;
     /**
      * Constructor de la clase EmpleadoController.
      *
      * @param empleadoService instancia del servicio de empleados
+     * @param modelMapper
      */
-    public EmpleadoController(EmpleadoService empleadoService) {
+    public EmpleadoController(EmpleadoService empleadoService, ModelMapper modelMapper) {
         this.empleadoService = empleadoService;
+        this.modelMapper = modelMapper;
     }
 
 
     /**
-     * Crea un nuevo empleado.
-     *
-     * @param empleado objeto Empleado a crear
-     * @return ResponseEntity con el estado HTTP de la respuesta
+     * Crea un empleado
+     * @param empleadoDTO
+     * @return
      */
-    @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody Empleado empleado) {
+    @PostMapping(value = "/", consumes = {"application/json","application/xml"})
+    public ResponseEntity<Void> create(@Valid @RequestBody EmpleadoDTO empleadoDTO) {
+        Empleado empleado = modelMapper.map(empleadoDTO, Empleado.class);
         empleadoService.create(empleado);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 
 
     /**

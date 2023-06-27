@@ -1,5 +1,7 @@
 package entradasApp.controller;
 
+import entradasApp.dtos.UsuarioEmpleadoDTO;
+import entradasApp.entities.Empleado;
 import entradasApp.entities.Usuario;
 import entradasApp.services.UsuarioService;
 import jakarta.validation.Valid;
@@ -40,7 +42,7 @@ public class UsuarioController {
      * @return ResponseEntity con estado HTTP 201 (CREATED) si se crea el usuario correctamente.
      */
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> create(@Valid @RequestBody Usuario usuario) {
         usuarioService.create(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -96,5 +98,11 @@ public class UsuarioController {
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         usuarioService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/empleado")
+    public ResponseEntity<Usuario> createUsuarioYEmpleado(@RequestBody UsuarioEmpleadoDTO usuarioEmpleadoDTO){
+        Usuario nuevoUsuario = usuarioService.createUsuarioYEmpleado(usuarioEmpleadoDTO);
+        return ResponseEntity.ok(nuevoUsuario);
     }
 }

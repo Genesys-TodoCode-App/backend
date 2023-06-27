@@ -1,6 +1,6 @@
 package entradasApp.controller;
 
-import entradasApp.dtos.EmpleadoLoginDTO;
+import entradasApp.dtos.UsuarioLoginDTO;
 import entradasApp.services.LoginService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +36,9 @@ public class LoginController {
      * @return un token de sesion y un nombre de usuario a través de un ResponseEntity con un Empleado DTO que protege la contraseña.
      */
     @PostMapping
-    public ResponseEntity<EmpleadoLoginDTO> login(@RequestParam String nombreUsuario,
-                                                  @RequestParam String contraseniaUsuario) {
-        ResponseEntity<EmpleadoLoginDTO> response = loginService.login(nombreUsuario, contraseniaUsuario);
+    public ResponseEntity<UsuarioLoginDTO> login(@RequestParam String nombreUsuario,
+                                                 @RequestParam String contraseniaUsuario) {
+        ResponseEntity<UsuarioLoginDTO> response = loginService.login(nombreUsuario, contraseniaUsuario);
 
         if(response.getBody() != null) {
             return response;

@@ -1,6 +1,6 @@
 package entradasApp.services;
 
-import entradasApp.dtos.EmpleadoLoginDTO;
+import entradasApp.dtos.UsuarioLoginDTO;
 import entradasApp.entities.Usuario;
 import entradasApp.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class LoginService {
      * @param contraseniaUsuario la contraseña del usuario.
      * @return un token de sesion y un nombre de usuario a través de un ResponseEntity con un Empleado DTO que protege la contraseña.
      */
-    public ResponseEntity<EmpleadoLoginDTO> login(String nombreUsuario, String contraseniaUsuario) {
+    public ResponseEntity<UsuarioLoginDTO> login(String nombreUsuario, String contraseniaUsuario) {
         Usuario existeUsuario = usuarioRepository.findByNombreUsuario(nombreUsuario);
         if (existeUsuario != null) {
             if (existeUsuario.getContraseniaUsuario().equals(contraseniaUsuario)){
@@ -47,19 +47,19 @@ public class LoginService {
                 String nombreUsuarioCookie = existeUsuario.getNombreUsuario();
                 int validezCookieEnSegundos = 86_000;
 
-                EmpleadoLoginDTO empleadoLoginDTO = new EmpleadoLoginDTO();
-                empleadoLoginDTO.setUsuarioEmpleado(existeUsuario.getNombreUsuario());
-                empleadoLoginDTO.setRolEmpleado(existeUsuario.getRolEmpleado());
-                empleadoLoginDTO.setTokenDeSesion(tokenSesion);
-                empleadoLoginDTO.setMensaje("Password correcto");
+                UsuarioLoginDTO usuarioLoginDTO = new UsuarioLoginDTO();
+                usuarioLoginDTO.setUsuarioEmpleado(existeUsuario.getNombreUsuario());
+                usuarioLoginDTO.setRolEmpleado(existeUsuario.getRolEmpleado());
+                usuarioLoginDTO.setTokenDeSesion(tokenSesion);
+                usuarioLoginDTO.setMensaje("Password correcto");
 
                 HttpHeaders httpHeaders = new HttpHeaders();
                 httpHeaders.add(HttpHeaders.SET_COOKIE, "token" + tokenSesion + "; Max-Age=" + validezCookieEnSegundos + "; HttpOnly");
                 httpHeaders.add(HttpHeaders.SET_COOKIE, "nombreUsuario" + nombreUsuarioCookie + "; Max-Age=" + validezCookieEnSegundos);
-                return ResponseEntity.ok().headers(httpHeaders).body(empleadoLoginDTO);
+                return ResponseEntity.ok().headers(httpHeaders).body(usuarioLoginDTO);
             }
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new EmpleadoLoginDTO(nombreUsuario, null, null, "Credeciales incorrectas, verifica los datos."));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new UsuarioLoginDTO(nombreUsuario, null, null, "Credeciales incorrectas, verifica los datos."));
     }
 
     /**

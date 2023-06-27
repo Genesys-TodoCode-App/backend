@@ -1,5 +1,6 @@
 package entradasApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -37,4 +38,8 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @JsonProperty("Rol Usuario")
     private RolEmpleado rolEmpleado;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Empleado empleado;
 }

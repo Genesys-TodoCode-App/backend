@@ -48,10 +48,6 @@ public class Juego {
     private boolean juegoActivo;
 
 
-    @Column(name = "juegos_vendidos")
-    @JsonProperty("Juegos Vendidos")
-    private boolean juegoVendido;
-
     @Column(name = "rutas_a_las_fotos")
     @JsonProperty("Rutas a las fotos")
     private String rutaALaFoto;

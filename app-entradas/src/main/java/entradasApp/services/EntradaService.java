@@ -4,6 +4,7 @@ import entradasApp.entities.Entrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EntradaRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -18,16 +19,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class EntradaService {
 
-    @Autowired
+
     private final EntradaRepository entradaRepository;
+    private final ModelMapper modelMapper;
 
 
     /**
      * Constructor de la clase EntradaService.
+     *
      * @param entradaRepository repositorio de entradas.
+     * @param modelMapper
      */
-    public EntradaService(EntradaRepository entradaRepository) {
+    @Autowired
+    public EntradaService(EntradaRepository entradaRepository, ModelMapper modelMapper) {
         this.entradaRepository = entradaRepository;
+        this.modelMapper = modelMapper;
     }
 
     /**

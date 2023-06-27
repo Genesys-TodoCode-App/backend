@@ -84,7 +84,7 @@ public class EntradaController {
     /**
      * Actualiza una entrada existente.
      *
-     * @param id      ID de la entrada a actualizar
+     * @param id ID de la entrada a actualizar
      * @param entrada objeto Entrada con los datos actualizados
      * @return ResponseEntity con la entrada actualizada
      */

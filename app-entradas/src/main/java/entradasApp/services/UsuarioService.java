@@ -1,8 +1,13 @@
 package entradasApp.services;
-
+;
+import entradasApp.dtos.UsuarioEmpleadoDTO;
+import entradasApp.entities.Empleado;
 import entradasApp.entities.Usuario;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
+import entradasApp.mapper.EmpleadoMapper;
+import entradasApp.mapper.UsuarioMapper;
+import entradasApp.repositories.EmpleadoRepository;
 import entradasApp.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,12 +24,17 @@ public class UsuarioService {
     @Autowired
     private final UsuarioRepository usuarioRepository;
 
+    private final EmpleadoRepository  empleadoRepository;
+
     /**
      * Constructor de la clase UsuarioService
-     * @param usuarioRepository Repositorio de usuarios.
+     *
+     * @param usuarioRepository  Repositorio de usuarios.
+     * @param empleadoRepository
      */
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, EmpleadoRepository empleadoRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.empleadoRepository = empleadoRepository;
     }
 
 
@@ -32,12 +42,12 @@ public class UsuarioService {
      * Crea un nuevo usuario.
      * @param usuario El usuario a crear.
      */
-    public void create(Usuario usuario) {
+    public Usuario create(Usuario usuario) {
         boolean existeUsuario = usuarioRepository.existsById(usuario.getIdUsuario());
         if (existeUsuario) {
             throw new ExisteEnBaseDeDatosExcepcion("Este usuario ya existe.");
         }
-        usuarioRepository.save(usuario);
+        return usuarioRepository.save(usuario);
     }
 
 
@@ -89,4 +99,22 @@ public class UsuarioService {
             throw new RuntimeException("Ocurrió un error al eliminar el Usuario");
         }
     }
+    public Usuario createUsuarioYEmpleado(UsuarioEmpleadoDTO dto) {
+        Usuario usuario = UsuarioMapper.map(dto);
+        Empleado empleado = EmpleadoMapper.map(dto);
+
+        boolean existeUsuario = usuarioRepository.existsById(usuario.getIdUsuario());
+        if (existeUsuario) {
+            throw new ExisteEnBaseDeDatosExcepcion("Este usuario ya existe.");
+        }
+
+        usuario.setEmpleado(empleado);
+        usuarioRepository.save(usuario);
+        empleadoRepository.save(empleado);
+
+        return usuario;
+    }
+
+
+
 }

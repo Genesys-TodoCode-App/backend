@@ -1,9 +1,14 @@
 package entradasApp.services;
 
+import entradasApp.dtos.CompradorDTO;
+import entradasApp.dtos.VentaEntradaDTO;
+import entradasApp.entities.Comprador;
 import entradasApp.entities.VentaEntrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.VentaEntradaRepository;
+import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -18,21 +23,26 @@ public class VentaEntradaService {
 
     @Autowired
     private final VentaEntradaRepository ventaEntradaRepository;
+    private final ModelMapper modelMapper;
 
     /**
      * Constructor de la clase VentaEntradaService
+     *
      * @param ventaEntradaRepository Repositorio de ventas de entradas.
+     * @param modelMapper
      */
-    public VentaEntradaService(VentaEntradaRepository ventaEntradaRepository) {
+    public VentaEntradaService(VentaEntradaRepository ventaEntradaRepository, ModelMapper modelMapper) {
         this.ventaEntradaRepository = ventaEntradaRepository;
+        this.modelMapper = modelMapper;
     }
 
 
     /**
      * Crea una nueva venta de entrada.
-     * @param ventaEntrada La venta de entrada a crear.
+     * @param ventaEntradaDTO La venta de entrada a crear.
      */
-    public void create(VentaEntrada ventaEntrada) {
+    public void create(@Valid VentaEntradaDTO ventaEntradaDTO) {
+        VentaEntrada ventaEntrada = modelMapper.map(ventaEntradaDTO, VentaEntrada.class);
         boolean existeVentaEntrada = ventaEntradaRepository.existsById(ventaEntrada.getIdVentaEntrada());
         if (existeVentaEntrada) {
             throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta venta de entradas en la base de datos");
@@ -46,9 +56,19 @@ public class VentaEntradaService {
      * @param pageable Parámetro de paginación.
      * @return Una lista de ventas de entradas.
      */
-    public Page<VentaEntrada> findAll(Pageable pageable) {
-        return ventaEntradaRepository.findAll(pageable);
+    public Page<VentaEntradaDTO> findAll(Pageable pageable) {
+        Page<VentaEntrada> ventasEntradasPage = ventaEntradaRepository.findAll(pageable);
+        return ventasEntradasPage.map((element) -> {
+            VentaEntradaDTO ventaEntradaDTO = modelMapper.map(element, VentaEntradaDTO.class);
+            ventaEntradaDTO.setIdVentaEntradas(element.getIdVentaEntrada());
+
+            CompradorDTO compradorDTO = modelMapper.map(element.getCompradorEntrada(), CompradorDTO.class);
+            compradorDTO.setIdComprador(element.getCompradorEntrada().getIdComprador()); // Asignar el ID del comprador al DTO
+            ventaEntradaDTO.setCompradorEntrada(compradorDTO);
+            return ventaEntradaDTO;
+        });
     }
+
 
 
     /**
@@ -57,29 +77,31 @@ public class VentaEntradaService {
      * @return La venta de entrada encontrada.
      * @throws NoEncontradoExcepcion Si no se encuentra la venta de entrada.
      */
-    public VentaEntrada findById(Long id) {
-        return ventaEntradaRepository.findById(id).orElseThrow(() -> new NoEncontradoExcepcion("La venta de entrada con el id: " + id + " no ha sido encontrada"));
+    public VentaEntradaDTO findById(Long id) {
+        VentaEntrada ventaEntrada = ventaEntradaRepository.findById(id)
+            .orElseThrow(() -> new NoEncontradoExcepcion("La venta de entrada con el id: " + id + " no ha sido encontrada"));
+        return modelMapper.map(ventaEntrada, VentaEntradaDTO.class);
     }
 
 
     /**
      * Actualiza una venta de entrada existente.
      * @param id El ID de la venta de entrada a actualizar.
-     * @param ventaEntrada La venta de entrada con los nuevos datos.
+     * @param ventaEntradaDTO La venta de entrada con los nuevos datos.
      * @return La venta de entrada actualizada.
      * @throws NoEncontradoExcepcion Si no se encuentra la venta de entrada.
      */
-    public VentaEntrada update(Long id, VentaEntrada ventaEntrada) {
-        VentaEntrada ventaEntradaExistente = ventaEntradaRepository
-            .findById(id)
+    public VentaEntradaDTO update(Long id, VentaEntradaDTO ventaEntradaDTO) {
+        VentaEntrada ventaEntradaExistente = ventaEntradaRepository.findById(id)
             .orElseThrow(() -> new NoEncontradoExcepcion("La venta de entradas con el id: " + id + " no ha sido encontrada"));
-        ventaEntradaExistente.setIdVentaEntrada(ventaEntrada.getIdVentaEntrada());
-        ventaEntradaExistente.setEntrada(ventaEntrada.getEntrada());
-        ventaEntradaExistente.setMontoVenta(ventaEntrada.getMontoVenta());
-        ventaEntradaExistente.setFechaVenta(ventaEntrada.getFechaVenta());
 
-        return ventaEntradaRepository.save(ventaEntradaExistente);
+        Comprador comprador = modelMapper.map(ventaEntradaDTO.getCompradorEntrada(), Comprador.class);
+        ventaEntradaExistente.setCompradorEntrada(comprador);
+
+        VentaEntrada ventaEntradaActualizada = ventaEntradaRepository.save(ventaEntradaExistente);
+        return modelMapper.map(ventaEntradaActualizada, VentaEntradaDTO.class);
     }
+
 
 
     /**

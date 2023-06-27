@@ -1,5 +1,6 @@
 package entradasApp.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import entradasApp.entities.RolEmpleado;
 import lombok.AllArgsConstructor;
@@ -41,9 +42,8 @@ public class EmpleadoDTO {
     @JsonProperty("Rol empleado")
     private RolEmpleado rolEmpleado;
 
-
-    @JsonProperty("Juegos")
-    private List<JuegoDTO> juegos;
+    @JsonProperty("Id usuario")
+    private Long idUsuario;
 
 
     /**
