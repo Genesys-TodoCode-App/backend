@@ -1,5 +1,6 @@
 package entradasApp.controller;
 
+import entradasApp.dtos.EntradaDTO;
 import entradasApp.entities.Entrada;
 import entradasApp.services.EntradaService;
 import jakarta.validation.Valid;
@@ -58,12 +59,12 @@ public class EntradaController {
      * @return ResponseEntity con las entradas encontradas
      */
     @GetMapping
-    public ResponseEntity<Page<Entrada>> findAll(
+    public ResponseEntity<Page<EntradaDTO>> findAll(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "20") int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Entrada> entradas = entradaService.findAll(pageable);
+        Page<EntradaDTO> entradas = entradaService.findAll(pageable);
         return ResponseEntity.ok(entradas);
     }
 

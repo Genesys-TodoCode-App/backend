@@ -1,5 +1,6 @@
 package entradasApp.services;
 
+import entradasApp.dtos.EntradaDTO;
 import entradasApp.entities.Entrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
@@ -55,9 +56,16 @@ public class EntradaService {
      * @param pageable Paginación de la consulta.
      * @return Una lista de entradas.
      */
-    public Page<Entrada> findAll(Pageable pageable) {
-        return entradaRepository.findAll(pageable);
+    public Page<EntradaDTO> findAll(Pageable pageable) {
+        Page<Entrada> entradaPage = entradaRepository.findAll(pageable);
+        return entradaPage.map((entrada) -> {
+            EntradaDTO entradaDTO = modelMapper.map(entrada, EntradaDTO.class);
+            entradaDTO.setIdJuegos(entrada.getJuego() != null ? entrada.getJuego().getIdJuego() : null);
+            entradaDTO.setNombreJuegos(entrada.getJuego() != null ? entrada.getJuego().getNombreJuego() : null);
+            return entradaDTO;
+        });
     }
+
 
 
     /**
