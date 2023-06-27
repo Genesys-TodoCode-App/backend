@@ -46,6 +46,7 @@ public class EmpleadoDTO {
     private Long idUsuario;
 
 
+
     /**
      * Constructor de EmpleadoDTO con parámetros específicos.
      *

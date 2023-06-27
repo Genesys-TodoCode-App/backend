@@ -28,12 +28,10 @@ public class HorarioJuego {
 
     @Column(name = "hora_inicio")
     @JsonProperty("Hora Inicio")
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime horaInicio;
 
     @Column(name = "hora_fin")
     @JsonProperty("Hora Fin")
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime HoraFin;
 
 }

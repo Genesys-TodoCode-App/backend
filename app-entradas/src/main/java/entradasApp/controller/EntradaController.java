@@ -43,7 +43,7 @@ public class EntradaController {
      * @return ResponseEntity con el estado HTTP de la respuesta
      */
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody Entrada entrada) {
+    public ResponseEntity<Void> create(@Valid @RequestBody EntradaDTO entrada) {
         entradaService.create(entrada);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

@@ -40,13 +40,14 @@ public class EntradaService {
     /**
      * Crea una nueva entrada.
      * Si la entrada ya existe en la base de datos, se lanza una ExisteEnBaseDeDatosExcepcion.
-     * @param entrada La entrada a crear.
+     * @param entradaDTO La entrada a crear.
      */
-    public void create(Entrada entrada) {
-        boolean existeEntrada = entradaRepository.existsById(entrada.getIdEntrada());
-        if (existeEntrada) {
-            throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta entrada en la base de datos");
+    public void create(EntradaDTO entradaDTO) {
+        boolean existeEntrada = entradaRepository.existsById(entradaDTO.getIdEntrada());
+        if(existeEntrada) {
+            throw new ExisteEnBaseDeDatosExcepcion("La entrada con el Id: " + entradaDTO.getIdEntrada() + " ya existe en la base de datos");
         }
+        Entrada entrada = modelMapper.map(entradaDTO, Entrada.class);
         entradaRepository.save(entrada);
     }
 

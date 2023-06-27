@@ -46,6 +46,7 @@ public class JuegoService {
         if (existeJuego) {
             throw new ExisteEnBaseDeDatosExcepcion("Ya existe en base de datos este juego");
         }
+        juegoRepository.save(juego);
     }
 
 

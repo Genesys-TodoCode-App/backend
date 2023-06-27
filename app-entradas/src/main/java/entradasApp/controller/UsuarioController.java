@@ -1,7 +1,5 @@
 package entradasApp.controller;
 
-import entradasApp.dtos.UsuarioEmpleadoDTO;
-import entradasApp.entities.Empleado;
 import entradasApp.entities.Usuario;
 import entradasApp.services.UsuarioService;
 import jakarta.validation.Valid;
@@ -100,9 +98,4 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/empleado")
-    public ResponseEntity<Usuario> createUsuarioYEmpleado(@RequestBody UsuarioEmpleadoDTO usuarioEmpleadoDTO){
-        Usuario nuevoUsuario = usuarioService.createUsuarioYEmpleado(usuarioEmpleadoDTO);
-        return ResponseEntity.ok(nuevoUsuario);
-    }
 }

@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+
 
 /**
  * Clase entrada que representa una entrada en la base de datos.
@@ -19,8 +21,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "entradas")
-public class Entrada {
-
+public class Entrada implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,12 +32,11 @@ public class Entrada {
 
     @Column(name = "cod_ident_entrada", length = 20)
     @JsonProperty("Codigo Identificacion Entrada")
-    private String codigoIdentificacionEntrada;
+    private String CodigoIdentificacionEntrada;
 
 
     @Column(name = "fecha_hora_utilizacion")
     @JsonProperty("Fecha y Hora Utilizacion")
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime fechaHoraUtilizacion;
 
 
@@ -48,6 +48,5 @@ public class Entrada {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_juegos")
     private Juego juego;
-
 
 }
