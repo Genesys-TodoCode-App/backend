@@ -4,6 +4,7 @@ import entradasApp.dtos.EmpleadoDTO;
 import entradasApp.entities.Empleado;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
+import entradasApp.mapper.GenericModelMapper;
 import entradasApp.repositories.EmpleadoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,17 +20,18 @@ import java.util.List;
 public class EmpleadoService {
 
     private final EmpleadoRepository empleadoRepository;
-    private final ModelMapper modelMapper;
+    private final GenericModelMapper mapper;
 
     /**
      * Constructor de la clase EmpleadoService.
      *
      * @param empleadoRepository Repositorio de empleados.
-     * @param modelMapper        Mapper de entidades a DTOs.
+     * @param mapper mapeador para DTO
      */
-    public EmpleadoService(EmpleadoRepository empleadoRepository, ModelMapper modelMapper) {
+    public EmpleadoService(EmpleadoRepository empleadoRepository, GenericModelMapper mapper) {
         this.empleadoRepository = empleadoRepository;
-        this.modelMapper = modelMapper;
+        this.mapper = mapper;
+
     }
 
 
@@ -57,7 +59,7 @@ public class EmpleadoService {
         Iterable<Empleado> empleados = empleadoRepository.findAll();
         List<EmpleadoDTO> empleadosDTO = new ArrayList<>();
         for (Empleado empleado : empleados) {
-            EmpleadoDTO empleadoDTO = modelMapper.map(empleado, EmpleadoDTO.class);
+            EmpleadoDTO empleadoDTO = mapper.mapToEmpleadoDTO(empleado);
             try {
                 empleadoDTO.setRolEmpleado(empleado.getUsuario().getRolEmpleado());
                 empleadoDTO.setIdEmpleado(empleado.getIdEmpleado());
@@ -82,7 +84,7 @@ public class EmpleadoService {
     public EmpleadoDTO findById(Long id) {
         Empleado empleado = empleadoRepository.findById(id).orElse(null);
         if (empleado != null) {
-            EmpleadoDTO empleadoDTO = modelMapper.map(empleado, EmpleadoDTO.class);
+            EmpleadoDTO empleadoDTO = mapper.mapToEmpleadoDTO(empleado);
             empleadoDTO.setRolEmpleado(empleado.getUsuario().getRolEmpleado());// a ver si se agrega el rol
             return empleadoDTO;
         } else {

@@ -44,7 +44,7 @@ public class EmpleadoDTO {
     private RolEmpleado rolEmpleado;
 
     @JsonProperty("Juegos asignados")
-    private List<JuegoDTO> juegosAsignados;
+    private List<JuegoDTO> juegos;
 
     /**
      * Constructor de EmpleadoDTO con parámetros específicos.

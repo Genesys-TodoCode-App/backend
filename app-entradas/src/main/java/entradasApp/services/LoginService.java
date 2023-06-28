@@ -52,7 +52,7 @@ public class LoginService {
                 String nombreUsuarioCookie = existeUsuario.getNombreUsuario();
                 int validezCookieEnSegundos = 86_000;
 
-                UsuarioLoginDTO usuarioLoginDTO = mapper.getModelMapper().map(existeUsuario, UsuarioLoginDTO.class);
+                UsuarioLoginDTO usuarioLoginDTO = mapper.mapToUsuarioLoginDTO(existeUsuario);
                 usuarioLoginDTO.setTokenDeSesion(tokenSesion);
                 usuarioLoginDTO.setMensaje("Password correcto");
 

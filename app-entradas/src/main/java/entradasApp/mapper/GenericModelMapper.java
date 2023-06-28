@@ -1,40 +1,35 @@
 package entradasApp.mapper;
 
+
+import entradasApp.dtos.EmpleadoDTO;
 import entradasApp.dtos.UsuarioLoginDTO;
+import entradasApp.entities.Empleado;
 import entradasApp.entities.Usuario;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 
 @Component
 public class GenericModelMapper {
+    
+    private final ModelMapper mapper = new ModelMapper();
+    
+    private static  GenericModelMapper instance;    
 
-    private ModelMapper modelMapper;
-
-    public void ModelMapperConfig() {
-        this.modelMapper = new ModelMapper();
-        configureMappings();
+    private GenericModelMapper() {
     }
-
-    public GenericModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    
+    public static GenericModelMapper singleInstance(){
+        if (instance == null){
+            instance = new GenericModelMapper();
+        }
+        return instance;
     }
+    
+    public UsuarioLoginDTO mapToUsuarioLoginDTO(Usuario usuario){
+        return mapper.map(usuario, UsuarioLoginDTO.class);}
 
-    public ModelMapper getModelMapper() {
-        return modelMapper;
+    public EmpleadoDTO mapToEmpleadoDTO(Empleado empleado){
+        return mapper.map(empleado, EmpleadoDTO.class);
     }
-
-    private void configureMappings() {
-        modelMapper.addMappings(new PropertyMap<Usuario, UsuarioLoginDTO>() {
-            @Override
-            protected void configure() {
-                map().setIdEmpleado(source.getEmpleado().getIdEmpleado());
-                map().setNombreUsuario(source.getNombreUsuario());
-                map().setRolEmpleado(source.getRolEmpleado());
-            }
-        });
-
-
-    }
-}
+};
 
