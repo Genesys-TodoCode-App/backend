@@ -1,9 +1,7 @@
 package entradasApp.services;
 
 import entradasApp.dtos.EmpleadoDTO;
-import entradasApp.dtos.JuegoDTO;
 import entradasApp.entities.Empleado;
-import entradasApp.entities.Juego;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.EmpleadoRepository;
@@ -63,6 +61,7 @@ public class EmpleadoService {
             try {
                 empleadoDTO.setRolEmpleado(empleado.getUsuario().getRolEmpleado());
                 empleadoDTO.setIdEmpleado(empleado.getIdEmpleado());
+                empleadoDTO.setJuegosAsignados(empleado.getJuegos());
             } catch (NullPointerException e) {
                 empleadoDTO.setRolEmpleado(null);
             }

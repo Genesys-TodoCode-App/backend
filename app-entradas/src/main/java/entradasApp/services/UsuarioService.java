@@ -20,7 +20,9 @@ public class UsuarioService {
     @Autowired
     private final UsuarioRepository usuarioRepository;
 
+    @Autowired
     private final EmpleadoRepository  empleadoRepository;
+
 
     /**
      * Constructor de la clase UsuarioService

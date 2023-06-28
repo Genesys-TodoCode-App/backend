@@ -18,8 +18,10 @@ public class UsuarioLoginDTO {
     private Long idUsuario;
 
     @JsonProperty("Usuario empleado")
-    private String usuarioEmpleado;
+    private String nombreUsuario;
 
+    @JsonProperty("Id empleado")
+    private Long idEmpleado;
 
     @JsonProperty("Rol empleado")
     private RolEmpleado rolEmpleado;

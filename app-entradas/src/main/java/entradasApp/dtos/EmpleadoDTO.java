@@ -2,6 +2,7 @@ package entradasApp.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import entradasApp.entities.Juego;
 import entradasApp.entities.RolEmpleado;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,10 +43,8 @@ public class EmpleadoDTO {
     @JsonProperty("Rol empleado")
     private RolEmpleado rolEmpleado;
 
-    @JsonProperty("Id usuario")
-    private Long idUsuario;
-
-
+    @JsonProperty("Juegos asignados")
+    private List<JuegoDTO> juegosAsignados;
 
     /**
      * Constructor de EmpleadoDTO con parámetros específicos.
@@ -55,5 +54,8 @@ public class EmpleadoDTO {
      * @param string              Un parámetro adicional de tipo String.
      */
     public EmpleadoDTO(String usuarioEmpleado, String contraseniaEmpleado, String string) {
+    }
+
+    public <V> void setJuegosAsignados(V v) {
     }
 }

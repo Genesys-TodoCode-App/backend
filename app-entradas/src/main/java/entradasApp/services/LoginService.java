@@ -2,6 +2,7 @@ package entradasApp.services;
 
 import entradasApp.dtos.UsuarioLoginDTO;
 import entradasApp.entities.Usuario;
+import entradasApp.mapper.GenericModelMapper;
 import entradasApp.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,15 +20,19 @@ import java.util.UUID;
 public class LoginService {
 
     private UsuarioRepository usuarioRepository;
+    private GenericModelMapper mapper;
 
 
     /**
      * Constructor de la clase LoginService.
+     *
      * @param usuarioRepository Repositorio de usuarios.
+     * @param mapper
      */
     @Autowired
-    public LoginService(UsuarioRepository usuarioRepository) {
+    public LoginService(UsuarioRepository usuarioRepository, GenericModelMapper mapper) {
         this.usuarioRepository = usuarioRepository;
+        this.mapper = mapper;
     }
 
 
@@ -47,9 +52,7 @@ public class LoginService {
                 String nombreUsuarioCookie = existeUsuario.getNombreUsuario();
                 int validezCookieEnSegundos = 86_000;
 
-                UsuarioLoginDTO usuarioLoginDTO = new UsuarioLoginDTO();
-                usuarioLoginDTO.setUsuarioEmpleado(existeUsuario.getNombreUsuario());
-                usuarioLoginDTO.setRolEmpleado(existeUsuario.getRolEmpleado());
+                UsuarioLoginDTO usuarioLoginDTO = mapper.getModelMapper().map(existeUsuario, UsuarioLoginDTO.class);
                 usuarioLoginDTO.setTokenDeSesion(tokenSesion);
                 usuarioLoginDTO.setMensaje("Password correcto");
 
