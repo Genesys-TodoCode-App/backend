@@ -21,6 +21,7 @@ public class GenericModelMapper {
     private static  GenericModelMapper instance;    
 
     private GenericModelMapper() {
+        configureVentaEntradaDTO();
     }
 
     /**
@@ -116,5 +117,16 @@ public class GenericModelMapper {
     public Entrada reverseMapToEntrada(EntradaDTO entradaDTO) {
         return mapper.map(entradaDTO, Entrada.class);
     }
+    private void configureVentaEntradaDTO() {
+        mapper.addMappings(new PropertyMap<VentaEntrada, VentaEntradaDTO>() {
+            @Override
+            protected void configure() {
+                map().setIdEntrada(source.getEntrada().getIdEntrada());
+            }
+        });
+    }
+
+
+
 };
 

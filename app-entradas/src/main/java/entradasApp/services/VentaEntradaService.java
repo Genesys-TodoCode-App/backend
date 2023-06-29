@@ -61,6 +61,7 @@ public class VentaEntradaService {
         return ventasEntradasPage.map((element) -> {
             VentaEntradaDTO ventaEntradaDTO = modelMapper.map(element, VentaEntradaDTO.class);
             ventaEntradaDTO.setIdVentaEntrada(element.getIdVentaEntrada());
+            ventaEntradaDTO.getIdEntrada();
 
             CompradorDTO compradorDTO = modelMapper.map(element.getCompradorEntrada(), CompradorDTO.class);
             compradorDTO.setIdComprador(element.getCompradorEntrada().getIdComprador()); // Asignar el ID del comprador al DTO
