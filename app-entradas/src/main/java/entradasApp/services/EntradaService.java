@@ -4,14 +4,15 @@ import entradasApp.dtos.EntradaDTO;
 import entradasApp.entities.Entrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
+import entradasApp.mapper.GenericModelMapper;
 import entradasApp.repositories.EntradaRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 
 
 /**
@@ -22,19 +23,19 @@ public class EntradaService {
 
 
     private final EntradaRepository entradaRepository;
-    private final ModelMapper modelMapper;
+    private final GenericModelMapper mapper;
 
 
     /**
      * Constructor de la clase EntradaService.
      *
      * @param entradaRepository repositorio de entradas.
-     * @param modelMapper
+     * @param mapper trae una configuración de ModelMapper
      */
     @Autowired
-    public EntradaService(EntradaRepository entradaRepository, ModelMapper modelMapper) {
+    public EntradaService(EntradaRepository entradaRepository,GenericModelMapper mapper) {
         this.entradaRepository = entradaRepository;
-        this.modelMapper = modelMapper;
+        this.mapper = mapper;
     }
 
     /**
@@ -47,7 +48,8 @@ public class EntradaService {
         if(existeEntrada) {
             throw new ExisteEnBaseDeDatosExcepcion("La entrada con el Id: " + entradaDTO.getIdEntrada() + " ya existe en la base de datos");
         }
-        Entrada entrada = modelMapper.map(entradaDTO, Entrada.class);
+        Entrada entrada = mapper.reverseMapToEntrada(entradaDTO);
+        generarCodigoIdentificacionEntrada(entrada);
         entradaRepository.save(entrada);
     }
 
@@ -60,9 +62,10 @@ public class EntradaService {
     public Page<EntradaDTO> findAll(Pageable pageable) {
         Page<Entrada> entradaPage = entradaRepository.findAll(pageable);
         return entradaPage.map((entrada) -> {
-            EntradaDTO entradaDTO = modelMapper.map(entrada, EntradaDTO.class);
+            EntradaDTO entradaDTO = mapper.mapToEntradaDTO(entrada);
             entradaDTO.setIdJuegos(entrada.getJuego() != null ? entrada.getJuego().getIdJuego() : null);
             entradaDTO.setNombreJuegos(entrada.getJuego() != null ? entrada.getJuego().getNombreJuego() : null);
+
             return entradaDTO;
         });
     }
@@ -79,7 +82,7 @@ public class EntradaService {
     public EntradaDTO findById(Long id) {
         Entrada entrada = entradaRepository.findById(id).orElse(null);
         if (entrada != null) {
-            EntradaDTO entradaDTO = modelMapper.map(entrada, EntradaDTO.class);
+            EntradaDTO entradaDTO = mapper.mapToEntradaDTO(entrada);
             entradaDTO.setIdJuegos(entrada.getJuego() != null ? entrada.getJuego().getIdJuego() : null);
             entradaDTO.setNombreJuegos(entrada.getJuego() != null ? entrada.getJuego().getNombreJuego() : null);
             return entradaDTO;
@@ -118,5 +121,11 @@ public class EntradaService {
         } catch (EmptyResultDataAccessException e) {
             throw new RuntimeException("Ocurrió un error al eliminar la entrada");
         }
+    }
+
+    public void generarCodigoIdentificacionEntrada(Entrada entrada) {
+        String uuid = UUID.randomUUID().toString();
+        String codigoIdentificacion = "CUE-" + uuid.substring(0, Math.min(uuid.length(), 24)) + "-TODOCODEPARK";
+        entrada.setCodigoIdentificacionEntrada(codigoIdentificacion);
     }
 }

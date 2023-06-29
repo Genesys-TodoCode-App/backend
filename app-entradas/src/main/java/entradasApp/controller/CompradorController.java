@@ -1,9 +1,14 @@
 package entradasApp.controller;
 
+import entradasApp.dtos.CompradorDTO;
 import entradasApp.entities.Comprador;
+import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.services.CompradorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,9 +53,13 @@ public class CompradorController {
      * @return ResponseEntity con el estado HTTP 200 (OK) y la lista de compradores si se encuentran compradores.
      */
     @GetMapping
-    public ResponseEntity<Iterable<Comprador>> findAll() {
-        Iterable<Comprador> listaDeCompradores = compradorService.findAll();
-        return ResponseEntity.ok(listaDeCompradores);
+    public ResponseEntity<Page<CompradorDTO>> findAll(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CompradorDTO> compradores = compradorService.findAll(pageable);
+        return ResponseEntity.ok(compradores);
     }
 
 
@@ -76,9 +85,19 @@ public class CompradorController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Comprador> update(@Valid @PathVariable Long id, @RequestBody Comprador comprador) {
-        Comprador compradorexistente = compradorService.findById(id);
-        return ResponseEntity.ok(compradorexistente);
+        Comprador compradorExistente = compradorService.findById(id);
+        if (compradorExistente != null) {
+            try {
+                compradorService.update(id, comprador);
+            } catch (NoEncontradoExcepcion e) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(compradorExistente);
     }
+
 
 
     /**

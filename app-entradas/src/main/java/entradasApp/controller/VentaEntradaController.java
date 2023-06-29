@@ -1,7 +1,6 @@
 package entradasApp.controller;
 
 import entradasApp.dtos.VentaEntradaDTO;
-import entradasApp.entities.VentaEntrada;
 import entradasApp.services.VentaEntradaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,6 +2,8 @@ package entradasApp.repositories;
 
 import entradasApp.entities.Comprador;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -31,4 +33,5 @@ public interface CompradorRepository extends CrudRepository<Comprador, Long> {
         "ORDER BY COUNT(*) DESC")
     List<Comprador> obtenerCompradorConMasEntradas(@Param("mes") int mes, @Param("anio") int anio);
 
+    Page<Comprador> findAll(Pageable pageable);
 }

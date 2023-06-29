@@ -111,6 +111,9 @@ public class JuegoService {
         juego.setPrecioJuego(null);
         juego.setCobroPaseOro(false);
         juego.setNombreJuego(null);
+        juego.setRutaALaFoto(null);
+        juego.setDescripciones(null);
+        juego.setHorarios(null);
         juegoRepository.save(juego);
     }
 }

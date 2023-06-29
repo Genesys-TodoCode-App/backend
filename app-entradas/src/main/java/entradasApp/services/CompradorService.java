@@ -1,10 +1,15 @@
 package entradasApp.services;
 
+import entradasApp.dtos.CompradorDTO;
 import entradasApp.entities.Comprador;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
+import entradasApp.mapper.GenericModelMapper;
 import entradasApp.repositories.CompradorRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,12 +22,20 @@ public class CompradorService {
     @Autowired
     private final CompradorRepository compradorRepository;
 
+    private final GenericModelMapper mapper;
+    private final ModelMapper modelMapper;
+
     /**
      * Constructor de la clase CompradorService.
+     *
      * @param compradorRepository Repositorio de compradores.
+     * @param mapper
      */
-    public CompradorService(CompradorRepository compradorRepository) {
+    public CompradorService(CompradorRepository compradorRepository, GenericModelMapper mapper,
+                            ModelMapper modelMapper) {
         this.compradorRepository = compradorRepository;
+        this.mapper = mapper;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -44,8 +57,9 @@ public class CompradorService {
      * Obtiene todos los compradores.
      * @return Una lista de todos los compradores.
      */
-    public Iterable<Comprador> findAll() {
-        return compradorRepository.findAll();
+    public Page<CompradorDTO> findAll(Pageable pageable) {
+        Page<Comprador> compradorPage = compradorRepository.findAll(pageable);
+        return compradorPage.map((element) -> modelMapper.map(element, CompradorDTO.class));
     }
 
 

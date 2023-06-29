@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class VentaEntradaDTO {
 
     @JsonProperty("Id Venta Entradas")
-    private Long idVentaEntradas;
+    private Long idVentaEntrada;
 
     @JsonProperty("Monto Venta")
     private BigDecimal montoVenta;

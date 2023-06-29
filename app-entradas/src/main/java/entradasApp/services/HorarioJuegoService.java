@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 
 /**
  * Clase de servicio que maneja las operaciones relacionadas con los horarios de juego.
@@ -89,7 +92,13 @@ public class HorarioJuegoService {
      */
     public void deleteById(Long id) {
         try {
-            horarioJuegoRepository.deleteById(id);
+           Optional<HorarioJuego> horarioABorrar = horarioJuegoRepository.findById(id);
+            if (horarioABorrar.isPresent()){
+                HorarioJuego horarioJuego = horarioABorrar.get();
+                horarioJuego.setHoraInicio(null);
+                horarioJuego.setHoraFin(null);
+                horarioJuegoRepository.save(horarioJuego);
+            }
         } catch (EmptyResultDataAccessException e) {
             throw new RuntimeException(("Ocurrió un error al eliminar el horario del juego"));
         }

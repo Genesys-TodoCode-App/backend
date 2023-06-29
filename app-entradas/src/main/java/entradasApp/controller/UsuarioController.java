@@ -1,6 +1,7 @@
 package entradasApp.controller;
 
 import entradasApp.entities.Usuario;
+import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class UsuarioController {
      * @return ResponseEntity con estado HTTP 201 (CREATED) si se crea el usuario correctamente.
      */
     @PostMapping
-    public ResponseEntity<Usuario> create(@Valid @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario) {
         usuarioService.create(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -67,10 +68,17 @@ public class UsuarioController {
      * @return ResponseEntity con el objeto Usuario existente en el cuerpo de la respuesta.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> update(@Valid @PathVariable Long id, @RequestBody Usuario usuario) {
-        Usuario usuarioExistente = usuarioService.findById(id);
-        return ResponseEntity.ok(usuarioExistente);
+    public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario usuario) {
+        try {
+            usuarioService.update(id, usuario);
+            Usuario usuarioActualizado = usuarioService.findById(id);
+            return ResponseEntity.ok(usuarioActualizado);
+        } catch (NoEncontradoExcepcion e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
+
+
 
 
     /**

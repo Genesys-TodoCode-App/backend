@@ -1,6 +1,7 @@
 package entradasApp.controller;
 
 import entradasApp.entities.HorarioJuego;
+import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.services.HorarioJuegoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,16 +60,36 @@ public class HorarioJuegoController {
         return ResponseEntity.ok(listaHorarioJuegos);
     }
 
+    /**
+     * Método para obtener in juego con su Id.
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<HorarioJuego> findById(@PathVariable Long id){
+        HorarioJuego horarioJuego = horarioJuegoService.findById(id);
+        return ResponseEntity.ok(horarioJuego);
+    }
+
 
     /**
-     * Método para buscar un horario de juego por su ID.
-     *
-     * @param id El ID del horario de juego a buscar.
-     * @return ResponseEntity con el objeto HorarioJuego encontrado en el cuerpo de la respuesta.
+     * Método para actualizar datos del Horario de los Juegos
+     * @param id
+     * @param horario
+     * @return
      */
     @PutMapping("/{id}")
-    public ResponseEntity<HorarioJuego> findById(@PathVariable Long id) {
+    public ResponseEntity<HorarioJuego> update(@PathVariable Long id, @RequestBody HorarioJuego horario) {
         HorarioJuego horarioJuego = horarioJuegoService.findById(id);
+        if (horarioJuego != null) {
+            try {
+                horarioJuegoService.update(id, horarioJuego);
+            } catch (NoEncontradoExcepcion e) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
         return ResponseEntity.ok(horarioJuego);
     }
 

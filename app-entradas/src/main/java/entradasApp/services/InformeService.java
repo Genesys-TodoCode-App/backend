@@ -7,6 +7,7 @@ import entradasApp.repositories.JuegoRepository;
 import entradasApp.repositories.VentaEntradaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -49,7 +50,7 @@ public class InformeService {
      * @param fecha La fecha para la cual se desea contar las entradas vendidas.
      * @return El número de entradas vendidas en la fecha especificada.
      */
-    public Integer countEntradasVendidasEnFecha(LocalDateTime fecha) {
+    public Integer countEntradasVendidasEnFecha(LocalDate fecha) {
         return ventaEntradaRepository.findCantidadEntradasVendidasPorFecha(fecha);
     }
 
@@ -60,7 +61,7 @@ public class InformeService {
      * @param fecha La fecha para la cual se desea contar las entradas vendidas.
      * @return El número de entradas vendidas para el juego y fecha especificados.
      */
-    public Integer countEntradasVendidasPorJuegoYFecha(Long idJuego, LocalDateTime fecha) {
+    public Integer countEntradasVendidasPorJuegoYFecha(Long idJuego, @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
         return ventaEntradaRepository.findCantidadEntradasVendidasPorJuegoYFecha(idJuego, fecha);
     }
 

@@ -1,6 +1,8 @@
 package entradasApp.repositories;
 
 import entradasApp.entities.Empleado;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,5 @@ public interface EmpleadoRepository extends CrudRepository<Empleado, Long> {
         "JOIN e.juegos j")
     List<Object[]> obtenerNombresyApellidosEmpleadosYJuegos();
 
+    Page<Empleado> findAll(Pageable pageable);
 }

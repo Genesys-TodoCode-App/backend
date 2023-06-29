@@ -27,7 +27,7 @@ public interface VentaEntradaRepository extends JpaRepository<VentaEntrada, Long
     @Query("SELECT COUNT(e) AS cantidadEntradasVendidas " +
         "FROM VentaEntrada e " +
         "WHERE FUNCTION('DATE', e.fechaVenta) = :fecha")
-    Integer findCantidadEntradasVendidasPorFecha(@Param("fecha") LocalDateTime fecha);
+    Integer findCantidadEntradasVendidasPorFecha(@Param("fecha") LocalDate fecha);
 
 
     /**
@@ -40,7 +40,7 @@ public interface VentaEntradaRepository extends JpaRepository<VentaEntrada, Long
         "FROM VentaEntrada v " +
         "WHERE v.entrada.juego.id = :juegoId " +
         "AND FUNCTION('DATE', v.fechaVenta) = :fecha")
-    Integer findCantidadEntradasVendidasPorJuegoYFecha(@Param("juegoId") Long juegoId, @Param("fecha") LocalDateTime fecha);
+    Integer findCantidadEntradasVendidasPorJuegoYFecha(@Param("juegoId") Long juegoId, @Param("fecha") LocalDate fecha);
 
 
     /**

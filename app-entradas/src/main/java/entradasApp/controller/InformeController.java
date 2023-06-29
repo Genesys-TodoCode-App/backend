@@ -3,6 +3,7 @@ package entradasApp.controller;
 import entradasApp.entities.Comprador;
 import entradasApp.services.InformeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,7 @@ public class InformeController {
      * @return El número de entradas vendidas en la fecha especificada.
      */
     @GetMapping("/cantidad-entradas-vendidas-en-fecha")
-    public Integer countEntradasVendidasEnFecha(@RequestParam("fecha") LocalDateTime fecha) {
+    public Integer countEntradasVendidasEnFecha(@RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
         return informeService.countEntradasVendidasEnFecha(fecha);
     }
 
@@ -55,7 +56,7 @@ public class InformeController {
      * @return El número de entradas vendidas para el juego y fecha especificados.
      */
     @GetMapping("/cantidad-entradas-vendidas-por-juego-y-fecha")
-    public Integer countEntradasVendidasPorJuegoYFecha(@RequestParam("juego") Long idJuego, @RequestParam("fecha") LocalDateTime fecha) {
+    public Integer countEntradasVendidasPorJuegoYFecha(@RequestParam("juego") Long idJuego, @RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
         return informeService.countEntradasVendidasPorJuegoYFecha(idJuego, fecha);
     }
 
@@ -80,7 +81,7 @@ public class InformeController {
      * @return La suma del monto de ventas para la fecha especificada.
      */
     @GetMapping("/sumatoria-monto-venta-por-dia")
-    public BigDecimal sumMontoVentaPorFecha(@RequestParam("fecha") LocalDate fecha) {
+    public BigDecimal sumMontoVentaPorFecha(@RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
         return informeService.getTotalVentasPorFecha(fecha);
     }
 

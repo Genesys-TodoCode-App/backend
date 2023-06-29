@@ -8,6 +8,8 @@ import entradasApp.mapper.GenericModelMapper;
 import entradasApp.repositories.EmpleadoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class EmpleadoService {
 
     private final EmpleadoRepository empleadoRepository;
     private final GenericModelMapper mapper;
+    private final ModelMapper modelMapper;
 
     /**
      * Constructor de la clase EmpleadoService.
@@ -28,10 +31,12 @@ public class EmpleadoService {
      * @param empleadoRepository Repositorio de empleados.
      * @param mapper mapeador para DTO
      */
-    public EmpleadoService(EmpleadoRepository empleadoRepository, GenericModelMapper mapper) {
+    public EmpleadoService(EmpleadoRepository empleadoRepository, GenericModelMapper mapper,
+                           ModelMapper modelMapper) {
         this.empleadoRepository = empleadoRepository;
         this.mapper = mapper;
 
+        this.modelMapper = modelMapper;
     }
 
 
@@ -55,22 +60,11 @@ public class EmpleadoService {
      * Como se debe asignar un usuario se agrega un try-catch para evitar una PointerNullException.
      * @return Una lista de EmpleadoDTO que representa a todos los empleados.
      */
-    public Iterable<EmpleadoDTO> findAll() {
-        Iterable<Empleado> empleados = empleadoRepository.findAll();
-        List<EmpleadoDTO> empleadosDTO = new ArrayList<>();
-        for (Empleado empleado : empleados) {
-            EmpleadoDTO empleadoDTO = mapper.mapToEmpleadoDTO(empleado);
-            try {
-                empleadoDTO.setRolEmpleado(empleado.getUsuario().getRolEmpleado());
-                empleadoDTO.setIdEmpleado(empleado.getIdEmpleado());
-                empleadoDTO.setJuegosAsignados(empleado.getJuegos());
-            } catch (NullPointerException e) {
-                empleadoDTO.setRolEmpleado(null);
-            }
-            empleadosDTO.add(empleadoDTO);
-        }
-        return empleadosDTO;
+    public Page<EmpleadoDTO> findAll(Pageable pageable) {
+        Page<Empleado> empleadosPage = empleadoRepository.findAll(pageable);
+        return empleadosPage.map(mapper::mapToEmpleadoDTO);
     }
+
 
 
 

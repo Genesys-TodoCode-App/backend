@@ -30,7 +30,7 @@ public class Entrada implements Serializable {
     private Long idEntrada;
 
 
-    @Column(name = "cod_ident_entrada", length = 20)
+    @Column(name = "cod_ident_entrada", length = 50)
     @JsonProperty("Codigo Identificacion Entrada")
     private String CodigoIdentificacionEntrada;
 
@@ -48,5 +48,6 @@ public class Entrada implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_juegos")
     private Juego juego;
+
 
 }

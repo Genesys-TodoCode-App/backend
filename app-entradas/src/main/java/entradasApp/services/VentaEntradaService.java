@@ -60,7 +60,7 @@ public class VentaEntradaService {
         Page<VentaEntrada> ventasEntradasPage = ventaEntradaRepository.findAll(pageable);
         return ventasEntradasPage.map((element) -> {
             VentaEntradaDTO ventaEntradaDTO = modelMapper.map(element, VentaEntradaDTO.class);
-            ventaEntradaDTO.setIdVentaEntradas(element.getIdVentaEntrada());
+            ventaEntradaDTO.setIdVentaEntrada(element.getIdVentaEntrada());
 
             CompradorDTO compradorDTO = modelMapper.map(element.getCompradorEntrada(), CompradorDTO.class);
             compradorDTO.setIdComprador(element.getCompradorEntrada().getIdComprador()); // Asignar el ID del comprador al DTO
