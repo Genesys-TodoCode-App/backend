@@ -24,5 +24,10 @@ public interface EmpleadoRepository extends CrudRepository<Empleado, Long> {
         "JOIN e.juegos j")
     List<Object[]> obtenerNombresyApellidosEmpleadosYJuegos();
 
+    /**
+     * Obtiene todos los empleados paginados
+     * @param pageable Paginación
+     * @return Una lista de empleados
+     */
     Page<Empleado> findAll(Pageable pageable);
 }

@@ -28,7 +28,7 @@ public class JuegoService {
      * Constructor de la clase JuegoService
      *
      * @param juegoRepository El repositorio de juegos.
-     * @param modelMapper
+     * @param modelMapper El mapeador de objetos.
      */
     public JuegoService(JuegoRepository juegoRepository, ModelMapper modelMapper) {
         this.juegoRepository = juegoRepository;

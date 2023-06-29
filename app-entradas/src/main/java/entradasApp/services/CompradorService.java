@@ -28,7 +28,8 @@ public class CompradorService {
      * Constructor de la clase CompradorService.
      *
      * @param compradorRepository Repositorio de compradores.
-     * @param mapper
+     * @param mapper Mapper de entidades a DTOs.
+     * @param modelMapper Mapper de DTOs a entidades.
      */
     public CompradorService(CompradorRepository compradorRepository, GenericModelMapper mapper,
                             ModelMapper modelMapper) {
@@ -55,6 +56,7 @@ public class CompradorService {
     /**
      * Obtiene todos los compradores.
      * @return Una lista de todos los compradores.
+     * @param pageable Parámetro para paginar la lista de compradores.
      */
     public Page<CompradorDTO> findAll(Pageable pageable) {
         Page<Comprador> compradorPage = compradorRepository.findAll(pageable);

@@ -24,10 +24,9 @@ public class LoginService {
 
 
     /**
-     * Constructor de la clase LoginService.
-     *
-     * @param usuarioRepository Repositorio de usuarios.
-     * @param mapper
+     * Este método se encarga de registrarse y devolver un token de sesion y un nombre de usuario.
+     * @param usuarioRepository el repositorio de usuarios.
+     * @param mapper el mapper de entidades a DTOs.
      */
     @Autowired
     public LoginService(UsuarioRepository usuarioRepository, GenericModelMapper mapper) {

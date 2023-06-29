@@ -33,5 +33,10 @@ public interface CompradorRepository extends CrudRepository<Comprador, Long> {
         "ORDER BY COUNT(*) DESC")
     List<Comprador> obtenerCompradorConMasEntradas(@Param("mes") int mes, @Param("anio") int anio);
 
+    /**
+     * Obtiene una lista de compradores paginada
+     * @param pageable Parámetro para paginar
+     * @return Una lista de compradores paginada
+     */
     Page<Comprador> findAll(Pageable pageable);
 }

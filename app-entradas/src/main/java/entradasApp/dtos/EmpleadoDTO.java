@@ -56,6 +56,11 @@ public class EmpleadoDTO {
     public EmpleadoDTO(String usuarioEmpleado, String contraseniaEmpleado, String string) {
     }
 
+    /**
+     * Constructor de EmpleadoDTO con parámetros específicos.
+     * @param v Un parámetro adicional de tipo V.
+     * @param <V> El tipo de dato de V.
+     */
     public <V> void setJuegosAsignados(V v) {
     }
 }

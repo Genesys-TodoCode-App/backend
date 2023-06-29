@@ -33,6 +33,13 @@ public class UsuarioLoginDTO {
     private String mensaje;
 
 
+    /**
+     * Constructor de la clase UsuarioLoginDTO generico
+     * @param nombreUsuario nombre de usuario del empleado
+     * @param o objeto empleado
+     * @param o1 objeto empleado
+     * @param s cadena de texto
+     */
     public UsuarioLoginDTO(String nombreUsuario, Object o, Object o1, String s) {
     }
 }

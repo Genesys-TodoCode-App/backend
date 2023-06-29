@@ -25,7 +25,7 @@ public class EmpleadoService {
 
     /**
      * Constructor de la clase EmpleadoService.
-     *
+     * @param modelMapper mapeador de entidades
      * @param empleadoRepository Repositorio de empleados.
      * @param mapper mapeador para DTO
      */
@@ -56,6 +56,7 @@ public class EmpleadoService {
     /**
      * Obtiene todos los empleados y los devuelve como una lista de EmpleadoDTO.
      * Como se debe asignar un usuario se agrega un try-catch para evitar una PointerNullException.
+     * @param pageable Paginación.
      * @return Una lista de EmpleadoDTO que representa a todos los empleados.
      */
     public Page<EmpleadoDTO> findAll(Pageable pageable) {

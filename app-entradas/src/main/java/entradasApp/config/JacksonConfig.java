@@ -10,8 +10,15 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Clase de Configuración para la serialización y deserialización de objetos JSON
+ */
 @Configuration
 public class JacksonConfig {
+    /**
+     * Bean para configurar la serialización y deserialización de objetos JSON del formato Fecha
+     * @return builder de objetos JSON
+     */
     @Bean
     public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();

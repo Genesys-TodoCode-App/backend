@@ -28,7 +28,7 @@ public class UsuarioService {
      * Constructor de la clase UsuarioService
      *
      * @param usuarioRepository  Repositorio de usuarios.
-     * @param empleadoRepository
+     * @param empleadoRepository Repositorio de empleados.
      */
     public UsuarioService(UsuarioRepository usuarioRepository, EmpleadoRepository empleadoRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -39,6 +39,7 @@ public class UsuarioService {
     /**
      * Crea un nuevo usuario.
      * @param usuario El usuario a crear.
+     * @return El usuario creado.
      */
     public Usuario create(Usuario usuario) {
         boolean existeUsuario = usuarioRepository.existsById(usuario.getIdUsuario());

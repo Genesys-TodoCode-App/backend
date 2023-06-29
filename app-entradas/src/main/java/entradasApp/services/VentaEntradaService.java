@@ -29,7 +29,7 @@ public class VentaEntradaService {
      * Constructor de la clase VentaEntradaService
      *
      * @param ventaEntradaRepository Repositorio de ventas de entradas.
-     * @param modelMapper
+     * @param modelMapper Mapper de entidades.
      */
     public VentaEntradaService(VentaEntradaRepository ventaEntradaRepository, ModelMapper modelMapper) {
         this.ventaEntradaRepository = ventaEntradaRepository;
