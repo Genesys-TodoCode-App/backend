@@ -63,7 +63,6 @@ public class JuegoService {
             JuegoDTO juegoDTO = modelMapper.map(juego, JuegoDTO.class);
             juegoDTOs.add(juegoDTO);
         }
-
         return juegoDTOs;
     }
 

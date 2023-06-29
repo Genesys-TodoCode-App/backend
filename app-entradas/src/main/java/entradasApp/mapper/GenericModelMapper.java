@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Clase que realiza el mapeo entre las entidades y los DTOs usando ModelMapper
+ */
 @Component
 public class GenericModelMapper {
     

@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * Clase Entrada DTO que contiene los datos de la entrada
+ * Contiene además anotaciones de Lombok con getters, setters y constructores
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

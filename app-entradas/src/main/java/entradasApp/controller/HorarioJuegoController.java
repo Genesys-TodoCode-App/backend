@@ -37,8 +37,7 @@ public class HorarioJuegoController {
 
     /**
      * Método para crear un nuevo horario de juego.
-     * Recibe un objeto HorarioJuego en el cuerpo de la solicitud.
-     *
+     * Recibe un objeto HorarioJuego en el cuerpo de la solicitud.     *
      * @param horarioJuego El objeto HorarioJuego que se va a crear.
      * @return ResponseEntity con estado HTTP 201 (CREATED) si se crea el horario de juego correctamente.
      */
@@ -50,8 +49,7 @@ public class HorarioJuegoController {
 
 
     /**
-     * Método para obtener todos los horarios de juego.
-     *
+     * Método para obtener todos los horarios de juego.     *
      * @return ResponseEntity con una lista Iterable de HorarioJuego en el cuerpo de la respuesta.
      */
     @GetMapping
@@ -61,9 +59,9 @@ public class HorarioJuegoController {
     }
 
     /**
-     * Método para obtener in juego con su Id.
-     * @param id
-     * @return
+     * Método para obtener un horario de juego por su ID.
+     * @param id El ID del horario de juego a obtener.
+     * @return ResponseEntity con el horario de juego en el cuerpo de la respuesta.
      */
     @GetMapping("/{id}")
     public ResponseEntity<HorarioJuego> findById(@PathVariable Long id){
@@ -74,9 +72,9 @@ public class HorarioJuegoController {
 
     /**
      * Método para actualizar datos del Horario de los Juegos
-     * @param id
-     * @param horario
-     * @return
+     * @param id El ID del horario de juego a actualizar
+     * @param horario El objeto HorarioJuego con los nuevos datos
+     * @return ResponseEntity con el horario de juego actualizado en el cuerpo de la respuesta.
      */
     @PutMapping("/{id}")
     public ResponseEntity<HorarioJuego> update(@PathVariable Long id, @RequestBody HorarioJuego horario) {
@@ -95,8 +93,7 @@ public class HorarioJuegoController {
 
 
     /**
-     * Método para eliminar un horario de juego por su ID.
-     *
+     * Método para eliminar un horario de juego por su ID.     *
      * @param id El ID del horario de juego a eliminar.
      * @return ResponseEntity con estado HTTP 204 (NO_CONTENT) si se elimina el horario de juego correctamente.
      */

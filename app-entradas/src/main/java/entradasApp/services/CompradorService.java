@@ -21,7 +21,6 @@ public class CompradorService {
 
     @Autowired
     private final CompradorRepository compradorRepository;
-
     private final GenericModelMapper mapper;
     private final ModelMapper modelMapper;
 

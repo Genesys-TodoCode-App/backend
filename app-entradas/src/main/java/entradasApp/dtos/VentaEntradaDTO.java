@@ -8,6 +8,11 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+
+/**
+ * Clase que representa una entrada de venta
+ * Contiene además anotaciones de Lombok con setters, getters y constructores
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

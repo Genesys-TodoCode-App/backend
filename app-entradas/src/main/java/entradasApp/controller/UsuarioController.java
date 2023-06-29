@@ -79,8 +79,6 @@ public class UsuarioController {
     }
 
 
-
-
     /**
      * Método para buscar un usuario por su ID.
      *

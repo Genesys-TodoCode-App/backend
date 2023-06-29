@@ -68,8 +68,7 @@ public class EntradaController {
 
 
     /**
-     * Obtiene una entrada por su ID.
-     *
+     * Obtiene una entrada por su ID.     *
      * @param id ID de la entrada a buscar
      * @return ResponseEntity con la entrada encontrada
      */
@@ -81,8 +80,7 @@ public class EntradaController {
 
 
     /**
-     * Actualiza una entrada existente.
-     *
+     * Actualiza una entrada existente.     *
      * @param id      ID de la entrada a actualizar
      * @param entrada objeto Entrada con los datos actualizados
      * @return ResponseEntity con la entrada actualizada
@@ -96,7 +94,6 @@ public class EntradaController {
 
     /**
      * Elimina una entrada por su ID.
-     *
      * @param id ID de la entrada a eliminar
      * @return ResponseEntity con el estado HTTP de la respuesta
      */

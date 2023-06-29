@@ -71,7 +71,6 @@ public class EntradaService {
     }
 
 
-
     /**
      * Busca una entrada por su ID y la devuelve.
      * Si la entrada no existe, se devuelve null.
@@ -123,6 +122,10 @@ public class EntradaService {
         }
     }
 
+    /**
+     * Método que genera un cádigo de identificación para una entrada
+     * @param entrada lo que se ingresa a la base de datos
+     */
     public void generarCodigoIdentificacionEntrada(Entrada entrada) {
         String uuid = UUID.randomUUID().toString();
         String codigoIdentificacion = "CUE-" + uuid.substring(0, Math.min(uuid.length(), 24)) + "-TODOCODEPARK";

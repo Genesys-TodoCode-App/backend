@@ -26,11 +26,13 @@ public class EmpleadoController {
     @Autowired
     private final EmpleadoService empleadoService;
     private final ModelMapper modelMapper;
+
+
     /**
      * Constructor de la clase EmpleadoController.
      *
      * @param empleadoService instancia del servicio de empleados
-     * @param modelMapper
+     * @param modelMapper  instancia del modelo mapper
      */
     public EmpleadoController(EmpleadoService empleadoService, ModelMapper modelMapper) {
         this.empleadoService = empleadoService;
@@ -39,9 +41,9 @@ public class EmpleadoController {
 
 
     /**
-     * Crea un empleado
-     * @param empleadoDTO
-     * @return
+     * Crea un empleado.
+     * @param empleadoDTO objeto EmpleadoDTO con los datos del empleado a crear
+     * @return ResponseEntity con el estado HTTP de la respuesta
      */
     @PostMapping(value = "/", consumes = {"application/json","application/xml"})
     public ResponseEntity<Void> create(@Valid @RequestBody EmpleadoDTO empleadoDTO) {
@@ -51,10 +53,10 @@ public class EmpleadoController {
     }
 
 
-
     /**
      * Obtiene todos los empleados.
-     *
+     * @param page pagina de la consulta
+     * @param size cantidad de registros por pagina
      * @return ResponseEntity con la lista de empleados
      */
     @GetMapping
@@ -74,13 +76,11 @@ public class EmpleadoController {
      * @param id ID del empleado a buscar
      * @return ResponseEntity con el empleado encontrado
      */
-
     @GetMapping("/{id}")
     public ResponseEntity<EmpleadoDTO> findById(@PathVariable Long id) {
         EmpleadoDTO empleadoDTO = empleadoService.findById(id);
         return ResponseEntity.ok(empleadoDTO);
     }
-
 
 
     /**

@@ -4,6 +4,7 @@ import entradasApp.entities.Comprador;
 import entradasApp.services.InformeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,27 +38,25 @@ public class InformeController {
 
 
     /**
-     * Método para obtener el número de entradas vendidas en una fecha específica.
-     *
-     * @param fecha La fecha para la cual se desea obtener el número de entradas vendidas.
-     * @return El número de entradas vendidas en la fecha especificada.
+     * Método para obtener la lista de los compradores que han comprado un juego en una fecha específica.
+     * @param fecha La fecha para la cual se desea obtener la lista de los compradores que han comprado un juego.
+     * @return La lista de los compradores que han comprado un juego en la fecha especificada.
      */
     @GetMapping("/cantidad-entradas-vendidas-en-fecha")
-    public Integer countEntradasVendidasEnFecha(@RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
-        return informeService.countEntradasVendidasEnFecha(fecha);
+    public ResponseEntity<Integer> countEntradasVendidasEnFecha(@RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
+        return ResponseEntity.ok(informeService.countEntradasVendidasEnFecha(fecha));
     }
 
 
     /**
-     * Método para obtener el número de entradas vendidas para un juego en particular en una fecha específica.
-     *
+     * Método para obtener el número de entradas vendidas para un juego en particular en una fecha específica.     *
      * @param idJuego El ID del juego para el cual se desea obtener el número de entradas vendidas.
      * @param fecha   La fecha para la cual se desea obtener el número de entradas vendidas.
      * @return El número de entradas vendidas para el juego y fecha especificados.
      */
     @GetMapping("/cantidad-entradas-vendidas-por-juego-y-fecha")
-    public Integer countEntradasVendidasPorJuegoYFecha(@RequestParam("juego") Long idJuego, @RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
-        return informeService.countEntradasVendidasPorJuegoYFecha(idJuego, fecha);
+    public ResponseEntity<Integer> countEntradasVendidasPorJuegoYFecha(@RequestParam("juego") Long idJuego, @RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
+        return ResponseEntity.ok(informeService.countEntradasVendidasPorJuegoYFecha(idJuego, fecha));
     }
 
 
@@ -69,8 +68,8 @@ public class InformeController {
      * @return La suma de los montos de ventas para el mes y año especificados.
      */
     @GetMapping("/sumatoria-montos-ventas-por-mes-anio")
-    public BigDecimal sumMontosVentasEnMesYAnio(@RequestParam("mes") int mes, @RequestParam("anio") int anio) {
-        return informeService.sumMontosVentasEnMesYAnio(mes, anio);
+    public ResponseEntity<BigDecimal> sumMontosVentasEnMesYAnio(@RequestParam("mes") int mes, @RequestParam("anio") int anio) {
+        return ResponseEntity.ok(informeService.sumMontosVentasEnMesYAnio(mes, anio));
     }
 
 
@@ -81,8 +80,8 @@ public class InformeController {
      * @return La suma del monto de ventas para la fecha especificada.
      */
     @GetMapping("/sumatoria-monto-venta-por-dia")
-    public BigDecimal sumMontoVentaPorFecha(@RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
-        return informeService.getTotalVentasPorFecha(fecha);
+    public ResponseEntity<BigDecimal> sumMontoVentaPorFecha(@RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fecha) {
+        return ResponseEntity.ok(informeService.getTotalVentasPorFecha(fecha));
     }
 
 
@@ -92,8 +91,8 @@ public class InformeController {
      * @return Una lista de objetos que contienen información sobre los empleados y los juegos asignados.
      */
     @GetMapping("/lista-empleados-con-juegos-asignados")
-    public List<Object[]> findEmpleadosConJuegosAsignados() {
-        return informeService.findEmpleadosConJuegosAsignados();
+    public ResponseEntity<List<Object[]>> findEmpleadosConJuegosAsignados() {
+        return ResponseEntity.ok(informeService.findEmpleadosConJuegosAsignados());
     }
 
 
@@ -104,8 +103,8 @@ public class InformeController {
      * @return Una lista de objetos Comprador que representan a los compradores con la mayor cantidad de entradas pagadas.
      */
     @GetMapping("/comprador-con-mas-entradas-compradas")
-    public List<Comprador> findCompradorMasEntradasPagadas(int mes, int anio) {
-        return informeService.findCompradorMasEntradas(mes, anio);
+    public ResponseEntity<List<Comprador>> findCompradorMasEntradasPagadas(int mes, int anio) {
+        return ResponseEntity.ok(informeService.findCompradorMasEntradas(mes, anio));
     }
 
 
@@ -114,8 +113,8 @@ public class InformeController {
      * @return Una lista de objetos que contienen información sobre los juegos y la cantidad de entradas vendidas.
      */
     @GetMapping("/juego-con-mas-entradas-vendidas-hasta-hoy")
-    public List<Object[]> findJuegoMasEntradasVendidasHastaHoy() {
-        return informeService.findJuegoMasEntradasVendidasHastaHoy();
+    public ResponseEntity<List<Object[]>> findJuegoMasEntradasVendidasHastaHoy() {
+        return ResponseEntity.ok(informeService.findJuegoMasEntradasVendidasHastaHoy());
     }
 
 }

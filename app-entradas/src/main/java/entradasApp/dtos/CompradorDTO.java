@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Clase CompradorDTO que representa un comprador.
+ * Contiene métodos de Lombok de getters y setters, constructor vacío y constructor completo.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

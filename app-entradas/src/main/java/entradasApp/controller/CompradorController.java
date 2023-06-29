@@ -48,9 +48,10 @@ public class CompradorController {
 
 
     /**
-     * Obtiene todos los compradores.
-     *
-     * @return ResponseEntity con el estado HTTP 200 (OK) y la lista de compradores si se encuentran compradores.
+     * Obtiene todos los compradores, paginados
+     * @param page numero de página a mostrar
+     * @param size tamaño de la página
+     * @return ResponseEntity con el estado HTTP 200 (OK) y la lista de compradores si se encuentran, o el estado HTTP 404 (Not Found) si no se encuentran.
      */
     @GetMapping
     public ResponseEntity<Page<CompradorDTO>> findAll(

@@ -70,7 +70,6 @@ public class VentaEntradaService {
     }
 
 
-
     /**
      * Busca una venta de entrada por su ID.
      * @param id El ID de la venta de entrada a buscar.
