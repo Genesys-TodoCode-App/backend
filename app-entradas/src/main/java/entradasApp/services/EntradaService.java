@@ -6,6 +6,8 @@ import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.mapper.GenericModelMapper;
 import entradasApp.repositories.EntradaRepository;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -44,14 +46,31 @@ public class EntradaService {
      * @param entradaDTO La entrada a crear.
      */
     public void create(EntradaDTO entradaDTO) {
-        boolean existeEntrada = entradaRepository.existsById(entradaDTO.getIdEntrada());
-        if(existeEntrada) {
-            throw new ExisteEnBaseDeDatosExcepcion("La entrada con el Id: " + entradaDTO.getIdEntrada() + " ya existe en la base de datos");
-        }
-        Entrada entrada = mapper.reverseMapToEntrada(entradaDTO);
+        // Crear un objeto ModelMapper
+        ModelMapper modelMapper = new ModelMapper();
+
+        // Configurar el mapeo de los campos del objeto interno al objeto externo
+        modelMapper.addMappings(new PropertyMap<EntradaDTO, Entrada>() {
+            @Override
+            protected void configure() {
+                map().setIdEntrada(source.getIdEntrada());
+                map().setCodigoIdentificacionEntrada(source.getCodigoIdentificacionEntrada());
+                map().setFechaHoraUtilizacion(source.getFechaHoraUtilizacion());
+                map().getJuego().setIdJuego(source.getIdJuegos());
+                map().getJuego().setNombreJuego(source.getNombreJuegos());
+            }
+        });
+
+        // Mapear los campos del objeto interno al objeto externo
+        Entrada entrada = modelMapper.map(entradaDTO, Entrada.class);
+
+        // Generar el código de identificación de la entrada
         generarCodigoIdentificacionEntrada(entrada);
+
+        // Persistir la entrada en la base de datos
         entradaRepository.save(entrada);
     }
+
 
 
     /**

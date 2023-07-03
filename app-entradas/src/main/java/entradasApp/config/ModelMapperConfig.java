@@ -1,7 +1,9 @@
 package entradasApp.config;
 
 
+import entradasApp.dtos.EntradaDTO;
 import entradasApp.dtos.VentaEntradaDTO;
+import entradasApp.entities.Entrada;
 import entradasApp.entities.VentaEntrada;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -22,6 +24,13 @@ public class ModelMapperConfig {
     ;@Bean
         public ModelMapper modelMapper() {
             ModelMapper modelMapper = new ModelMapper();
+
+            modelMapper.addMappings(new PropertyMap<Entrada, EntradaDTO>() {
+                @Override
+                protected void configure() {
+                    map().setIdJuegos(source.getJuego().getIdJuego());
+                }
+            });
             modelMapper.addMappings(new PropertyMap<VentaEntrada, VentaEntradaDTO>() {
                 @Override
                 protected void configure() {
