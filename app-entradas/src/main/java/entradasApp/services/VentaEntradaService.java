@@ -3,14 +3,12 @@ package entradasApp.services;
 import entradasApp.dtos.CompradorDTO;
 import entradasApp.dtos.VentaEntradaDTO;
 import entradasApp.entities.Comprador;
-import entradasApp.entities.Entrada;
 import entradasApp.entities.VentaEntrada;
 import entradasApp.exceptions.ExisteEnBaseDeDatosExcepcion;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.repositories.VentaEntradaRepository;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -44,29 +42,9 @@ public class VentaEntradaService {
      * @param ventaEntradaDTO La venta de entrada a crear.
      */
     public void create(@Valid VentaEntradaDTO ventaEntradaDTO) {
-        // Crear un objeto ModelMapper
-        ModelMapper modelMapper = new ModelMapper();
-
-        // Mapear los campos del objeto interno al objeto externo
-        modelMapper.addMappings(new PropertyMap<VentaEntradaDTO, VentaEntrada>() {
-            @Override
-            protected void configure() {
-                map().setEntrada(modelMapper.map(source.getIdEntrada(), Entrada.class));
-            }
-        });
         VentaEntrada ventaEntrada = modelMapper.map(ventaEntradaDTO, VentaEntrada.class);
-
-        // Verificar si ya existe una venta de entradas en la base de datos
-        boolean existeVentaEntrada = ventaEntradaRepository.existsById(ventaEntrada.getIdVentaEntrada());
-        if (existeVentaEntrada) {
-            throw new ExisteEnBaseDeDatosExcepcion("Ya existe esta venta de entradas en la base de datos");
-        }
-
-        // Persistir el objeto externo
         ventaEntradaRepository.save(ventaEntrada);
     }
-
-
 
 
     /**
@@ -79,7 +57,7 @@ public class VentaEntradaService {
         return ventasEntradasPage.map((element) -> {
             VentaEntradaDTO ventaEntradaDTO = modelMapper.map(element, VentaEntradaDTO.class);
             ventaEntradaDTO.setIdVentaEntrada(element.getIdVentaEntrada());
-            ventaEntradaDTO.getIdEntrada();
+            ventaEntradaDTO.setIdEntrada(element.getEntrada().getIdEntrada());
 
             CompradorDTO compradorDTO = modelMapper.map(element.getCompradorEntrada(), CompradorDTO.class);
             compradorDTO.setIdComprador(element.getCompradorEntrada().getIdComprador()); // Asignar el ID del comprador al DTO

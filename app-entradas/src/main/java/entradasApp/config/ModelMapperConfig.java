@@ -21,16 +21,10 @@ public class ModelMapperConfig {
      * Bean para el ModelMapper
      * @return ModelMapper
      */
-    ;@Bean
+    @Bean
         public ModelMapper modelMapper() {
             ModelMapper modelMapper = new ModelMapper();
 
-            modelMapper.addMappings(new PropertyMap<Entrada, EntradaDTO>() {
-                @Override
-                protected void configure() {
-                    map().setIdJuegos(source.getJuego().getIdJuego());
-                }
-            });
             modelMapper.addMappings(new PropertyMap<VentaEntrada, VentaEntradaDTO>() {
                 @Override
                 protected void configure() {

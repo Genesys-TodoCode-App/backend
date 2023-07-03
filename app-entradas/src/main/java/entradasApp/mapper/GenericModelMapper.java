@@ -108,15 +108,6 @@ public class GenericModelMapper {
         return mapper.map(entrada, EntradaDTO.class);
     }
 
-
-    /**
-     * Método que realiza el mapeo entre EntradaDTO a Entidad Entrada
-     * @param entradaDTO entrada que se quiere mapear
-     * @return entrada con los datos de la entrada
-     */
-    public Entrada reverseMapToEntrada(EntradaDTO entradaDTO) {
-        return mapper.map(entradaDTO, Entrada.class);
-    }
     private void configureVentaEntradaDTO() {
         mapper.addMappings(new PropertyMap<VentaEntrada, VentaEntradaDTO>() {
             @Override
