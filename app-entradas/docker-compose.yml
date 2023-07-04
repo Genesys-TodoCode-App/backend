@@ -1,15 +1,30 @@
-version: '3.1'
+version: '3.9'
 
 services:
+    java_app:
+        container_name: java_app
+        image: tcpimage-app:1.0.0
+        build: .
+        ports:
+            - 8080:8080
+        environment:
+            - DATABASE_URL=jdbc:postgresql://todocodepark_UP:5432/postgres
+            - DATABASE_USERNAME=postgres
+            - DATABASE_PASSWORD=postgres
+        depends_on:
+            -   todocodepark_UP
+    todocodepark_UP:
+        container_name: todocodepark_UP
+        image: postgres:15-alpine3.17
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+        volumes:
+            - db-data:/var/lib/postgresql/data
 
-  db:
-    image: postgres
-    restart: always
-    ports:
-      - "5433:5432"
-    environment:
-      POSTGRES_USERNAME: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: entradas_PU
-      TZ: UTC
-      PGTZ: UTC
+volumes:
+    db-data:
+
