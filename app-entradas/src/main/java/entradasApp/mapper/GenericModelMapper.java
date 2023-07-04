@@ -5,6 +5,7 @@ import entradasApp.dtos.*;
 import entradasApp.entities.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -80,6 +81,14 @@ public class GenericModelMapper {
 
         return empleadoDTO;
     }
+    public Empleado reverseMaptoEmpleado(EmpleadoDTO empleadoDTO) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.typeMap(EmpleadoDTO.class, Empleado.class).addMappings(mapper -> {
+            mapper.map(src -> src.getJuegos(), Empleado::setJuegos);
+        });
+
+        return modelMapper.map(empleadoDTO, Empleado.class);
+    }
 
 
     /**
@@ -106,6 +115,9 @@ public class GenericModelMapper {
      */
     public EntradaDTO mapToEntradaDTO(Entrada entrada) {
         return mapper.map(entrada, EntradaDTO.class);
+    }
+    public Entrada reverseMaptoEntrada(EntradaDTO entradaDTO) {
+        return mapper.map(entradaDTO, Entrada.class);
     }
 
     private void configureVentaEntradaDTO() {

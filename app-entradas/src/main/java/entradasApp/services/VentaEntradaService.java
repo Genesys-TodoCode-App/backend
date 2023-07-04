@@ -76,7 +76,16 @@ public class VentaEntradaService {
     public VentaEntradaDTO findById(Long id) {
         VentaEntrada ventaEntrada = ventaEntradaRepository.findById(id)
             .orElseThrow(() -> new NoEncontradoExcepcion("La venta de entrada con el id: " + id + " no ha sido encontrada"));
-        return modelMapper.map(ventaEntrada, VentaEntradaDTO.class);
+
+        VentaEntradaDTO ventaEntradaDTO = modelMapper.map(ventaEntrada, VentaEntradaDTO.class);
+        ventaEntradaDTO.setIdVentaEntrada(ventaEntrada.getIdVentaEntrada());
+        ventaEntradaDTO.setIdEntrada(ventaEntrada.getEntrada().getIdEntrada());
+
+        CompradorDTO compradorDTO = modelMapper.map(ventaEntrada.getCompradorEntrada(), CompradorDTO.class);
+        compradorDTO.setIdComprador(ventaEntrada.getCompradorEntrada().getIdComprador()); // Asignar el ID del comprador al DTO
+        ventaEntradaDTO.setCompradorEntrada(compradorDTO);
+
+        return ventaEntradaDTO;
     }
 
 

@@ -24,15 +24,7 @@ public class ModelMapperConfig {
     @Bean
         public ModelMapper modelMapper() {
             ModelMapper modelMapper = new ModelMapper();
-
-            modelMapper.addMappings(new PropertyMap<VentaEntrada, VentaEntradaDTO>() {
-                @Override
-                protected void configure() {
-                    map().setIdEntrada(source.getEntrada().getIdEntrada());
-
-                }
-            });
-            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+                        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
             return modelMapper;
         }
     }

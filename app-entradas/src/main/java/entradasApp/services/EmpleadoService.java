@@ -42,13 +42,10 @@ public class EmpleadoService {
      * Crea un nuevo empleado.
      * Si el empleado ya existe en la base de datos, se lanza una ExisteEnBaseDeDatosExcepcion.
      *
-     * @param empleado El empleado a crear.
+     * @param empleadoDTO El empleado a crear.
      */
-    public void create(Empleado empleado) {
-        boolean existeEmpleado = empleadoRepository.existsById(empleado.getIdEmpleado());
-        if (existeEmpleado) {
-            throw new ExisteEnBaseDeDatosExcepcion("Existe este empleado en la base de datos");
-        }
+    public void create(EmpleadoDTO empleadoDTO) {
+        Empleado empleado = mapper.reverseMaptoEmpleado(empleadoDTO);
         empleadoRepository.save(empleado);
     }
 
@@ -78,12 +75,15 @@ public class EmpleadoService {
         Empleado empleado = empleadoRepository.findById(id).orElse(null);
         if (empleado != null) {
             EmpleadoDTO empleadoDTO = mapper.mapToEmpleadoDTO(empleado);
-            empleadoDTO.setRolEmpleado(empleado.getUsuario().getRolEmpleado());// a ver si se agrega el rol
+            if (empleado.getUsuario() != null) {
+                empleadoDTO.setRolEmpleado(empleado.getUsuario().getRolEmpleado());
+            }
             return empleadoDTO;
         } else {
             throw new NoEncontradoExcepcion("El empleado con el id: " + id + " no ha sido encontrado");
         }
     }
+
 
 
     /**
@@ -96,15 +96,17 @@ public class EmpleadoService {
     public void update(Long id, EmpleadoDTO empleadoDTO) {
         Empleado empleado = empleadoRepository.findById(id).orElse(null);
         if (empleado != null) {
-            empleado.setNombreEmpleado(empleadoDTO.getNombreEmpleado());
-            empleado.setApellidoEmpleado(empleadoDTO.getApellidoEmpleado());
-            empleado.setDniEmpleado(empleadoDTO.getDniEmpleado());
-            empleado.setRutaALaFoto(empleadoDTO.getRutaALaFoto());
+            ModelMapper modelMapper = new ModelMapper();
+            modelMapper.typeMap(EmpleadoDTO.class, Empleado.class).addMappings(mapper -> {
+                mapper.map(src -> src.getJuegos(), Empleado::setJuegos);
+            });
+            modelMapper.map(empleadoDTO, empleado);
             empleadoRepository.save(empleado);
         } else {
             throw new NoEncontradoExcepcion("Empleado con el Id: " + id + " no encontrado");
         }
     }
+
 
 
     /**

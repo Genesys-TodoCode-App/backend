@@ -47,8 +47,7 @@ public class EmpleadoController {
      */
     @PostMapping(value = "/", consumes = {"application/json","application/xml"})
     public ResponseEntity<Void> create(@Valid @RequestBody EmpleadoDTO empleadoDTO) {
-        Empleado empleado = modelMapper.map(empleadoDTO, Empleado.class);
-        empleadoService.create(empleado);
+        empleadoService.create(empleadoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

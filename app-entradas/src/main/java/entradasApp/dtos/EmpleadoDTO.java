@@ -43,6 +43,9 @@ public class EmpleadoDTO {
     @JsonProperty("Rol empleado")
     private RolEmpleado rolEmpleado;
 
+    @JsonProperty("Id usuario")
+    private Long idUsuario;
+
     @JsonProperty("Juegos asignados")
     private List<JuegoDTO> juegos;
 
