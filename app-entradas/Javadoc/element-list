@@ -1,0 +1,9 @@
+entradasApp
+entradasApp.config
+entradasApp.controller
+entradasApp.dtos
+entradasApp.entities
+entradasApp.exceptions
+entradasApp.mapper
+entradasApp.repositories
+entradasApp.services

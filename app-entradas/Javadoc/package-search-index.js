@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"entradasApp"},{"l":"entradasApp.config"},{"l":"entradasApp.controller"},{"l":"entradasApp.dtos"},{"l":"entradasApp.entities"},{"l":"entradasApp.exceptions"},{"l":"entradasApp.mapper"},{"l":"entradasApp.repositories"},{"l":"entradasApp.services"}];updateSearchResults();
