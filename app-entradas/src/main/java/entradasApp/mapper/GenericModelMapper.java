@@ -81,6 +81,12 @@ public class GenericModelMapper {
 
         return empleadoDTO;
     }
+
+    /**
+     * Método que convierte un EmpleadoDTO a un Empleado
+     * @param empleadoDTO
+     * @return
+     */
     public Empleado reverseMaptoEmpleado(EmpleadoDTO empleadoDTO) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.typeMap(EmpleadoDTO.class, Empleado.class).addMappings(mapper -> {

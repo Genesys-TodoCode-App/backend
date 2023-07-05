@@ -71,7 +71,6 @@ public class EmpleadoController {
 
     /**
      * Obtiene un empleado por su ID.
-     *
      * @param id ID del empleado a buscar
      * @return ResponseEntity con el empleado encontrado
      */
@@ -84,7 +83,6 @@ public class EmpleadoController {
 
     /**
      * Actualiza un empleado existente.
-     *
      * @param id           ID del empleado a actualizar
      * @param empleadoDTO objeto EmpleadoDTO con los datos actualizados
      * @return ResponseEntity con el estado HTTP de la respuesta
@@ -98,7 +96,6 @@ public class EmpleadoController {
 
     /**
      * Elimina un empleado por su ID.
-     *
      * @param id ID del empleado a eliminar
      * @return ResponseEntity con el estado HTTP de la respuesta
      */

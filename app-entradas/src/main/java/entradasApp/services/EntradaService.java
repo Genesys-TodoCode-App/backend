@@ -42,14 +42,12 @@ public class EntradaService {
 
     /**
      * Crea una nueva entrada.
-     * Si la entrada ya existe en la base de datos, se lanza una ExisteEnBaseDeDatosExcepcion.
      * @param entradaDTO La entrada a crear.
      */
     public void create(EntradaDTO entradaDTO) {
-        // Crear un objeto ModelMapper
+
         ModelMapper modelMapper = new ModelMapper();
 
-        // Configurar el mapeo de los campos del objeto interno al objeto externo
         modelMapper.addMappings(new PropertyMap<EntradaDTO, Entrada>() {
             @Override
             protected void configure() {
@@ -61,13 +59,8 @@ public class EntradaService {
             }
         });
 
-        // Mapear los campos del objeto interno al objeto externo
         Entrada entrada = modelMapper.map(entradaDTO, Entrada.class);
-
-        // Generar el código de identificación de la entrada
         generarCodigoIdentificacionEntrada(entrada);
-
-        // Persistir la entrada en la base de datos
         entradaRepository.save(entrada);
     }
 

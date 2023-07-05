@@ -3,7 +3,6 @@ package entradasApp.controller;
 import entradasApp.entities.Usuario;
 import entradasApp.exceptions.NoEncontradoExcepcion;
 import entradasApp.services.UsuarioService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

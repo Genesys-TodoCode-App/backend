@@ -79,18 +79,18 @@ INSERT INTO empleados (nombre_empleados, apellido_empleados, dni_empleados, ruta
          ('Miguel', 'Pérez', '12345678', '/ruta/foto11.jpg', 11),
          ('Carolina', 'González', '56789012', '/ruta/foto12.jpg', 12);
 INSERT INTO juegos (nombre_juegos, precio_juegos, cobro_pase_oro, juegos_activos, descripciones, rutas_a_las_fotos)
-VALUES ('Montaña Rusa', 10, true, true, 'Descripción Montaña Rusa', 'ruta_foto1'),
-       ('Carrusel', 5, false, false, 'Descripción Carrusel', 'ruta_foto2'),
-       ('Tobogán Acuático', 8, true, true, 'Descripción Tobogán Acuático', 'ruta_foto3'),
-       ('Sillas Voladoras', 6, false, false, 'Descripción Sillas Voladoras', 'ruta_foto4'),
-       ('Laberinto', 4, true, true, 'Descripción Laberinto', 'ruta_foto5'),
-       ('Barco Pirata', 7, false, false, 'Descripción Barco Pirata', 'ruta_foto6'),
-       ('Rueda de la Fortuna', 10, true, true, 'Descripción Rueda de la Fortuna', 'ruta_foto7'),
-       ('Autos Chocadores', 6, false, false, 'Descripción Autos Chocadores', 'ruta_foto8'),
-       ('Atracción Acuática', 8, true, true, 'Descripción Atracción Acuática', 'ruta_foto9'),
-       ('Torre de Caída', 9, false, false, 'Descripción Torre de Caída', 'ruta_foto10'),
-       ('Montaña de Agua', 7, true, true, 'Descripción Montaña de Agua', 'ruta_foto11'),
-       ('Tren Fantasma', 5, false, false, 'Descripción Tren Fantasma', 'ruta_foto12');
+VALUES ('Montaña Rusa', 10, true, true, 'Descripción Montaña Rusa', 'https://media.istockphoto.com/id/1404372377/es/foto/monta%C3%B1a-rusa-emocionante-y-divertida-atracci%C3%B3n-en-la-v%C3%ADa-del-ferrocarril-en-el-parque-tem%C3%A1tico.webp?b=1&s=170667a&w=0&k=20&c=AdqDRow_FRjleudXub_n8rHDBdMEu0QfRNDuHbdUmfk='),
+       ('Carrusel', 5, false, false, 'Descripción Carrusel', 'https://images.unsplash.com/photo-1577774438656-768f1e5d9ed6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FycnVzZWx8ZW58MHwwfDB8fHww&auto=format&fit=crop&w=500&q=60'),
+       ('Tobogán Acuático', 8, true, true, 'Descripción Tobogán Acuático', 'https://images.unsplash.com/photo-1642717841683-c0323214617c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHRvYm9nYW4lMjBhY3VhdGljb3xlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'),
+       ('Sillas Voladoras', 6, false, false, 'Descripción Sillas Voladoras', 'https://images.unsplash.com/photo-1531114297032-fef035025fe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2lsbGFzJTIwdm9sYWRvcmFzfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'),
+       ('Laberinto', 4, true, true, 'Descripción Laberinto', 'https://images.unsplash.com/photo-1590278458425-6aa3912a48a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TGFiZXJpbnRvfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'),
+       ('Barco Pirata', 7, false, false, 'Descripción Barco Pirata', 'https://media.istockphoto.com/id/680512040/es/foto/barco-pirata-en-alta-mar.webp?b=1&s=170667a&w=0&k=20&c=FRcEn2rc4rU_wqOmgMNCmOntVodJxK-XVqlbTskP6mA='),
+       ('Rueda de la Fortuna', 10, true, true, 'Descripción Rueda de la Fortuna', 'https://images.unsplash.com/photo-1528324100-d0c311a3da67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8UnVlZGElMjBkZSUyMGxhJTIwRm9ydHVuYXxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'),
+       ('Autos Chocadores', 6, false, false, 'Descripción Autos Chocadores', 'https://images.unsplash.com/photo-1572164625211-6723762c0e3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QXV0b3MlMjBDaG9jYWRvcmVzfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'),
+       ('Atracción Acuática', 8, true, true, 'Descripción Atracción Acuática', 'https://media.istockphoto.com/id/1051006012/es/foto/familia-feliz-divertirse-en-un-parque-de-diversiones.webp?b=1&s=170667a&w=0&k=20&c=oOCLSa6lwoagyy9zeTziHbBoF-jca3AiTzeyPX_wrJU='),
+       ('Torre de Caída', 9, false, false, 'Descripción Torre de Caída', 'https://media.istockphoto.com/id/1165715981/es/foto/vista-de-primer-plano-de-la-torre-de-ca%C3%ADda-de-hierro-vertical-o-gran-ca%C3%ADda-en-un-parque-de.webp?b=1&s=170667a&w=0&k=20&c=_uminvu77JGfpsgKbw2S9hueVfUnFMRO3oM6YXArIXY='),
+       ('Montaña de Agua', 7, true, true, 'Descripción Montaña de Agua', 'https://media.istockphoto.com/id/1459256710/es/foto/un-ni%C3%B1o-o-ni%C3%B1a-se-divierte-chapoteando-en-la-piscina-despu%C3%A9s-de-bajar-por-un-tobog%C3%A1n-acu%C3%A1tico.webp?b=1&s=170667a&w=0&k=20&c=vPFw8UPj5zTGx-QdjyYcKRyXRH5uT7F1zrKuoXYvcP8='),
+       ('Tren Fantasma', 5, false, false, 'Descripción Tren Fantasma', 'https://images.unsplash.com/photo-1527498348926-888801f0a493?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fFRyZW4lMjBGYW50YXNtYXxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60');
 
 
 -- Primer horario: 16:00 - 20:00

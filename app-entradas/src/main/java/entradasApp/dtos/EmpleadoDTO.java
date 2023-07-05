@@ -1,8 +1,6 @@
 package entradasApp.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import entradasApp.entities.Juego;
 import entradasApp.entities.RolEmpleado;
 import lombok.AllArgsConstructor;
 import lombok.Data;

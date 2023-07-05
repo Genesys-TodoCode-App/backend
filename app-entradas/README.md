@@ -14,7 +14,7 @@
 - Spring Boot DevTools
 - Lombok
 - OpenApi webmvc
-- Docker Compose
+- Docker Compose(para desarrollo)
 - Validation I/O
 - Jackson DataBind
 - ModelMapper
@@ -27,7 +27,7 @@
 
 ### Los endpoints de la aplicacion y sus métodos son los siguientes:
 
-   Siempre partiendo de http://localhost:8080
+   Siempre partiendo de http://localhost:3000
 
 - /login para get y post
 - /login/{id} para delete, get y put
@@ -45,7 +45,7 @@
 - /venta-entrada para delete, get y put
 
 
-    Los métodos especiales que solicita el cliente son tambien el localhost:8080
+    Los métodos especiales que solicita el cliente son tambien el localhost:3000
 
 
 - /cantidad-entradas-vendidas-en-fecha
@@ -65,4 +65,15 @@
 
 - Para hacer correr el backend es necesario tener instalado Docker, Docker Compose y tener el Docker Daemon corriendo.
 - Luego se hace baja de GitHub y se hace correr en el IDE de su preferencia apretando el "play"
-- Para correr el frontend es
+
+
+- Para correr el la aplicación:
+  - Hay que tener Docker Compose, Docker y tener el Docker Daemon corriendo.
+  - Se baja del repositorio de Github presente y se hace un ./mvn clean package -DskipTests para construir la imagen
+  - Se hace un docker-compose up y a disfrutar!
+  - La aplicacion tiene los usuarios en pares clave:valor
+    - usuario1: contrasenia1    EMPLEADO_ADMINISTRATIVO
+    - usuario2:contrasenia2    EMPLEADO_JUEGO  
+    - el resto de usuarios hasta el 12
+    - las entradas vendidas son del 19 al 23 de junio de 2023 para los informes
+    - tambien se puede acceder mediante el deploy hecho en http://vps-3399115-x.dattaweb.com:3000/ 
