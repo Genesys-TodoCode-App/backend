@@ -1,0 +1,29 @@
+.footer {
+    align-items: center;
+    background-color: #000;
+    bottom: 0px;
+    color: #fff;
+    display: flex;
+    gap: 30px;
+    height: 80px;
+    justify-content: center;
+    opacity: .7;
+    padding-top: 10px;
+    position: sticky;
+    bottom: 0;  
+    width: 100%;
+}
+
+.footer_link {
+    align-items: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.footer_link:hover {
+    text-decoration: underline;
+    transition: 1s;
+}

@@ -1,0 +1,38 @@
+.navbar {
+    height: 50px;
+    top: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    gap: 20px;
+    opacity: .7;
+    width: 100%;
+}
+
+.nav_link {
+    color: #fff;
+    display: flex;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    align-items: center;
+    text-align: center;
+}
+
+.nav_link_select {
+    background-color: inherit;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    width: min-content;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.nav_link_option {
+    opacity: .7 !important;
+}

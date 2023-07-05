@@ -24,7 +24,13 @@ services:
             POSTGRES_DB: postgres
         volumes:
             - db-data:/var/lib/postgresql/data
-
+    react_app:
+        container_name: react_app
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        ports:
+            - 3000:5173
 volumes:
     db-data:
 

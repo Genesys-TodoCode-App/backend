@@ -1,0 +1,25 @@
+.card {
+    border: 1px solid grey;
+    border-radius: 10px;
+    background-color: #000;
+    color: #fff;
+    opacity: .8;
+    height: fit-content;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 4px 4px 10px #fff;
+}
+
+.card_title {
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+    white-space: nowrap;
+}
+
+.card_img {
+    height: 166px ;
+    width: 100%;
+    border: 1px solid grey;
+}
